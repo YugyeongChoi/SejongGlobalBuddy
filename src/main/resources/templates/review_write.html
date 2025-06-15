@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Write Review</title>
+</head>
+<body>
+<h1>글쓰기</h1>
+
+<form th:action="@{/review/write}" method="post">
+    <label>제목:</label><br/>
+    <input type="text" name="title" required/><br/><br/>
+
+    <label>내용:</label><br/>
+    <textarea name="content" rows="10" cols="50" required></textarea><br/><br/>
+
+    <label>비밀번호:</label><br/>
+    <input type="password" name="password" required/><br/><br/>
+
+    <button type="submit">등록</button>
+</form>
+
+<a href="/review">리뷰 목록으로 돌아가기</a>
+</body>
+</html>

@@ -16,11 +16,6 @@ public class PageController {
         return "data";
     }
 
-    @GetMapping("/review")
-    public String reviewPage() {
-        return "review";
-    }
-
     @GetMapping("/team")
     public String teamPage() {
         return "team";
