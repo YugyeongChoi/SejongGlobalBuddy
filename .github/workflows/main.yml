@@ -21,8 +21,9 @@ jobs:
         script: |
           cd /home/ec2-user/SejongGlobalBuddy
           git pull origin main
-          ./gradlew build
+          ./gradlew build && echo "Build Success" || { echo "Build Failed"; exit 1; }
           pkill -f 'java -jar' || true
           nohup java -jar build/libs/*.jar > app.log 2>&1 &
+          disown
           exit 0
           
