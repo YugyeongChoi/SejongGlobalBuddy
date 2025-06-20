@@ -19,11 +19,9 @@ jobs:
         username: ec2-user
         key: ${{ secrets.EC2_KEY }}
         script: |
-          cd /home/ec2-user/SejongGlobalBuddy
-          git pull origin main
-          ./gradlew build && echo "Build Success" || { echo "Build Failed"; exit 1; }
-          pkill -f 'java -jar' || true
-          setsid java -jar build/libs/*.jar > app.log 2>&1 < /dev/null &
-          exit 0
-
-          
+              cd /home/ec2-user/SejongGlobalBuddy
+              git pull origin main
+              ./gradlew build && echo "Build Success" || { echo "Build Failed"; exit 1; }
+              sudo systemctl daemon-reload
+              sudo systemctl restart sejongglobalbuddy
+              exit 0
