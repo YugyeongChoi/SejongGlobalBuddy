@@ -1,7 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
-
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
@@ -12,10 +9,14 @@ function App() {
         .then((res) => {
           setHello(res.data);
         })
+        .catch((err) => {
+          console.error('API 호출 에러:', err);
+        });
   }, []);
+
   return (
       <div className="App">
-        백엔드 데이터 : {hello}
+        백엔드 데이터: {hello}
       </div>
   );
 }
