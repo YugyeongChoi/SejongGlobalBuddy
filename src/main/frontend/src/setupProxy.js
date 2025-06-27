@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://localhost:8080', // 백엔드 주소
+            target: 'http://www.sejongglobalbuddy.kr', // 백엔드 주소
             changeOrigin: true,
         })
     );
