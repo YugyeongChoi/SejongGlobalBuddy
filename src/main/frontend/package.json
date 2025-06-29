@@ -1,7 +1,7 @@
 {
   "name": "fronted",
   "version": "0.1.0",
-  "homepage": "http://15.164.222.68:8080",
+  "homepage": "http://www.sejongglobalbuddy.kr",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
