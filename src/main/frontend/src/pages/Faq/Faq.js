@@ -1,3 +1,5 @@
+import React, { useRef } from 'react';
+
 function Faq() {
     return (
         <div>
