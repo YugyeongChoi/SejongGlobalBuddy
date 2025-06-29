@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Main from './pages/Main';
-import Data from './pages/Data';
-import Team from './pages/Team';
-import Faq from './pages/Faq';
+import Main from './pages/Main/Main';
+import Data from './pages/Data/Data';
+import Team from './pages/Team/Team';
+import Faq from './pages/Faq/Faq';
 
 function App() {
     return (
