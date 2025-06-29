@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 
 function Team() {
     return (
