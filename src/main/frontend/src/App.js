@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-
 import axios from "axios";
-import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Main from './pages/Main/Main';
 import Data from './pages/Data/Data';
