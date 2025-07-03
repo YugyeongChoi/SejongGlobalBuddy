@@ -31,6 +31,9 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 }
+tasks.named('bootJar') {
+    mainClass = 'sejong.globalbuddy.GlobalbuddyApplication'
+}
 
 tasks.named('test') {
     useJUnitPlatform()
@@ -59,7 +62,7 @@ task installReact(type: Exec) {
     // node_modules 없으면 실행하도록 설정
     onlyIf { !file("$frontendDir/node_modules").exists() }
 }
-
+::
 task buildReact(type: Exec) {
     dependsOn installReact
     workingDir "$frontendDir"
