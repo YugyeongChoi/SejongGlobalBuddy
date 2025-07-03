@@ -39,3 +39,9 @@ out/
 ### Local Properties ###
 application-local.properties
 application.properties
+
+node_modules/
+build/
+src/main/resources/static/
+
+
