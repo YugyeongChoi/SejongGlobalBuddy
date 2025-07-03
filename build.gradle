@@ -60,19 +60,6 @@ task installReact(type: Exec) {
     onlyIf { !file("$frontendDir/node_modules").exists() }
 }
 
-task installReact(type: Exec) {
-    workingDir "$frontendDir"
-    group = BasePlugin.BUILD_GROUP
-
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "install"
-    } else {
-        commandLine "npm", "install"
-    }
-
-    onlyIf { !file("$frontendDir/node_modules").exists() }
-}
-
 task buildReact(type: Exec) {
     dependsOn installReact
     workingDir "$frontendDir"
