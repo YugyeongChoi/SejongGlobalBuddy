@@ -1,0 +1,40 @@
+.social-footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: none;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.social-footer h2 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.social-footer p {
+    font-size: 16px;
+    margin: 6px 0;
+}
+
+.social-footer .highlight {
+    color: crimson;
+    font-weight: bold;
+}
+
+.social-icons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.social-icons img {
+    width: 48px;
+    height: 48px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.social-icons img:hover {
+    transform: scale(1.15);
+}
