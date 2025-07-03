@@ -60,6 +60,19 @@ task installReact(type: Exec) {
     onlyIf { !file("$frontendDir/node_modules").exists() }
 }
 
+task installReact(type: Exec) {
+    workingDir "$frontendDir"
+    group = BasePlugin.BUILD_GROUP
+
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine "npm.cmd", "install"
+    } else {
+        commandLine "npm", "install"
+    }
+
+    onlyIf { !file("$frontendDir/node_modules").exists() }
+}
+
 task buildReact(type: Exec) {
     dependsOn installReact
     workingDir "$frontendDir"
@@ -72,8 +85,12 @@ task buildReact(type: Exec) {
     }
 }
 
+task cleanStatic(type: Delete) {
+    delete "$projectDir/src/main/resources/static"
+}
+
 task copyReactBuildFiles(type: Copy) {
-    dependsOn buildReact
+    dependsOn buildReact, cleanStatic
     from "$frontendDir/build"
     into "$projectDir/src/main/resources/static"
 }
