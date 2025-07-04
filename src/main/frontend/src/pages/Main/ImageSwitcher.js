@@ -7,7 +7,7 @@ function ImageSwitcher() {
         {id: 2, src: '/images/group2.jpg', alt: 'Image 2'},
         {id: 3, src: '/images/group3.jpg', alt: 'Image 3'},
         {id: 4, src: '/images/group4.jpg', alt: 'Image 4'},
-        {id: 5, src: '/images/group5.jpg', alt: 'Image 5'},
+        {id: 5, src: '/images/group5.JPG', alt: 'Image 5'},
     ];
 
     const [mainImage, setMainImage] = useState({
