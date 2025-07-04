@@ -6,7 +6,7 @@ const Footer = () => {
         <footer className="social-footer">
             <h2>SJGB</h2>
             <p>
-                <span className="highlight">SE</span>JONG <span className="highlight">G</span>lobal <span className="highlight">B</span>uddy
+                <span className="highlight">S</span>E<span className="highlight">J</span>ONG <span className="highlight">G</span>lobal <span className="highlight">B</span>uddy
             </p>
             <p>Check Out Our Other Social Media Channels By Clicking The Icons!</p>
 

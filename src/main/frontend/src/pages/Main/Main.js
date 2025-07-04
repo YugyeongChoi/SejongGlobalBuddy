@@ -1,10 +1,14 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import './Main.css';
+import ImageSwitcher from './ImageSwitcher';
+import CalendarSection from './CalendarSection';
 
 function Main() {
     return (
-        <div>
-            <h1>Main 페이지</h1>
-        </div>
+        <>
+            <ImageSwitcher />
+            <CalendarSection />
+        </>
     );
 }
 
