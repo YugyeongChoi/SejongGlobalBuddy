@@ -1,0 +1,43 @@
+.team-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.team-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.team-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.team-content {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+
+.team-card.reverse .team-content {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.team-image {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.team-card.reverse .team-title {
+    text-align: right;
+}

@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
+import TeamSection from "./TeamSection";
 
 function Team() {
     return (
         <div>
-            <h1>Team 페이지</h1>
+            <TeamSection />
         </div>
     );
 }

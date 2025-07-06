@@ -53,8 +53,8 @@ function ImageSwitcher() {
                     공식행사, 먼슬리버디, 소모임 등의 다양한 교류 활동으로 특별한 대학생활을 만들어갑니다.
                 </p>
 
-                <Link to="/team" className="cta-button">
-                    팀 별 소개
+                <Link to="/review" className="cta-button">
+                    후기 보러가기
                 </Link>
 
             </div>

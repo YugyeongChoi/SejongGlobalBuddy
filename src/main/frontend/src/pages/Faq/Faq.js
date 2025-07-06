@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 function Faq() {
     return (
         <div>
-            <h1>Faq 페이지</h1>
+            <h1>FAQ 페이지</h1>
         </div>
     );
 }
