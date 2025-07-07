@@ -17,7 +17,7 @@ const Review = () => {
             <ReviewList reviews={reviews} />
 
             <Link to="/review/write" className="fab-button">
-                <FiEdit3 size={28} />
+                <FiEdit3 color="white" size={28} />
             </Link>
         </div>
     );

@@ -14,6 +14,7 @@
 .back-btn {
     background-color: #777;
     color: white;
+    font-weight: bold;
     border: none;
     border-radius: 50%;
     width: 42px;
@@ -30,6 +31,9 @@
     padding: 10px 20px;
     font-weight: bold;
     cursor: pointer;
+}
+.post-btn i {
+    color: white;
 }
 
 .fab-button {

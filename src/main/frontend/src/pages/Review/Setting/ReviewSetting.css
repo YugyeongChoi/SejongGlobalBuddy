@@ -1,0 +1,62 @@
+.review-edit-container {
+    position: relative;
+    display: inline-block;
+}
+
+.review-edit-dots {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #333;
+    transition: transform 0.2s ease;
+}
+
+.review-edit-dots:hover {
+    transform: scale(1.2);
+}
+
+.review-edit-popup {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    min-width: 240px;
+}
+
+.review-edit-popup input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.review-edit-popup input:focus {
+    border-color: #2d4a5c;
+}
+
+.review-edit-popup button {
+    background-color: #2d4a5c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.review-edit-popup button:hover {
+    background-color: #1e3542;
+}

@@ -1,7 +1,7 @@
-import React, {useState, forwardRef, useImperativeHandle} from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import './ReviewForm.css';
 
-const ReviewForm = forwardRef(({onSubmit}, ref) => {
+const ReviewForm = forwardRef(({ onSubmit, initialData }, ref) => {
     const [form, setForm] = useState({
         title: '',
         content: '',
@@ -13,14 +13,28 @@ const ReviewForm = forwardRef(({onSubmit}, ref) => {
 
     const [showExtraFields, setShowExtraFields] = useState(false);
 
+    useEffect(() => {
+        if (initialData) {
+            setForm({
+                title: initialData.title || '',
+                content: initialData.content || '',
+                password: initialData.password || '',
+                nationality: initialData.nationality || 'Korean',
+                generation: initialData.generation || '',
+                nickname: initialData.nickname || '',
+            });
+            setShowExtraFields(true);
+        }
+    }, [initialData]);
+
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         if (name === 'nickname' && value.length > 10) return;
-        setForm({...form, [name]: value});
+        setForm({ ...form, [name]: value });
     };
 
     const handleSelect = (key, value) => {
-        setForm({...form, [key]: value});
+        setForm({ ...form, [key]: value });
     };
 
     const handleSubmit = (e) => {
@@ -32,13 +46,9 @@ const ReviewForm = forwardRef(({onSubmit}, ref) => {
         onSubmit(form);
     };
 
-    // 🔥 외부에서 submit을 호출할 수 있도록 연결
     useImperativeHandle(ref, () => ({
         submit: () => {
-            const fakeEvent = {
-                preventDefault: () => {
-                }
-            };
+            const fakeEvent = { preventDefault: () => {} };
             handleSubmit(fakeEvent);
         }
     }));
@@ -66,7 +76,6 @@ const ReviewForm = forwardRef(({onSubmit}, ref) => {
                     className="content-textarea"
                 />
             </div>
-
 
             {showExtraFields && (
                 <div className="review-modal-overlay">
@@ -131,14 +140,12 @@ const ReviewForm = forwardRef(({onSubmit}, ref) => {
                             />
                         </div>
 
-
                         <button type="submit" className="submit-btn">
                             Post now
                         </button>
                     </div>
                 </div>
             )}
-
         </form>
     );
 });

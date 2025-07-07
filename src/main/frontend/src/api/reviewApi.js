@@ -15,3 +15,10 @@ export const getReviewDetail = async (id) => {
     const res = await axios.get(`/review/${id}`)
     return res.data;
 };
+export const updateReview = (id, data) => {
+    return axios.put(`${API_BASE}/${id}`, data);
+};
+
+export const deleteReview = async (id) => {
+    return await axios.delete(`${API_BASE}/${id}`);
+};

@@ -80,15 +80,18 @@ public class PostEntity {
 
 
     @Builder
-    public PostEntity(String title, String content, String password,
-                      String nationality, String generation, String nickname) {
+    public PostEntity(Long id, String title, String content, String password,
+                      String nationality, String generation, String nickname,
+                      LocalDateTime createdTime) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.password = password;
         this.nationality = nationality;
         this.generation = generation;
         this.nickname = nickname;
-        this.createdTime = LocalDateTime.now();
+        this.createdTime = createdTime != null ? createdTime : LocalDateTime.now(); // 수정: 유지 or 새로 생성
     }
+
 
 }

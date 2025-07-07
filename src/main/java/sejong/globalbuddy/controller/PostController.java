@@ -68,6 +68,42 @@ public class PostController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePost(@PathVariable("id") Long id) {
+        postRepository.deleteById(id);
+        return ResponseEntity.ok().body("deleted");
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updatePost(
+            @PathVariable("id") Long id,
+            @RequestBody PostDto dto) {
+
+        return postRepository.findById(id)
+                .map(existing -> {
+                    // 비밀번호 검증
+                    if (!existing.getPassword().equals(dto.getPassword())) {
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                .body("Incorrect password");
+                    }
+
+                    PostEntity updatedPost = PostEntity.builder()
+                            .id(existing.getId())  // ⭐ 반드시 ID 설정
+                            .title(dto.getTitle())
+                            .content(dto.getContent())
+                            .password(dto.getPassword())
+                            .nationality(dto.getNationality())
+                            .generation(dto.getGeneration())
+                            .nickname(dto.getNickname())
+                            .createdTime(existing.getCreatedTime()) // 원본 시간 보존(Optional)
+                            .build();
+
+                    postRepository.save(updatedPost);
+                    return ResponseEntity.ok("updated");
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
 
 
 }

@@ -25,7 +25,7 @@ const ReviewWrite = () => {
     return (
         <div className="review-write-container">
             <div className="top-bar">
-                <button className="back-btn" onClick={() => navigate(-1)}>←</button>
+                <button className="back-btn" onClick={() => navigate('/review')}>←</button>
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Post</button>
             </div>
 

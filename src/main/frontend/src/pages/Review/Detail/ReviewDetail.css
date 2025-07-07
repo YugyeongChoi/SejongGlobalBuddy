@@ -1,5 +1,4 @@
 .review-detail-container {
-    max-width: 600px;
     margin: 40px auto;
     padding: 32px;
     border-radius: 24px;
@@ -58,4 +57,27 @@ a:hover,
 a:active {
     text-decoration: none;
     color: inherit;
+}
+
+.top-bar {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.back-btn {
+    background-color: #777;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.review-detail-wrapper {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
 }

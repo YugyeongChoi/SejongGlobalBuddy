@@ -1,0 +1,44 @@
+import React, { useEffect, useState, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getReviewDetail, updateReview } from '../../../api/reviewApi';
+import ReviewForm from "../Form/ReviewForm";
+import '../ReviewWrite.css'
+
+const ReviewEditPage = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const formRef = useRef();
+    const [initialData, setInitialData] = useState(null);
+
+    useEffect(() => {
+        getReviewDetail(id).then(setInitialData).catch(() => {
+            alert('리뷰 정보를 불러오지 못했습니다.');
+            navigate(-1);
+        });
+    }, [id, navigate]);
+
+    const handleSubmit = async (formData) => {
+        try {
+            await updateReview(id, formData);
+            navigate(`/review/${id}`);
+        } catch (error) {
+            alert('수정 중 오류가 발생했습니다.');
+            console.error(error);
+        }
+    };
+
+    if (!initialData) return <div>Loading...</div>;
+
+    return (
+        <div className="review-write-container">
+            <div className="top-bar">
+                <button className="back-btn" onClick={() => navigate('/review')}>←</button>
+                <button className="post-btn" onClick={() => formRef.current?.submit()}>Edit</button>
+            </div>
+
+            <ReviewForm onSubmit={handleSubmit} ref={formRef} initialData={initialData} />
+        </div>
+    );
+};
+
+export default ReviewEditPage;

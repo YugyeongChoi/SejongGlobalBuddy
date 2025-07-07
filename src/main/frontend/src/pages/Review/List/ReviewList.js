@@ -1,12 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ReviewList.css';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ReviewSetting from '../Setting/ReviewSetting';
+import { deleteReview } from '../../../api/reviewApi';
 
 const ReviewList = ({ reviews }) => {
+    const navigate = useNavigate();
+    const [popupOpenId, setPopupOpenId] = useState(null); // 🔥 팝업 열린 항목 추적
+
+    const handlePasswordSubmit = (inputPassword, review) => {
+        if (inputPassword === review.password) {
+            const confirmEdit = window.confirm('수정하시겠습니까? (취소 시 삭제)');
+            if (confirmEdit) {
+                navigate(`/review/edit/${review.id}`);
+            } else {
+                deleteReview(review.id)
+                    .then(() => {
+                        alert('삭제되었습니다.');
+                        window.location.reload();
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        alert('삭제 실패');
+                    });
+            }
+        } else {
+            alert('비밀번호가 틀렸습니다.');
+        }
+        setPopupOpenId(null); // 팝업 닫기
+    };
+
+    const handleCardClick = (review) => {
+        if (popupOpenId === review.id) return; // 팝업 열려있으면 이동 막기
+        navigate(`/review/${review.id}`);
+    };
+
     return (
         <div className="review-list-container">
             {reviews.map((review) => (
-                <Link to={`/review/${review.id}`} className="review-card-link" key={review.id}>
+                <div
+                    key={review.id}
+                    className="review-card-link"
+                    onClick={() => handleCardClick(review)}
+                >
                     <div className="review-card">
                         <div className="review-card-header">
                             <div className="title-section">
@@ -18,14 +54,22 @@ const ReviewList = ({ reviews }) => {
                                         ? `${review.generation} ${review.nickname}`
                                         : `International ${review.nickname}`}
                                 </span>
-                                <span className="options">⋮</span>
+                                <ReviewSetting
+                                    isOpen={popupOpenId === review.id}
+                                    setOpen={(isOpen) =>
+                                        setPopupOpenId(isOpen ? review.id : null)
+                                    }
+                                    onPasswordSubmit={(inputPassword) =>
+                                        handlePasswordSubmit(inputPassword, review)
+                                    }
+                                />
                             </div>
                         </div>
                         <div className="review-content">
                             <p>{review.content}</p>
                         </div>
                     </div>
-                </Link>
+                </div>
             ))}
         </div>
     );
