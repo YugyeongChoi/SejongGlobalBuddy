@@ -10,7 +10,6 @@
 .team-card {
     display: flex;
     flex-direction: column;
-    gap: 12px;
 }
 
 .team-title {

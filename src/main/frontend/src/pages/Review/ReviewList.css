@@ -1,0 +1,53 @@
+.review-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.review-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.title-section h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.author-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.options {
+    cursor: pointer;
+}
+
+.review-content {
+    margin-top: 12px;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}

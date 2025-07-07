@@ -1,5 +1,6 @@
 package sejong.globalbuddy.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -32,10 +33,20 @@ public class PostEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "nationality")
+    private String nationality;
+
+    @Column(name = "generation")
+    private String generation;
+
+    @Column(name = "nickname", length = 10)
+    private String nickname;
+
     @Column(name = "created_time")
     private LocalDateTime createdTime;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<PhotoEntity> photos = new ArrayList<>();
 
     @PrePersist
@@ -60,6 +71,8 @@ public class PostEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 
     @Builder
     public PostEntity(String title, String content, String password) {

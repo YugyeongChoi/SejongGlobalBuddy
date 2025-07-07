@@ -8,6 +8,7 @@ import Team from './pages/Team/Team';
 import Faq from './pages/Faq/Faq';
 import Review from './pages/Review/Review';
 import Layout from "./components/Layout";
+import ReviewWrite from "./pages/Review/ReviewWrite";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/review" element={<Review/>}/>
                     <Route path="/team" element={<Team/>}/>
                     <Route path="/faq" element={<Faq/>}/>
+                    <Route path="/review/write" element={<ReviewWrite />} />
                 </Routes>
             </Layout>
         </Router>

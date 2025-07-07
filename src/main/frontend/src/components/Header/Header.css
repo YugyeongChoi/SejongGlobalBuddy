@@ -51,6 +51,7 @@
     top: 35px;
     color: black;
     z-index: 999;
+    transform: translateX(-100%);
 }
 
 /* 사이드 메뉴 (모바일용) */
@@ -120,6 +121,7 @@
 body.menu-open {
     overflow: hidden;
 }
+
 .hamburger.hide {
     display: none;
 }
