@@ -50,6 +50,23 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDto> getPostById(@PathVariable("id") Long id){
+        return postRepository.findById(id)
+                .map(post -> {
+                    PostDto dto = new PostDto();
+                    dto.setId(post.getId());
+                    dto.setTitle(post.getTitle());
+                    dto.setContent(post.getContent());
+                    dto.setPassword(post.getPassword());
+                    dto.setNationality(post.getNationality());
+                    dto.setGeneration(post.getGeneration());
+                    dto.setNickname(post.getNickname());
+                    dto.setCreatedTime(post.getCreatedTime());
+                    return ResponseEntity.ok(dto);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 
 
 

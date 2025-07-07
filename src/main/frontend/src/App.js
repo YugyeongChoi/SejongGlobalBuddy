@@ -8,6 +8,7 @@ import Faq from './pages/Faq/Faq';
 import Review from './pages/Review/Review';
 import ReviewWrite from './pages/Review/ReviewWrite';
 import Layout from './components/Layout';
+import ReviewDetail from "./pages/Review/Detail/ReviewDetail";
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -29,6 +30,7 @@ const AppRoutes = () => {
                         <Route path="/review" element={<Review />} />
                         <Route path="/team" element={<Team />} />
                         <Route path="/faq" element={<Faq />} />
+                        <Route path="/review/:id" element={<ReviewDetail />} />
                     </Routes>
                 </Layout>
             )}

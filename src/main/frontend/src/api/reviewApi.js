@@ -10,3 +10,8 @@ export const fetchReviews = async () => {
 export const postReview = async (data) => {
     return await axios.post(`${API_BASE}/write`, data);
 };
+
+export const getReviewDetail = async (id) => {
+    const res = await axios.get(`/review/${id}`)
+    return res.data;
+};
