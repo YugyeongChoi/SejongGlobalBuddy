@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {fetchReviews} from "../../api/reviewApi";
-import ReviewList from "./ReviewList";
+import ReviewList from "./List/ReviewList";
 import { Link } from 'react-router-dom';
+import { FiEdit3 } from "react-icons/fi";
+import './ReviewWrite.css';
 
 const Review = () => {
     const [reviews, setReviews] = useState([]);
@@ -12,9 +14,11 @@ const Review = () => {
 
     return (
         <div>
-            <Link to="/review/write">글쓰기</Link>
             <ReviewList reviews={reviews} />
 
+            <Link to="/review/write" className="fab-button">
+                <FiEdit3 size={28} />
+            </Link>
         </div>
     );
 };

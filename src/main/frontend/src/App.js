@@ -1,29 +1,45 @@
-import React, {useEffect, useState, useRef} from 'react';
-
-import {HashRouter as Router, Routes, Route, Link, Navigate} from "react-router-dom";
+import React from 'react';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 import Main from './pages/Main/Main';
 import Data from './pages/Data/Data';
 import Team from './pages/Team/Team';
 import Faq from './pages/Faq/Faq';
 import Review from './pages/Review/Review';
-import Layout from "./components/Layout";
-import ReviewWrite from "./pages/Review/ReviewWrite";
+import ReviewWrite from './pages/Review/ReviewWrite';
+import Layout from './components/Layout';
+
+const AppRoutes = () => {
+    const location = useLocation();
+    const isWritePage = location.pathname === '/review/write';
+
+    return (
+        <>
+            <div className="background"></div>
+
+            {isWritePage ? (
+                <Routes>
+                    <Route path="/review/write" element={<ReviewWrite />} />
+                </Routes>
+            ) : (
+                <Layout>
+                    <Routes>
+                        <Route path="/" element={<Main />} />
+                        <Route path="/data" element={<Data />} />
+                        <Route path="/review" element={<Review />} />
+                        <Route path="/team" element={<Team />} />
+                        <Route path="/faq" element={<Faq />} />
+                    </Routes>
+                </Layout>
+            )}
+        </>
+    );
+};
 
 function App() {
     return (
         <Router>
-            <div className="background"></div>
-            <Layout>
-                <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/data" element={<Data/>}/>
-                    <Route path="/review" element={<Review/>}/>
-                    <Route path="/team" element={<Team/>}/>
-                    <Route path="/faq" element={<Faq/>}/>
-                    <Route path="/review/write" element={<ReviewWrite />} />
-                </Routes>
-            </Layout>
+            <AppRoutes />
         </Router>
     );
 }
