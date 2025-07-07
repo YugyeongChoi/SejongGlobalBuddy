@@ -7,4 +7,8 @@ public class PostDto {
     private String title;
     private String content;
     private String password;
+    private String nationality;
+    private String generation;
+    private String nickname;
 }
+

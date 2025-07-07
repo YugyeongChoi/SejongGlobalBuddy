@@ -1,5 +1,5 @@
 import React from 'react';
-import './ReviewList.css'; // 스타일 분리해서 관리
+import './ReviewList.css';
 
 const ReviewList = ({ reviews }) => {
     return (
@@ -9,9 +9,14 @@ const ReviewList = ({ reviews }) => {
                     <div className="review-card-header">
                         <div className="title-section">
                             <h3>{review.title}</h3>
+                            <span className="badge">{review.id}</span>
                         </div>
                         <div className="author-options">
-                            <span className="author">24기 DINH DIEU LINH</span>
+                            <span className="author">
+                                {review.nationality === 'Korean'
+                                    ? `${review.generation} ${review.nickname}`
+                                    : `International ${review.nickname}`}
+                            </span>
                             <span className="options">⋮</span>
                         </div>
                     </div>

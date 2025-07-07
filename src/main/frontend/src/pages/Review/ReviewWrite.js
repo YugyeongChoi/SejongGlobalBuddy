@@ -7,8 +7,17 @@ const ReviewWrite = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (formData) => {
-        await postReview(formData);
-        navigate('/review');
+        try {
+            await postReview(formData);
+            navigate('/review');
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                alert(error.response.data);
+            } else {
+                alert('오류가 발생했습니다.');
+                console.error(error);
+            }
+        }
     };
 
     return (

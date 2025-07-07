@@ -3,6 +3,8 @@ package sejong.globalbuddy.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.annotations.processing.Pattern;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.web.ErrorResponse;
 
@@ -31,6 +33,7 @@ public class PostEntity {
     private String content;
 
     @Column(name = "password")
+    @NotNull
     private String password;
 
     @Column(name = "nationality")
@@ -75,11 +78,15 @@ public class PostEntity {
 
 
     @Builder
-    public PostEntity(String title, String content, String password) {
+    public PostEntity(String title, String content, String password,
+                      String nationality, String generation, String nickname) {
         this.title = title;
         this.content = content;
         this.password = password;
-        this.createdTime = LocalDateTime.now(); // 직접 설정
+        this.nationality = nationality;
+        this.generation = generation;
+        this.nickname = nickname;
+        this.createdTime = LocalDateTime.now();
     }
 
 }

@@ -1,6 +1,7 @@
 package sejong.globalbuddy.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sejong.globalbuddy.dto.PostDto;
@@ -22,15 +23,34 @@ public class PostController {
     }
 
     @PostMapping("/write")
-    public ResponseEntity<String> savePost(@RequestBody PostDto dto) {
-        PostEntity post = PostEntity.builder()
-                .title(dto.getTitle())
-                .content(dto.getContent())
-                .password(dto.getPassword())
-                .build();
+    public ResponseEntity<?> savePost(@RequestBody PostDto dto) {
+        try {
+            String password = dto.getPassword();
 
-        postRepository.save(post);
+            // 6자리 숫자가 아닌 경우 예외 처리
+            if (!password.matches("^\\d{6}$")) {
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body("Please enter a 6-digit password!");
+            }
 
-        return ResponseEntity.ok("saved");
+            PostEntity post = PostEntity.builder()
+                    .title(dto.getTitle())
+                    .content(dto.getContent())
+                    .password(password)
+                    .nationality(dto.getNationality())
+                    .generation(dto.getGeneration())
+                    .nickname(dto.getNickname())
+                    .build();
+
+            postRepository.save(post);
+            return ResponseEntity.ok("saved");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
+
+
+
 }
