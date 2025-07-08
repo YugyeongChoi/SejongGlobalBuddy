@@ -13,14 +13,21 @@
 
 .back-btn {
     background-color: #777;
-    color: white;
-    font-weight: bold;
     border: none;
     border-radius: 50%;
     width: 42px;
     height: 42px;
-    font-size: 20px;
+    padding: 0;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-icon {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
 }
 
 .post-btn {

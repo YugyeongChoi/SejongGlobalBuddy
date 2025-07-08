@@ -4,6 +4,7 @@ import ReviewList from "./List/ReviewList";
 import { Link } from 'react-router-dom';
 import { FiEdit3 } from "react-icons/fi";
 import './ReviewWrite.css';
+import './Review.css';
 
 const Review = () => {
     const [reviews, setReviews] = useState([]);
@@ -13,7 +14,8 @@ const Review = () => {
     }, []);
 
     return (
-        <div>
+        <div className="review-page">
+            <h1>Global Buddy Review</h1>
             <ReviewList reviews={reviews} />
 
             <Link to="/review/write" className="fab-button">

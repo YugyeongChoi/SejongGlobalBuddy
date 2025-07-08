@@ -20,7 +20,9 @@ const ReviewDetail = () => {
     return (
         <div className="review-detail-wrapper">
             <div className="top-bar">
-                <button className="back-btn" onClick={() => navigate('/review')}>←</button>
+                <button className="back-btn" onClick={() => navigate('/review')}>
+                    <img src="images/back.png" alt="Back" className="back-icon" />
+                </button>
             </div>
 
             <div className="review-detail-container">

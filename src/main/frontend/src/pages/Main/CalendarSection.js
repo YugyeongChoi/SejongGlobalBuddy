@@ -8,7 +8,7 @@ function CalendarSection() {
 
             <div className="calendar-content">
                 <img
-                    src="/images/calendar.png"
+                    src="/images/calendar.jpg"
                     className="calendar-image"
                 />
                 <img
