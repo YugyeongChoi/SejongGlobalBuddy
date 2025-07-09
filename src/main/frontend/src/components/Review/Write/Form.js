@@ -1,7 +1,7 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import './ModalForm.css';
+import './Form.css';
 
-const ModalForm = forwardRef(({ onSubmit, initialData }, ref) => {
+const Form = forwardRef(({ onSubmit, initialData }, ref) => {
     const [form, setForm] = useState({
         title: '',
         content: '',
@@ -11,6 +11,7 @@ const ModalForm = forwardRef(({ onSubmit, initialData }, ref) => {
         nickname: '',
     });
 
+    const [images, setImages] = useState([]);
     const [showExtraFields, setShowExtraFields] = useState(false);
 
     useEffect(() => {
@@ -37,13 +38,27 @@ const ModalForm = forwardRef(({ onSubmit, initialData }, ref) => {
         setForm({ ...form, [key]: value });
     };
 
+    const handleImageChange = (e) => {
+        setImages(Array.from(e.target.files));
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!showExtraFields) {
             setShowExtraFields(true);
             return;
         }
-        onSubmit(form);
+
+        const formData = new FormData();
+        formData.append("review", new Blob([JSON.stringify(form)], {
+            type: "application/json"
+        }));
+
+        images.forEach((file) => {
+            formData.append("images", file);
+        });
+
+        onSubmit(formData);
     };
 
     useImperativeHandle(ref, () => ({
@@ -74,6 +89,17 @@ const ModalForm = forwardRef(({ onSubmit, initialData }, ref) => {
                     onChange={handleChange}
                     required
                     className="content-textarea"
+                />
+            </div>
+
+
+            <div className="input-block">
+                <label className="review-label">이미지 업로드</label>
+                <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={handleImageChange}
                 />
             </div>
 
@@ -150,4 +176,4 @@ const ModalForm = forwardRef(({ onSubmit, initialData }, ref) => {
     );
 });
 
-export default ModalForm;
+export default Form;

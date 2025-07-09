@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ReviewDto {
@@ -15,6 +16,7 @@ public class ReviewDto {
     private String generation;
     private String nickname;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime createdTime; // ✅ 추가
+    private LocalDateTime createdTime;
+    private List<String> photoUrls;
 }
 

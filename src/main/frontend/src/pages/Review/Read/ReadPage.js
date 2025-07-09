@@ -10,7 +10,7 @@ const ReadPage = () => {
 
     useEffect(() => {
         getReviewDetail(id).then((data) => {
-            console.log('리뷰 데이터:', data); // 디버깅용
+            console.log('리뷰 데이터:', data);
             setReview(data);
         });
     }, [id]);
@@ -40,6 +40,20 @@ const ReadPage = () => {
                 </div>
 
                 <div className="review-content">{review.content}</div>
+
+                {review.photoUrls && review.photoUrls.length > 0 && (
+                    <div className="review-photo-wrapper">
+                        {review.photoUrls.map((url, index) => (
+                            <img
+                                key={index}
+                                src={url}
+                                alt={`uploaded-${index}`}
+                                className="review-photo"
+                            />
+                        ))}
+                    </div>
+                )}
+
             </div>
         </div>
 

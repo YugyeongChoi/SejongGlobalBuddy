@@ -7,9 +7,14 @@ export const fetchReviews = async () => {
     return res.data;
 };
 
-export const postReview = async (data) => {
-    return await axios.post(`${API_BASE}/write`, data);
+export const postReview = async (formData) => {
+    return await axios.post(`${API_BASE}/write`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 };
+
 
 export const getReviewDetail = async (id) => {
     const res = await axios.get(`/review/${id}`)

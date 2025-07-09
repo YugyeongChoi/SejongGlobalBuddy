@@ -5,10 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sejong.globalbuddy.dto.ReviewDto;
+import sejong.globalbuddy.entity.PhotoEntity;
 import sejong.globalbuddy.entity.ReviewEntity;
 import sejong.globalbuddy.repository.ReviewRepository;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/review")
@@ -22,13 +26,13 @@ public class ReviewController {
         return reviewRepository.findAll();
     }
 
-    @PostMapping("/write")
-    public ResponseEntity<?> savePost(@RequestBody ReviewDto dto) {
-        try {
-            String password = dto.getPassword();
+    @PostMapping(value = "/write", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> savePostWithPhoto(
+            @RequestPart("review") ReviewDto dto,
+            @RequestPart(value = "images", required = false) List<MultipartFile> images) {
 
-            // 6자리 숫자가 아닌 경우 예외 처리
-            if (!password.matches("^\\d{6}$")) {
+        try {
+            if (!dto.getPassword().matches("^\\d{6}$")) {
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
                         .body("Please enter a 6-digit password!");
@@ -37,14 +41,34 @@ public class ReviewController {
             ReviewEntity post = ReviewEntity.builder()
                     .title(dto.getTitle())
                     .content(dto.getContent())
-                    .password(password)
+                    .password(dto.getPassword())
                     .nationality(dto.getNationality())
                     .generation(dto.getGeneration())
                     .nickname(dto.getNickname())
                     .build();
 
+            // 이미지 저장
+            if (images != null) {
+                for (MultipartFile image : images) {
+                    String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads/";
+                    String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
+                    String filePath = uploadDir + fileName;
+
+                    File dest = new File(filePath);
+                    dest.getParentFile().mkdirs();
+                    image.transferTo(dest);
+
+                    PhotoEntity photo = PhotoEntity.builder()
+                            .url("/uploads/" + fileName)
+                            .build();
+
+                    post.addPhoto(photo);
+                }
+            }
+
             reviewRepository.save(post);
             return ResponseEntity.ok("saved");
+
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
@@ -63,6 +87,15 @@ public class ReviewController {
                     dto.setGeneration(post.getGeneration());
                     dto.setNickname(post.getNickname());
                     dto.setCreatedTime(post.getCreatedTime());
+
+                    if (post.getPhotos() != null) {
+                        dto.setPhotoUrls(
+                                post.getPhotos().stream()
+                                        .map(photo -> photo.getUrl())
+                                        .collect(java.util.stream.Collectors.toList())
+                        );
+                    }
+
                     return ResponseEntity.ok(dto);
                 })
                 .orElse(ResponseEntity.notFound().build());
@@ -87,14 +120,14 @@ public class ReviewController {
                     }
 
                     ReviewEntity updatedPost = ReviewEntity.builder()
-                            .id(existing.getId())  // ⭐ 반드시 ID 설정
+                            .id(existing.getId())
                             .title(dto.getTitle())
                             .content(dto.getContent())
                             .password(dto.getPassword())
                             .nationality(dto.getNationality())
                             .generation(dto.getGeneration())
                             .nickname(dto.getNickname())
-                            .createdTime(existing.getCreatedTime()) // 원본 시간 보존(Optional)
+                            .createdTime(existing.getCreatedTime())
                             .build();
 
                     reviewRepository.save(updatedPost);

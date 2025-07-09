@@ -39,7 +39,6 @@
     align-self: flex-start;
 }
 
-
 .thumbnail {
     width: 100px;
     height: 100px;
@@ -84,13 +83,6 @@
     padding: 20px;
     max-width: 1000px;
     border-radius: 12px;
-}
-
-.calendar-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    padding-left: 20px;
 }
 
 .calendar-content {

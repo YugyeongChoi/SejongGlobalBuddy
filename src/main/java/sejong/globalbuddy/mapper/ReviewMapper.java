@@ -3,6 +3,10 @@ package sejong.globalbuddy.mapper;
 import org.springframework.stereotype.Component;
 import sejong.globalbuddy.dto.ReviewDto;
 import sejong.globalbuddy.entity.ReviewEntity;
+import sejong.globalbuddy.entity.PhotoEntity;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ReviewMapper {
@@ -17,6 +21,12 @@ public class ReviewMapper {
         dto.setGeneration(post.getGeneration());
         dto.setNickname(post.getNickname());
         dto.setCreatedTime(post.getCreatedTime());
+
+        List<String> photoUrls = post.getPhotos().stream()
+                .map(PhotoEntity::getUrl)
+                .collect(Collectors.toList());
+        dto.setPhotoUrls(photoUrls);
+
         return dto;
     }
 

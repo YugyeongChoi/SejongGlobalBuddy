@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getReviewDetail, updateReview } from '../../../api/reviewApi';
-import ModalForm from "../../../components/Review/Write/ModalForm";
+import Form from "../../../components/Review/Write/Form";
 import '../Write/WritePage.css'
 
 const EditPage = () => {
@@ -36,7 +36,7 @@ const EditPage = () => {
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Edit</button>
             </div>
 
-            <ModalForm onSubmit={handleSubmit} ref={formRef} initialData={initialData} />
+            <Form onSubmit={handleSubmit} ref={formRef} initialData={initialData} />
         </div>
     );
 };

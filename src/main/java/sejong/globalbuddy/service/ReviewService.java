@@ -8,6 +8,9 @@ import sejong.globalbuddy.dto.ReviewDto;
 import sejong.globalbuddy.entity.ReviewEntity;
 import sejong.globalbuddy.mapper.ReviewMapper;
 import sejong.globalbuddy.repository.ReviewRepository;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import sejong.globalbuddy.entity.PhotoEntity;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -23,9 +26,15 @@ public class ReviewService {
     @Transactional(readOnly = true)
     public ReviewDto getReviewDetail(Long id) throws ChangeSetPersister.NotFoundException {
         ReviewEntity review = reviewRepository.findByIdWithPhotos(id)
-                .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+                .orElseThrow(NotFoundException::new);
 
-        return reviewMapper.toDto(review);
+        ReviewDto dto = reviewMapper.toDto(review);
+        dto.setPhotoUrls(
+                review.getPhotos().stream()
+                        .map(PhotoEntity::getUrl)
+                        .collect(Collectors.toList())
+        );
+        return dto;
     }
 
 }

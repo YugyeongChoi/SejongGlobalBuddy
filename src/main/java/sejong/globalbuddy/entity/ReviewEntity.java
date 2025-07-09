@@ -13,8 +13,7 @@ import java.util.List;
 
 @Getter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // 빌더 사용 시 이 패턴 추천
-//@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "post")
 public class ReviewEntity {
@@ -57,7 +56,6 @@ public class ReviewEntity {
         this.createdTime = LocalDateTime.now();
     }
 
-    // 편의 메서드 (양방향 관계 설정)
     public void addPhoto(PhotoEntity photo) {
         photos.add(photo);
         photo.setPost(this);
@@ -88,7 +86,7 @@ public class ReviewEntity {
         this.nationality = nationality;
         this.generation = generation;
         this.nickname = nickname;
-        this.createdTime = createdTime != null ? createdTime : LocalDateTime.now(); // 수정: 유지 or 새로 생성
+        this.createdTime = createdTime != null ? createdTime : LocalDateTime.now();
     }
 
 

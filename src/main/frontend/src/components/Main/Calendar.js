@@ -4,8 +4,6 @@ import '../../pages/Main/MainPage.css';
 function Calendar() {
     return (
         <div className="calendar-wrapper">
-            <h2 className="calendar-title">달력</h2>
-
             <div className="calendar-content">
                 <img
                     src="/images/calendar.jpg"

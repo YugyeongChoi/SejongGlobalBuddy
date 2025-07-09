@@ -29,4 +29,10 @@ public class PhotoEntity {
     public void setPost(ReviewEntity post) {
         this.post = post;
     }
+
+    @Builder
+    public PhotoEntity(String url) {
+        this.url = url;
+    }
+
 }

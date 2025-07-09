@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ModalForm from '../../../components/Review/Write/ModalForm';
+import Form from '../../../components/Review/Write/Form';
 import { postReview } from '../../../api/reviewApi';
 import './WritePage.css';
 
@@ -31,7 +31,7 @@ const WritePage = () => {
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Post</button>
             </div>
 
-            <ModalForm onSubmit={handleSubmit} ref={formRef} />
+            <Form onSubmit={handleSubmit} ref={formRef} />
         </div>
     );
 };
