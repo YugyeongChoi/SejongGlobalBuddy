@@ -1,15 +1,15 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-import MainPage from './pages/Main/MainPage';
-import DataPage from './pages/Data/DataPage';
-import TeamPage from './pages/Team/TeamPage';
-import FaqPage from './pages/Faq/FaqPage';
-import ReviewPage from './pages/Review/ReviewPage';
-import WritePage from './pages/Review/Write/WritePage';
-import Layout from './components/Layout/Layout';
-import ReadPage from "./pages/Review/Read/ReadPage";
-import EditPage from "./pages/Review/Edit/EditPage";
+import MainPage from '../pages/Main/MainPage';
+import DataPage from '../pages/Data/DataPage';
+import TeamPage from '../pages/Team/TeamPage';
+import FaqPage from '../pages/Faq/FaqPage';
+import ReviewPage from '../pages/Review/ReviewPage';
+import WritePage from '../pages/Review/Write/WritePage';
+import Layout from '../components/Layout/Layout';
+import ReadPage from "../pages/Review/Read/ReadPage";
+import EditPage from "../pages/Review/Edit/EditPage";
 
 const AppRoutes = () => {
     const location = useLocation();
