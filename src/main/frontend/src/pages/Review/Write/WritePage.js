@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReviewForm from './Form/ReviewForm';
-import { postReview } from '../../api/reviewApi';
-import './ReviewWrite.css';
+import ModalForm from '../../../components/Review/Write/ModalForm';
+import { postReview } from '../../../api/reviewApi';
+import './WritePage.css';
 
-const ReviewWrite = () => {
+const WritePage = () => {
     const navigate = useNavigate();
     const formRef = React.useRef();
 
@@ -31,9 +31,9 @@ const ReviewWrite = () => {
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Post</button>
             </div>
 
-            <ReviewForm onSubmit={handleSubmit} ref={formRef} />
+            <ModalForm onSubmit={handleSubmit} ref={formRef} />
         </div>
     );
 };
 
-export default ReviewWrite;
+export default WritePage;

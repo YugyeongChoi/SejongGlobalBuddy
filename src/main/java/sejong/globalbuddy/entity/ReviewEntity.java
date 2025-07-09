@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
-import org.hibernate.annotations.processing.Pattern;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.web.ErrorResponse;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.List;
 //@AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "post")
-public class PostEntity {
+public class ReviewEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,9 +78,9 @@ public class PostEntity {
 
 
     @Builder
-    public PostEntity(Long id, String title, String content, String password,
-                      String nationality, String generation, String nickname,
-                      LocalDateTime createdTime) {
+    public ReviewEntity(Long id, String title, String content, String password,
+                        String nationality, String generation, String nickname,
+                        LocalDateTime createdTime) {
         this.id = id;
         this.title = title;
         this.content = content;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './ReviewSetting.css';
+import './Setting.css';
 
-const ReviewSetting = ({ onPasswordSubmit, isOpen, setOpen }) => {
+const Setting = ({ onPasswordSubmit, isOpen, setOpen }) => {
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
@@ -35,4 +35,4 @@ const ReviewSetting = ({ onPasswordSubmit, isOpen, setOpen }) => {
     );
 };
 
-export default ReviewSetting;
+export default Setting;

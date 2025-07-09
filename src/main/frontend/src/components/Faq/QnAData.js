@@ -1,4 +1,4 @@
-const faqData = {
+const qnAData = {
     ko: [
         {
             question: '막학기인데, 지원이 가능할까요?',
@@ -25,4 +25,4 @@ const faqData = {
     ],
 };
 
-export default faqData;
+export default qnAData;

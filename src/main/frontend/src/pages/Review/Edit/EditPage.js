@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getReviewDetail, updateReview } from '../../../api/reviewApi';
-import ReviewForm from "../Form/ReviewForm";
-import '../ReviewWrite.css'
+import ModalForm from "../../../components/Review/Write/ModalForm";
+import '../Write/WritePage.css'
 
-const ReviewEditPage = () => {
+const EditPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const formRef = useRef();
@@ -36,9 +36,9 @@ const ReviewEditPage = () => {
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Edit</button>
             </div>
 
-            <ReviewForm onSubmit={handleSubmit} ref={formRef} initialData={initialData} />
+            <ModalForm onSubmit={handleSubmit} ref={formRef} initialData={initialData} />
         </div>
     );
 };
 
-export default ReviewEditPage;
+export default EditPage;

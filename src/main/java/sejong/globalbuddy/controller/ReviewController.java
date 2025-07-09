@@ -4,26 +4,26 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sejong.globalbuddy.dto.PostDto;
-import sejong.globalbuddy.entity.PostEntity;
-import sejong.globalbuddy.repository.PostRepository;
+import sejong.globalbuddy.dto.ReviewDto;
+import sejong.globalbuddy.entity.ReviewEntity;
+import sejong.globalbuddy.repository.ReviewRepository;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/review")
 @RequiredArgsConstructor
-public class PostController {
+public class ReviewController {
 
-    private final PostRepository postRepository;
+    private final ReviewRepository reviewRepository;
 
     @GetMapping
-    public List<PostEntity> list() {
-        return postRepository.findAll();
+    public List<ReviewEntity> list() {
+        return reviewRepository.findAll();
     }
 
     @PostMapping("/write")
-    public ResponseEntity<?> savePost(@RequestBody PostDto dto) {
+    public ResponseEntity<?> savePost(@RequestBody ReviewDto dto) {
         try {
             String password = dto.getPassword();
 
@@ -34,7 +34,7 @@ public class PostController {
                         .body("Please enter a 6-digit password!");
             }
 
-            PostEntity post = PostEntity.builder()
+            ReviewEntity post = ReviewEntity.builder()
                     .title(dto.getTitle())
                     .content(dto.getContent())
                     .password(password)
@@ -43,7 +43,7 @@ public class PostController {
                     .nickname(dto.getNickname())
                     .build();
 
-            postRepository.save(post);
+            reviewRepository.save(post);
             return ResponseEntity.ok("saved");
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,10 +51,10 @@ public class PostController {
         }
     }
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable("id") Long id){
-        return postRepository.findById(id)
+    public ResponseEntity<ReviewDto> getPostById(@PathVariable("id") Long id){
+        return reviewRepository.findById(id)
                 .map(post -> {
-                    PostDto dto = new PostDto();
+                    ReviewDto dto = new ReviewDto();
                     dto.setId(post.getId());
                     dto.setTitle(post.getTitle());
                     dto.setContent(post.getContent());
@@ -70,15 +70,15 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePost(@PathVariable("id") Long id) {
-        postRepository.deleteById(id);
+        reviewRepository.deleteById(id);
         return ResponseEntity.ok().body("deleted");
     }
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePost(
             @PathVariable("id") Long id,
-            @RequestBody PostDto dto) {
+            @RequestBody ReviewDto dto) {
 
-        return postRepository.findById(id)
+        return reviewRepository.findById(id)
                 .map(existing -> {
                     // 비밀번호 검증
                     if (!existing.getPassword().equals(dto.getPassword())) {
@@ -86,7 +86,7 @@ public class PostController {
                                 .body("Incorrect password");
                     }
 
-                    PostEntity updatedPost = PostEntity.builder()
+                    ReviewEntity updatedPost = ReviewEntity.builder()
                             .id(existing.getId())  // ⭐ 반드시 ID 설정
                             .title(dto.getTitle())
                             .content(dto.getContent())
@@ -97,7 +97,7 @@ public class PostController {
                             .createdTime(existing.getCreatedTime()) // 원본 시간 보존(Optional)
                             .build();
 
-                    postRepository.save(updatedPost);
+                    reviewRepository.save(updatedPost);
                     return ResponseEntity.ok("updated");
                 })
                 .orElse(ResponseEntity.notFound().build());

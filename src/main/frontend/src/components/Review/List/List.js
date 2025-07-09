@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './ReviewList.css';
+import './List.css';
 import { useNavigate } from 'react-router-dom';
-import ReviewSetting from '../Setting/ReviewSetting';
+import Setting from './Setting';
 import { deleteReview } from '../../../api/reviewApi';
 
-const ReviewList = ({ reviews }) => {
+const List = ({ reviews }) => {
     const navigate = useNavigate();
     const [popupOpenId, setPopupOpenId] = useState(null); // 🔥 팝업 열린 항목 추적
 
@@ -54,7 +54,7 @@ const ReviewList = ({ reviews }) => {
                                         ? `${review.generation} ${review.nickname}`
                                         : `International ${review.nickname}`}
                                 </span>
-                                <ReviewSetting
+                                <Setting
                                     isOpen={popupOpenId === review.id}
                                     setOpen={(isOpen) =>
                                         setPopupOpenId(isOpen ? review.id : null)
@@ -75,4 +75,4 @@ const ReviewList = ({ reviews }) => {
     );
 };
 
-export default ReviewList;
+export default List;

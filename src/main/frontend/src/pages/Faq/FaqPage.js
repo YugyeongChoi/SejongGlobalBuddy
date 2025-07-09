@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import './Faq.css';
-import faqData from './FaqData';
+import './FaqPage.css';
+import qnAData from '../../components/Faq/QnAData';
 
-function Faq() {
+function FaqPage() {
     const [language, setLanguage] = useState('ko');
     const [openStates, setOpenStates] = useState([]);
 
-    const faqs = faqData[language];
+    const faqs = qnAData[language];
 
     const handleLangChange = (lang) => {
         setLanguage(lang);
-        setOpenStates(new Array(faqData[lang].length).fill(false));
+        setOpenStates(new Array(qnAData[lang].length).fill(false));
     };
 
     const toggleFAQ = (index) => {
@@ -57,4 +57,4 @@ function Faq() {
     );
 }
 
-export default Faq;
+export default FaqPage;

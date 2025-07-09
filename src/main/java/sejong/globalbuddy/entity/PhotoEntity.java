@@ -24,9 +24,9 @@ public class PhotoEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     @JsonBackReference
-    private PostEntity post;
+    private ReviewEntity post;
 
-    public void setPost(PostEntity post) {
+    public void setPost(ReviewEntity post) {
         this.post = post;
     }
 }

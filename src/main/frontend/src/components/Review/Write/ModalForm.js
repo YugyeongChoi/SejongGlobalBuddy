@@ -1,7 +1,7 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import './ReviewForm.css';
+import './ModalForm.css';
 
-const ReviewForm = forwardRef(({ onSubmit, initialData }, ref) => {
+const ModalForm = forwardRef(({ onSubmit, initialData }, ref) => {
     const [form, setForm] = useState({
         title: '',
         content: '',
@@ -150,4 +150,4 @@ const ReviewForm = forwardRef(({ onSubmit, initialData }, ref) => {
     );
 });
 
-export default ReviewForm;
+export default ModalForm;

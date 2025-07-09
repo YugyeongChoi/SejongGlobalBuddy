@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './Main.css';
+import '../../pages/Main/MainPage.css';
 import {Link} from "react-router-dom";
 
 function ImageSwitcher() {
@@ -13,7 +13,7 @@ function ImageSwitcher() {
     const [mainImage, setMainImage] = useState({
         id: 1,
         src: '/images/group1.jpg',
-        alt: 'Main Image',
+        alt: 'MainPage Image',
     });
 
     const [thumbnails, setThumbnails] = useState(initialImages);

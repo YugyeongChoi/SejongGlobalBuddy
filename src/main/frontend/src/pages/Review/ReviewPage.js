@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {fetchReviews} from "../../api/reviewApi";
-import ReviewList from "./List/ReviewList";
+import List from "../../components/Review/List/List";
 import { Link } from 'react-router-dom';
 import { FiEdit3 } from "react-icons/fi";
-import './ReviewWrite.css';
-import './Review.css';
+import './Write/WritePage.css';
+import './ReviewPage.css';
 
-const Review = () => {
+const ReviewPage = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const Review = () => {
     return (
         <div className="review-page">
             <h1>Global Buddy Review</h1>
-            <ReviewList reviews={reviews} />
+            <List reviews={reviews} />
 
             <Link to="/review/write" className="fab-button">
                 <FiEdit3 color="white" size={28} />
@@ -25,4 +25,4 @@ const Review = () => {
     );
 };
 
-export default Review;
+export default ReviewPage;

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-function Data() {
+function DataPage() {
     return (
         <div>
             <h1>Data 페이지</h1>
@@ -7,4 +7,4 @@ function Data() {
     );
 }
 
-export default Data;
+export default DataPage;

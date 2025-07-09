@@ -1,15 +1,15 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-import Main from './pages/Main/Main';
-import Data from './pages/Data/Data';
-import Team from './pages/Team/Team';
-import Faq from './pages/Faq/Faq';
-import Review from './pages/Review/Review';
-import ReviewWrite from './pages/Review/ReviewWrite';
-import Layout from './components/Layout';
-import ReviewDetail from "./pages/Review/Detail/ReviewDetail";
-import ReviewEditPage from "./pages/Review/Edit/ReviewEditPage";
+import MainPage from './pages/Main/MainPage';
+import DataPage from './pages/Data/DataPage';
+import TeamPage from './pages/Team/TeamPage';
+import FaqPage from './pages/Faq/FaqPage';
+import ReviewPage from './pages/Review/ReviewPage';
+import WritePage from './pages/Review/Write/WritePage';
+import Layout from './components/Layout/Layout';
+import ReadPage from "./pages/Review/Read/ReadPage";
+import EditPage from "./pages/Review/Edit/EditPage";
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -21,18 +21,18 @@ const AppRoutes = () => {
 
             {isWritePage ? (
                 <Routes>
-                    <Route path="/review/write" element={<ReviewWrite />} />
+                    <Route path="/review/write" element={<WritePage />} />
                 </Routes>
             ) : (
                 <Layout>
                     <Routes>
-                        <Route path="/" element={<Main />} />
-                        <Route path="/data" element={<Data />} />
-                        <Route path="/review" element={<Review />} />
-                        <Route path="/team" element={<Team />} />
-                        <Route path="/faq" element={<Faq />} />
-                        <Route path="/review/:id" element={<ReviewDetail />} />
-                        <Route path="/review/edit/:id" element={<ReviewEditPage />} />
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/data" element={<DataPage />} />
+                        <Route path="/review" element={<ReviewPage />} />
+                        <Route path="/team" element={<TeamPage />} />
+                        <Route path="/faq" element={<FaqPage />} />
+                        <Route path="/review/:id" element={<ReadPage />} />
+                        <Route path="/review/edit/:id" element={<EditPage />} />
                     </Routes>
                 </Layout>
             )}

@@ -1,14 +1,14 @@
 package sejong.globalbuddy.mapper;
 
 import org.springframework.stereotype.Component;
-import sejong.globalbuddy.dto.PostDto;
-import sejong.globalbuddy.entity.PostEntity;
+import sejong.globalbuddy.dto.ReviewDto;
+import sejong.globalbuddy.entity.ReviewEntity;
 
 @Component
-public class PostMapper {
+public class ReviewMapper {
 
-    public PostDto toDto(PostEntity post) {
-        PostDto dto = new PostDto();
+    public ReviewDto toDto(ReviewEntity post) {
+        ReviewDto dto = new ReviewDto();
         dto.setId(post.getId());
         dto.setTitle(post.getTitle());
         dto.setContent(post.getContent());
@@ -20,8 +20,8 @@ public class PostMapper {
         return dto;
     }
 
-    public PostEntity toEntity(PostDto dto) {
-        return PostEntity.builder()
+    public ReviewEntity toEntity(ReviewDto dto) {
+        return ReviewEntity.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .password(dto.getPassword())

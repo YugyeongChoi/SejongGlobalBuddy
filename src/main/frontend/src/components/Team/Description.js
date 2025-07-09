@@ -1,5 +1,5 @@
 import React from 'react';
-import './TeamSection.css';
+import './Description.css';
 
 const team = [
     {
@@ -28,7 +28,7 @@ const team = [
     },
 ];
 
-function TeamSection() {
+function Description() {
     return (
         <div className="team-wrapper">
             {team.map((item, index) => (
@@ -49,4 +49,4 @@ function TeamSection() {
 
 
 
-export default TeamSection;
+export default Description;

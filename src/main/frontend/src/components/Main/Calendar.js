@@ -1,7 +1,7 @@
 import React from 'react';
-import './Main.css';
+import '../../pages/Main/MainPage.css';
 
-function CalendarSection() {
+function Calendar() {
     return (
         <div className="calendar-wrapper">
             <h2 className="calendar-title">달력</h2>
@@ -20,4 +20,4 @@ function CalendarSection() {
     );
 }
 
-export default CalendarSection;
+export default Calendar;

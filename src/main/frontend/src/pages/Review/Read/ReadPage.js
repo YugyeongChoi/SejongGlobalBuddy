@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import {getReviewDetail} from '../../../api/reviewApi';
-import './ReviewDetail.css';
+import './ReadPage.css';
 
-const ReviewDetail = () => {
+const ReadPage = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const [review, setReview] = useState(null);
@@ -54,4 +54,4 @@ const formatDate = (isoString) => {
 };
 
 
-export default ReviewDetail;
+export default ReadPage;
