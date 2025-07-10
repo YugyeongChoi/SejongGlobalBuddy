@@ -2,6 +2,7 @@ package sejong.globalbuddy.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.*;
@@ -13,7 +14,10 @@ import sejong.globalbuddy.entity.ReviewEntity;
 import sejong.globalbuddy.repository.ReviewRepository;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.List;
 import java.util.UUID;
@@ -31,6 +35,8 @@ public class ReviewController {
 
     @GetMapping
     public List<ReviewDto> list() {
+        System.out.println("review 리스트 요청 들어옴");
+
         return reviewRepository.findAll().stream()
                 .map(post -> {
                     ReviewDto dto = new ReviewDto();
@@ -180,17 +186,22 @@ public class ReviewController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 이미지 조회용 핸들러
     @GetMapping("/images/{filename:.+}")
-    public ResponseEntity<Resource> getImage(@PathVariable String filename) throws IOException {
-        Path filepath = Paths.get(uploadDir).resolve(filename).normalize();
-        Resource resource = new UrlResource(filepath.toUri());
+    public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename) throws IOException {
+        String decodedFilename = URLDecoder.decode(filename, StandardCharsets.UTF_8);
+        File file = new File(uploadDir, decodedFilename);
+        System.out.println("Raw filename from URL: " + filename);
+        System.out.println("Decoded filename: " + decodedFilename);
 
-        if (!resource.exists()) {
+        System.out.println("Trying direct File: " + file.getAbsolutePath());
+
+        if (!file.exists() || !file.canRead()) {
+            System.err.println("File not found or unreadable: " + file.getAbsolutePath());
             return ResponseEntity.notFound().build();
         }
 
-        String contentType = Files.probeContentType(filepath);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        String contentType = Files.probeContentType(file.toPath());
         if (contentType == null) {
             contentType = "application/octet-stream";
         }

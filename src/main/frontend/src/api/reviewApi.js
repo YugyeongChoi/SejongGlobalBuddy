@@ -35,8 +35,6 @@ export const postReview = async (data) => {
     });
 };
 
-
-
 export const getReviewDetail = async (id) => {
     const res = await axios.get(`${API_BASE}/${id}`);
     return res.data;

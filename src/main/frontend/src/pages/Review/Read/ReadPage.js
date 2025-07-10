@@ -46,7 +46,10 @@ const ReadPage = () => {
                         {review.photoUrls.map((url, index) => (
                             <img
                                 key={index}
-                                src={`https://www.sejongglobalbuddy.kr${url}`}
+                                src={`${process.env.NODE_ENV === 'development'
+                                    ? ''
+                                    : 'https://www.sejongglobalbuddy.kr'
+                                }/review/images/${encodeURIComponent(url.substring('/images/'.length))}`}
                                 alt={`uploaded-${index}`}
                                 className="review-photo"
                             />
