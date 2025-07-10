@@ -8,13 +8,15 @@
 }
 
 .review-card {
+    position: relative;
     background: white;
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     cursor: pointer;
     transition: transform 0.15s ease;
-    height: 350px;
+    height: 380px;
+    padding-bottom: 30px;
 }
 .review-card:hover {
     transform: translateY(-4px);
@@ -103,3 +105,16 @@
     border-radius: 999px;
     z-index: 2;
 }
+
+.thumbnail-likes {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #e74c3c;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+

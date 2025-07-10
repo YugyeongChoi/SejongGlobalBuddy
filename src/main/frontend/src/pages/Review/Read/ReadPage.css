@@ -103,3 +103,37 @@ a:active {
     border-radius: 8px;
     object-fit: cover;
 }
+
+.review-actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+}
+
+.like-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.like-button:hover {
+    transform: scale(1.2);
+}
+
+.like-count {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff4d4f;
+}
+
+
+

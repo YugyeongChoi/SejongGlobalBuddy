@@ -48,6 +48,7 @@ public class ReviewController {
                     dto.setGeneration(post.getGeneration());
                     dto.setNickname(post.getNickname());
                     dto.setCreatedTime(post.getCreatedTime());
+                    dto.setLikes(post.getLikes());
 
                     if (post.getPhotos() != null) {
                         dto.setPhotoUrls(
@@ -137,6 +138,7 @@ public class ReviewController {
                     dto.setGeneration(post.getGeneration());
                     dto.setNickname(post.getNickname());
                     dto.setCreatedTime(post.getCreatedTime());
+                    dto.setLikes(post.getLikes());
 
                     if (post.getPhotos() != null) {
                         dto.setPhotoUrls(
@@ -234,4 +236,15 @@ public class ReviewController {
                 .contentType(MediaType.parseMediaType(contentType))
                 .body(resource);
     }
+    @PutMapping("/{id}/like")
+    public ResponseEntity<?> likePost(@PathVariable("id") Long id) {
+        return reviewRepository.findById(id)
+                .map(post -> {
+                    post.setLikes(post.getLikes() + 1);
+                    reviewRepository.save(post);
+                    return ResponseEntity.ok(post.getLikes());
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

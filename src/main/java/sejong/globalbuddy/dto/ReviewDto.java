@@ -22,5 +22,6 @@ public class ReviewDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdTime;
     private List<String> photoUrls;
+    private int likes;
 }
 

@@ -85,8 +85,13 @@ const List = ({ reviews }) => {
                                 <h3>{review.title}</h3>
                             </div>
                         </div>
+
                         <div className="review-content">
                             <p>{review.content}</p>
+                        </div>
+
+                        <div className="thumbnail-likes">
+                            ❤️ {review.likes}
                         </div>
                     </div>
                 </div>

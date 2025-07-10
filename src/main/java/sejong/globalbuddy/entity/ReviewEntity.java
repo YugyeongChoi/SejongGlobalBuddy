@@ -44,6 +44,9 @@ public class ReviewEntity {
     @Column(name = "nickname", length = 10)
     private String nickname;
 
+    @Column(nullable = false)
+    private int likes = 0;
+
     @Column(name = "created_time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdTime;

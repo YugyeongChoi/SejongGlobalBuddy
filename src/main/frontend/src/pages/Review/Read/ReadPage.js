@@ -2,18 +2,57 @@ import React, {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import {getReviewDetail} from '../../../api/reviewApi';
 import './ReadPage.css';
+import { likeReview } from '../../../api/reviewApi';
 
 const ReadPage = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const [review, setReview] = useState(null);
 
+    const [likes, setLikes] = useState(0);
+    const [reported, setReported] = useState(false);
+
+
     useEffect(() => {
         getReviewDetail(id).then((data) => {
             console.log('리뷰 데이터:', data);
             setReview(data);
+            setLikes(data.likes || 0);
         });
     }, [id]);
+
+    const handleLike = async () => {
+        const likedKey = `liked-review-${review.id}`;
+
+        if (localStorage.getItem(likedKey)) {
+            alert("이미 좋아요를 누르셨어요!");
+            return;
+        }
+        try {
+            await likeReview(review.id);
+            localStorage.setItem(likedKey, "true");
+
+            setReview((prev) => ({ ...prev, likes: prev.likes + 1 }));
+        } catch (error) {
+            console.error("좋아요 실패:", error);
+        }
+    };
+
+
+    const handleReport = () => {
+        if (reported) {
+            alert('이미 신고하셨습니다.');
+            return;
+        }
+
+        const confirmReport = window.confirm('정말 이 게시물을 신고하시겠습니까?');
+        if (confirmReport) {
+            setReported(true);
+            alert('신고가 접수되었습니다.');
+            // 필요 시 서버 연동
+        }
+    };
+
 
     if (!review) return <div className="loading">Loading...</div>;
 
@@ -62,6 +101,11 @@ const ReadPage = () => {
                         })}
                     </div>
                 )}
+                <div className="like-section">
+                    <button className="like-button" onClick={handleLike}>❤️</button>
+                    <span className="like-count">{likes}</span>
+                </div>
+
 
 
             </div>

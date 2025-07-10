@@ -74,3 +74,8 @@ export const updateReview = (id, data) => {
 export const deleteReview = async (id) => {
     return await axios.delete(`${API_BASE}/${id}`);
 };
+
+export const likeReview = async (id) => {
+    const res = await axios.put(`/review/${id}/like`);
+    return res.data;
+};
