@@ -8,19 +8,27 @@ const WritePage = () => {
     const navigate = useNavigate();
     const formRef = React.useRef();
 
-    const handleSubmit = async (formData) => {
-        try {
-            await postReview(formData);
-            navigate('/review');
-        } catch (error) {
-            if (error.response && error.response.status === 400) {
-                alert(error.response.data);
-            } else {
-                alert('오류가 발생했습니다.');
-                console.error(error);
-            }
-        }
+    const handleSubmit = async (formValues) => {
+        console.log("handleSubmit formValues =", formValues);
+
+        const {
+            title,
+            content,
+            password,
+            nationality,
+            generation,
+            nickname,
+            images
+        } = formValues;
+
+        const review = {
+            title, content, password, nationality, generation, nickname
+        };
+
+        await postReview({ review, images });
     };
+
+
 
     return (
         <div className="review-write-container">

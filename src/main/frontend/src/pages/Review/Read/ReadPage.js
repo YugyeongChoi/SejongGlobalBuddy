@@ -46,7 +46,7 @@ const ReadPage = () => {
                         {review.photoUrls.map((url, index) => (
                             <img
                                 key={index}
-                                src={url}
+                                src={`https://www.sejongglobalbuddy.kr${url}`}
                                 alt={`uploaded-${index}`}
                                 className="review-photo"
                             />

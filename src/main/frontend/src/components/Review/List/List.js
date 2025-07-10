@@ -45,6 +45,15 @@ const List = ({ reviews }) => {
                 >
                     <div className="review-card">
                         <div className="review-card-header">
+
+                            {review.photoUrls?.[0] && (
+                                <img
+                                    src={review.photoUrls[0]}
+                                    alt="thumbnail"
+                                    className="thumbnail-img"
+                                />
+                            )}
+
                             <div className="title-section">
                                 <h3>{review.title}</h3>
                             </div>

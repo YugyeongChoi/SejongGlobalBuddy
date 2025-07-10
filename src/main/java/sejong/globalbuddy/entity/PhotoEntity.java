@@ -31,8 +31,8 @@ public class PhotoEntity {
     }
 
     @Builder
-    public PhotoEntity(String url) {
+    public PhotoEntity(String url, ReviewEntity post) {
         this.url = url;
+        this.post = post;
     }
-
 }

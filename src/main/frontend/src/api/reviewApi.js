@@ -7,13 +7,34 @@ export const fetchReviews = async () => {
     return res.data;
 };
 
-export const postReview = async (formData) => {
+export const postReview = async (data) => {
+    const { review, images } = data || {};
+
+    if (!review) {
+        throw new Error("review 값이 정의되지 않았습니다.");
+    }
+
+    const formData = new FormData();
+
+    const reviewBlob = new Blob([JSON.stringify(review)], {
+        type: 'application/json'
+    });
+
+    formData.append('review', reviewBlob);
+
+    if (images && images.length > 0) {
+        images.forEach((img) => {
+            formData.append('images', img);
+        });
+    }
+
     return await axios.post(`${API_BASE}/write`, formData, {
         headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
         },
     });
 };
+
 
 
 export const getReviewDetail = async (id) => {

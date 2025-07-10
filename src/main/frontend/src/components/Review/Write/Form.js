@@ -1,7 +1,7 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
 import './Form.css';
 
-const Form = forwardRef(({ onSubmit, initialData }, ref) => {
+const Form = forwardRef(({onSubmit, initialData}, ref) => {
     const [form, setForm] = useState({
         title: '',
         content: '',
@@ -29,47 +29,54 @@ const Form = forwardRef(({ onSubmit, initialData }, ref) => {
     }, [initialData]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         if (name === 'nickname' && value.length > 10) return;
-        setForm({ ...form, [name]: value });
+        setForm({...form, [name]: value});
     };
 
     const handleSelect = (key, value) => {
-        setForm({ ...form, [key]: value });
+        setForm({...form, [key]: value});
     };
 
     const handleImageChange = (e) => {
         setImages(Array.from(e.target.files));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!showExtraFields) {
-            setShowExtraFields(true);
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append("review", new Blob([JSON.stringify(form)], {
-            type: "application/json"
-        }));
-
-        images.forEach((file) => {
-            formData.append("images", file);
-        });
-
-        onSubmit(formData);
-    };
-
     useImperativeHandle(ref, () => ({
         submit: () => {
-            const fakeEvent = { preventDefault: () => {} };
-            handleSubmit(fakeEvent);
+            if (!showExtraFields) {
+                setShowExtraFields(true);
+                return;
+            }
+
+            onSubmit({...form, images});
         }
     }));
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (!showExtraFields) {
+    //         setShowExtraFields(true);
+    //         return;
+    //     }
+    //
+    //     const formData = new FormData();
+    //     formData.append("review", new Blob([JSON.stringify(form)], {
+    //         type: "application/json"
+    //     }));
+    //
+    //     images.forEach((file) => {
+    //         formData.append("images", file);
+    //     });
+    //
+    //     onSubmit(formData);
+    // };
+
+
     return (
-        <form onSubmit={handleSubmit} className="review-form-container">
+        // <form onSubmit={handleSubmit} className="review-form-container">
+        <div className="review-form-container">
+
             <div className="input-block">
                 <input
                     name="title"
@@ -166,13 +173,18 @@ const Form = forwardRef(({ onSubmit, initialData }, ref) => {
                             />
                         </div>
 
-                        <button type="submit" className="submit-btn">
+                        <button
+                            type="button"
+                            className="submit-btn"
+                            onClick={() => ref.current?.submit()}
+                        >
                             Post now
                         </button>
+
                     </div>
                 </div>
             )}
-        </form>
+        </div>
     );
 });
 
