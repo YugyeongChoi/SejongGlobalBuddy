@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'https://www.sejongglobalbuddy.kr/review';
+const API_BASE = '/review';
 
 export const fetchReviews = async () => {
     const res = await axios.get(API_BASE);
