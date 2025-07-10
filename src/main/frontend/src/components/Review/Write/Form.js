@@ -53,28 +53,7 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
         }
     }));
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (!showExtraFields) {
-    //         setShowExtraFields(true);
-    //         return;
-    //     }
-    //
-    //     const formData = new FormData();
-    //     formData.append("review", new Blob([JSON.stringify(form)], {
-    //         type: "application/json"
-    //     }));
-    //
-    //     images.forEach((file) => {
-    //         formData.append("images", file);
-    //     });
-    //
-    //     onSubmit(formData);
-    // };
-
-
     return (
-        // <form onSubmit={handleSubmit} className="review-form-container">
         <div className="review-form-container">
 
             <div className="input-block">
@@ -98,7 +77,6 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
                     className="content-textarea"
                 />
             </div>
-
 
             <div className="input-block">
                 <label className="review-label">이미지 업로드</label>

@@ -6,7 +6,7 @@ import { deleteReview } from '../../../api/reviewApi';
 
 const List = ({ reviews }) => {
     const navigate = useNavigate();
-    const [popupOpenId, setPopupOpenId] = useState(null); // 🔥 팝업 열린 항목 추적
+    const [popupOpenId, setPopupOpenId] = useState(null);
 
     const handlePasswordSubmit = (inputPassword, review) => {
         if (inputPassword === review.password) {
@@ -27,11 +27,11 @@ const List = ({ reviews }) => {
         } else {
             alert('비밀번호가 틀렸습니다.');
         }
-        setPopupOpenId(null); // 팝업 닫기
+        setPopupOpenId(null);
     };
 
     const handleCardClick = (review) => {
-        if (popupOpenId === review.id) return; // 팝업 열려있으면 이동 막기
+        if (popupOpenId === review.id) return;
         navigate(`/review/${review.id}`);
     };
 
@@ -48,7 +48,7 @@ const List = ({ reviews }) => {
 
                             {review.photoUrls?.[0] && (
                                 <img
-                                    src={review.photoUrls[0]}
+                                    src={`https://www.sejongglobalbuddy.kr${review.photoUrls[0]}`}
                                     alt="thumbnail"
                                     className="thumbnail-img"
                                 />
