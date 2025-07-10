@@ -14,11 +14,12 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/{path:[^\\.]*}")
+        registry.addViewController("/{spring:(?!api|review)[^\\.]*}")
                 .setViewName("forward:/");
-        registry.addViewController("/**/{path:[^\\.]*}")
+        registry.addViewController("/**/{spring:(?!api|review)[^\\.]*}")
                 .setViewName("forward:/");
     }
+
 //    @Override
 //    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        registry.addResourceHandler("/images/**")
