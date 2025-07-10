@@ -43,19 +43,26 @@ const ReadPage = () => {
 
                 {review.photoUrls && review.photoUrls.length > 0 && (
                     <div className="review-photo-wrapper">
-                        {review.photoUrls.map((url, index) => (
-                            <img
-                                key={index}
-                                src={`${process.env.NODE_ENV === 'development'
-                                    ? ''
-                                    : 'https://www.sejongglobalbuddy.kr'
-                                }/review/images/${encodeURIComponent(url.substring('/images/'.length))}`}
-                                alt={`uploaded-${index}`}
-                                className="review-photo"
-                            />
-                        ))}
+                        {review.photoUrls.map((url, index) => {
+                            const imageBaseURL =
+                                process.env.NODE_ENV === 'development'
+                                    ? 'http://localhost:8081'
+                                    : 'https://www.sejongglobalbuddy.kr';
+
+                            const encodedFilename = encodeURIComponent(url.substring('/images/'.length));
+
+                            return (
+                                <img
+                                    key={index}
+                                    src={`${imageBaseURL}/review/images/${encodedFilename}`}
+                                    alt={`uploaded-${index}`}
+                                    className="review-photo"
+                                />
+                            );
+                        })}
                     </div>
                 )}
+
 
             </div>
         </div>

@@ -1,4 +1,5 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
+import {useNavigate} from 'react-router-dom';
 import './Form.css';
 
 const Form = forwardRef(({onSubmit, initialData}, ref) => {
@@ -11,7 +12,9 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
         nickname: '',
     });
 
+    const navigate = useNavigate();
     const [images, setImages] = useState([]);
+    const [previewUrls, setPreviewUrls] = useState([]);
     const [showExtraFields, setShowExtraFields] = useState(false);
 
     useEffect(() => {
@@ -39,8 +42,26 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
     };
 
     const handleImageChange = (e) => {
-        setImages(Array.from(e.target.files));
+        const files = Array.from(e.target.files);
+        const totalSize = files.reduce((acc, file) => acc + file.size, 0);
+
+        if (totalSize > 30 * 1024 * 1024) {
+            alert('파일 용량이 너무 큽니다! 총 30MB 이하로 올려주세요.');
+            return;
+        }
+
+        const previews = files.map(file => URL.createObjectURL(file));
+        setImages(files);
+        setPreviewUrls(previews);
     };
+
+    const handleRemoveImage = (indexToRemove) => {
+        const newImages = images.filter((_, index) => index !== indexToRemove);
+        const newPreviews = previewUrls.filter((_, index) => index !== indexToRemove);
+        setImages(newImages);
+        setPreviewUrls(newPreviews);
+    };
+
 
     useImperativeHandle(ref, () => ({
         submit: () => {
@@ -50,6 +71,7 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
             }
 
             onSubmit({...form, images});
+            navigate('/review');
         }
     }));
 
@@ -76,16 +98,44 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
                     required
                     className="content-textarea"
                 />
-            </div>
 
-            <div className="input-block">
-                <label className="review-label">이미지 업로드</label>
-                <input
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    onChange={handleImageChange}
-                />
+                <div className="image-preview-container">
+                    {previewUrls.map((url, index) => (
+                        <div className="image-box" key={index}>
+                            <img
+                                src={url}
+                                alt={`preview-${index}`}
+                                className="image-preview"
+                            />
+                            <button
+                                type="button"
+                                className="remove-btn"
+                                onClick={() => handleRemoveImage(index)}
+                            >
+                                x
+                            </button>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="custom-divider" />
+
+                <div className="custom-upload-wrapper">
+                    <input
+                        type="file"
+                        id="image-upload"
+                        multiple
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
+                    />
+
+                    <label htmlFor="image-upload" className="custom-upload-box">
+                        <img src="/images/photo.png" alt="Photo upload icon" className="upload-icon" />
+                        <span className="upload-text">Photo</span>
+                    </label>
+                </div>
+
             </div>
 
             {showExtraFields && (
