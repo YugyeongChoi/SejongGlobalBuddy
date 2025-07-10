@@ -1,8 +1,9 @@
-import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Form.css';
+import ExtraFieldModal from './ExtraFieldModal';
 
-const Form = forwardRef(({onSubmit, initialData}, ref) => {
+const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowExtraFields = false }, ref) => {
     const [form, setForm] = useState({
         title: '',
         content: '',
@@ -15,7 +16,7 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
     const navigate = useNavigate();
     const [images, setImages] = useState([]);
     const [previewUrls, setPreviewUrls] = useState([]);
-    const [showExtraFields, setShowExtraFields] = useState(false);
+    const [showExtraFields, setShowExtraFields] = useState(initialShowExtraFields);
 
     useEffect(() => {
         if (initialData) {
@@ -27,18 +28,29 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
                 generation: initialData.generation || '',
                 nickname: initialData.nickname || '',
             });
-            setShowExtraFields(true);
+
+            if (initialData.photoUrls && initialData.photoUrls.length > 0) {
+                const baseURL = process.env.NODE_ENV === 'development'
+                    ? 'http://localhost:8081'
+                    : 'https://www.sejongglobalbuddy.kr';
+                const previews = initialData.photoUrls.map((url) =>
+                    `${baseURL}/review/images/${encodeURIComponent(url.substring('/images/'.length))}`
+                );
+                setPreviewUrls(previews);
+
+                setImages(initialData.photoUrls.map((url) => ({ existing: true, url })));
+            }
         }
     }, [initialData]);
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         if (name === 'nickname' && value.length > 10) return;
-        setForm({...form, [name]: value});
+        setForm((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSelect = (key, value) => {
-        setForm({...form, [key]: value});
+        setForm((prev) => ({ ...prev, [key]: value }));
     };
 
     const handleImageChange = (e) => {
@@ -46,11 +58,11 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
         const totalSize = files.reduce((acc, file) => acc + file.size, 0);
 
         if (totalSize > 30 * 1024 * 1024) {
-            alert('파일 용량이 너무 큽니다! 총 30MB 이하로 올려주세요.');
+            alert('The file size is too large. Please upload within 30MB total.');
             return;
         }
 
-        const previews = files.map(file => URL.createObjectURL(file));
+        const previews = files.map((file) => URL.createObjectURL(file));
         setImages(files);
         setPreviewUrls(previews);
     };
@@ -62,7 +74,6 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
         setPreviewUrls(newPreviews);
     };
 
-
     useImperativeHandle(ref, () => ({
         submit: () => {
             if (!showExtraFields) {
@@ -70,14 +81,18 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
                 return;
             }
 
-            onSubmit({...form, images});
+            if (images.length === 0) {
+                alert('Please upload at least one photo!');
+                return;
+            }
+
+            onSubmit({ ...form, images });
             navigate('/review');
-        }
+        },
     }));
 
     return (
         <div className="review-form-container">
-
             <div className="input-block">
                 <input
                     name="title"
@@ -95,25 +110,19 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
                     placeholder="Write your content here..."
                     value={form.content}
                     onChange={(e) => {
-                        if (e.target.value.length <= 1000) {  // 예: 1000자 제한
+                        if (e.target.value.length <= 1000) {
                             handleChange(e);
                         }
                     }}
                     required
                     className="content-textarea"
                 />
-                <div className="text-length-info">
-                    {form.content.length} / 1000
-                </div>
+                <div className="text-length-info">{form.content.length} / 1000</div>
 
                 <div className="image-preview-container">
                     {previewUrls.map((url, index) => (
                         <div className="image-box" key={index}>
-                            <img
-                                src={url}
-                                alt={`preview-${index}`}
-                                className="image-preview"
-                            />
+                            <img src={url} alt={`preview-${index}`} className="image-preview" />
                             <button
                                 type="button"
                                 className="remove-btn"
@@ -136,88 +145,21 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
                         onChange={handleImageChange}
                         style={{ display: 'none' }}
                     />
-
                     <label htmlFor="image-upload" className="custom-upload-box">
                         <img src="/images/photo.png" alt="Photo upload icon" className="upload-icon" />
                         <span className="upload-text">Photo</span>
                     </label>
                 </div>
-
             </div>
 
             {showExtraFields && (
-                <div className="review-modal-overlay">
-                    <div className="review-modal">
-                        <button
-                            className="close-modal-btn"
-                            onClick={() => setShowExtraFields(false)}
-                        >
-                            ✕
-                        </button>
-
-                        <div className="button-group">
-                            {['Korean', 'International'].map((type) => (
-                                <button
-                                    type="button"
-                                    key={type}
-                                    onClick={() => handleSelect('nationality', type)}
-                                    className={`select-btn ${form.nationality === type ? 'active' : ''}`}
-                                >
-                                    {type}
-                                </button>
-                            ))}
-                        </div>
-
-                        {form.nationality === 'Korean' && (
-                            <div className="button-group">
-                                {['23th', '24th', 'OB'].map((gen) => (
-                                    <button
-                                        type="button"
-                                        key={gen}
-                                        onClick={() => handleSelect('generation', gen)}
-                                        className={`select-btn ${form.generation === gen ? 'active' : ''}`}
-                                    >
-                                        {gen}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-
-                        <div className="input-row">
-                            <label className="review-label">Nickname</label>
-                            <input
-                                name="nickname"
-                                placeholder="Maximum 10 characters"
-                                value={form.nickname}
-                                onChange={handleChange}
-                                required
-                                className="input"
-                            />
-                        </div>
-
-                        <div className="input-row">
-                            <label className="review-label">Password</label>
-                            <input
-                                name="password"
-                                type="password"
-                                placeholder="Enter a 6-digit PIN"
-                                value={form.password}
-                                onChange={handleChange}
-                                required
-                                className="input"
-                            />
-                        </div>
-
-                        <button
-                            type="button"
-                            className="submit-btn"
-                            onClick={() => ref.current?.submit()}
-                        >
-                            Post now
-                        </button>
-
-                    </div>
-                </div>
+                <ExtraFieldModal
+                    form={form}
+                    setForm={setForm}
+                    onClose={() => setShowExtraFields(false)}
+                    onSubmit={() => ref.current?.submit()}
+                    handleSelect={handleSelect}
+                />
             )}
         </div>
     );

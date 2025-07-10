@@ -19,13 +19,27 @@ const EditPage = () => {
 
     const handleSubmit = async (formData) => {
         try {
-            await updateReview(id, formData);
+            const { title, content, password, nationality, generation, nickname, images } = formData;
+
+            await updateReview(id, {
+                review: {
+                    title,
+                    content,
+                    password,
+                    nationality,
+                    generation,
+                    nickname,
+                },
+                images,
+            });
+
             navigate(`/review/${id}`);
         } catch (error) {
             alert('수정 중 오류가 발생했습니다.');
             console.error(error);
         }
     };
+
 
     if (!initialData) return <div>Loading...</div>;
 
@@ -36,7 +50,13 @@ const EditPage = () => {
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Edit</button>
             </div>
 
-            <Form onSubmit={handleSubmit} ref={formRef} initialData={initialData} />
+            <Form
+                onSubmit={handleSubmit}
+                ref={formRef}
+                initialData={initialData}
+                showExtraFields={false}
+            />
+
         </div>
     );
 };

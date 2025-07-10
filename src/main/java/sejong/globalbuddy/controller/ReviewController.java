@@ -157,34 +157,58 @@ public class ReviewController {
         return ResponseEntity.ok().body("deleted");
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updatePost(
+    @PostMapping(value = "/{id}", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> editPost(
             @PathVariable("id") Long id,
-            @RequestBody ReviewDto dto) {
+            @RequestPart("review") ReviewDto dto,
+            @RequestPart(value = "images", required = false) List<MultipartFile> images) {
 
         return reviewRepository.findById(id)
                 .map(existing -> {
                     if (!existing.getPassword().equals(dto.getPassword())) {
-                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                .body("Incorrect password");
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
                     }
 
-                    ReviewEntity updatedPost = ReviewEntity.builder()
-                            .id(existing.getId())
-                            .title(dto.getTitle())
-                            .content(dto.getContent())
-                            .password(dto.getPassword())
-                            .nationality(dto.getNationality())
-                            .generation(dto.getGeneration())
-                            .nickname(dto.getNickname())
-                            .createdTime(existing.getCreatedTime())
-                            .build();
+                    // 기존 객체에 데이터 업데이트
+                    existing.setTitle(dto.getTitle());
+                    existing.setContent(dto.getContent());
+                    existing.setNationality(dto.getNationality());
+                    existing.setGeneration(dto.getGeneration());
+                    existing.setNickname(dto.getNickname());
 
-                    reviewRepository.save(updatedPost);
+                    // 기존 사진은 삭제하거나 유지 (지금은 무시됨)
+                    if (images != null && !images.isEmpty()) {
+                        File uploadPath = new File(uploadDir);
+                        if (!uploadPath.exists()) uploadPath.mkdirs();
+
+                        for (MultipartFile image : images) {
+                            try {
+                                String originalName = image.getOriginalFilename();
+                                String sanitized = originalName.replaceAll("[^a-zA-Z0-9.\\-_]", "_");
+                                String fileName = UUID.randomUUID() + "_" + sanitized;
+                                Path filePath = Paths.get(uploadDir, fileName);
+                                image.transferTo(filePath.toFile());
+
+                                PhotoEntity photo = PhotoEntity.builder()
+                                        .url("/images/" + fileName)
+                                        .post(existing) // 기존 객체에 연결
+                                        .build();
+
+                                existing.addPhoto(photo);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    reviewRepository.save(existing); // 기존 객체 저장
                     return ResponseEntity.ok("updated");
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
+
+
 
     @GetMapping("/images/{filename:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename) throws IOException {

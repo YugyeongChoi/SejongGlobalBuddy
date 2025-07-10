@@ -5,13 +5,21 @@ import { Link } from 'react-router-dom';
 import { FiEdit3 } from "react-icons/fi";
 import './Write/WritePage.css';
 import './ReviewPage.css';
+import { useLocation } from 'react-router-dom';
 
 const ReviewPage = () => {
     const [reviews, setReviews] = useState([]);
+    const location = useLocation();
 
     useEffect(() => {
         fetchReviews().then(setReviews);
     }, []);
+
+    useEffect(() => {
+        if (location.state?.fromForm) {
+            fetchReviews().then(setReviews);
+        }
+    }, [location.state]);
 
     return (
         <div className="review-page">

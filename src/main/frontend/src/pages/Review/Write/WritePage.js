@@ -39,7 +39,11 @@ const WritePage = () => {
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Post</button>
             </div>
 
-            <Form onSubmit={handleSubmit} ref={formRef} />
+            <Form
+                onSubmit={handleSubmit}
+                ref={formRef}
+                showExtraFields={false}
+            />
         </div>
     );
 };
