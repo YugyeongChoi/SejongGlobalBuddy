@@ -76,6 +76,9 @@
     height: 300px;
 
     resize: none;
+    overflow: hidden;
+    white-space: pre-wrap;
+    text-overflow: ellipsis;
 
     border: none !important;
     outline: none !important;

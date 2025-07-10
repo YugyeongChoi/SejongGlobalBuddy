@@ -18,7 +18,7 @@ const Setting = ({ onPasswordSubmit, isOpen, setOpen }) => {
 
     return (
         <div className="review-edit-container" onClick={(e) => e.stopPropagation()}>
-            <button className="review-edit-dots" onClick={handleButtonClick}>⋯</button>
+            <button className="review-edit-dots" onClick={handleButtonClick}>⋮</button>
 
             {isOpen && (
                 <div className="review-edit-popup" onClick={(e) => e.stopPropagation()}>

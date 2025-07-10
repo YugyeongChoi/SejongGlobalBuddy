@@ -94,10 +94,17 @@ const Form = forwardRef(({onSubmit, initialData}, ref) => {
                     name="content"
                     placeholder="Write your content here..."
                     value={form.content}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                        if (e.target.value.length <= 1000) {  // 예: 1000자 제한
+                            handleChange(e);
+                        }
+                    }}
                     required
                     className="content-textarea"
                 />
+                <div className="text-length-info">
+                    {form.content.length} / 1000
+                </div>
 
                 <div className="image-preview-container">
                     {previewUrls.map((url, index) => (

@@ -44,25 +44,45 @@ const List = ({ reviews }) => {
                     onClick={() => handleCardClick(review)}
                 >
                     <div className="review-card">
-                        <div className="review-card-header">
-                            <div className="title-section">
-                                <h3>{review.title}</h3>
-                            </div>
-                            <div className="author-options">
+                        <div className="author-options">
                                 <span className="author">
                                     {review.nationality === 'Korean'
                                         ? `${review.generation} ${review.nickname}`
                                         : `International ${review.nickname}`}
                                 </span>
-                                <Setting
-                                    isOpen={popupOpenId === review.id}
-                                    setOpen={(isOpen) =>
-                                        setPopupOpenId(isOpen ? review.id : null)
-                                    }
-                                    onPasswordSubmit={(inputPassword) =>
-                                        handlePasswordSubmit(inputPassword, review)
-                                    }
+                            <Setting
+                                isOpen={popupOpenId === review.id}
+                                setOpen={(isOpen) =>
+                                    setPopupOpenId(isOpen ? review.id : null)
+                                }
+                                onPasswordSubmit={(inputPassword) =>
+                                    handlePasswordSubmit(inputPassword, review)
+                                }
+                            />
+                        </div>
+                        {review.photoUrls && review.photoUrls.length > 0 && (
+                            <div className="thumbnail-wrapper">
+                                <img
+                                    className="thumbnail-img"
+                                    src={`${
+                                        process.env.NODE_ENV === 'development'
+                                            ? 'http://localhost:8081'
+                                            : 'https://www.sejongglobalbuddy.kr'
+                                    }/review/images/${encodeURIComponent(
+                                        review.photoUrls[0].substring('/images/'.length)
+                                    )}`}
+                                    alt="thumbnail"
                                 />
+                                {review.photoUrls.length > 1 && (
+                                    <div className="thumbnail-overlay">
+                                        {review.photoUrls.length - 1}+
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                        <div className="review-card-header">
+                            <div className="title-section">
+                                <h3>{review.title}</h3>
                             </div>
                         </div>
                         <div className="review-content">
