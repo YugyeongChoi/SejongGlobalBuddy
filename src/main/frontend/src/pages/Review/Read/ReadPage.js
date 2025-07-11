@@ -89,6 +89,8 @@ const ReadPage = () => {
                 <div className="like-section">
                     <button className="like-button" onClick={handleLike}>
                         <img src="/images/likes.ico" alt="like" className="like-icon" />
+                        <link rel="icon" href="%PUBLIC_URL%/images/likes.ico" />
+
                     </button>
                     <span className="like-count">{likes}</span>
                 </div>
