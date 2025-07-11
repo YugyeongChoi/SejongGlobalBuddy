@@ -5,14 +5,15 @@ import {Link} from "react-router-dom";
 function ImageSwitcher() {
     const initialImages = [
         {id: 2, src: '/images/group2.jpg', alt: 'Image 2'},
-        {id: 3, src: '/images/group3.JPG', alt: 'Image 3'},
+        {id: 3, src: '/images/group3.jpg', alt: 'Image 3'},
         {id: 4, src: '/images/group4.jpg', alt: 'Image 4'},
-        {id: 5, src: '/images/group5.jpg', alt: 'Image 5'},
+        {id: 5, src: '/images/group5.JPG', alt: 'Image 5'},
+        //사진 확장자
     ];
 
     const [mainImage, setMainImage] = useState({
         id: 1,
-        src: '/images/group1.JPG',
+        src: '/images/group1.jpg',
         alt: 'MainPage Image',
     });
 
