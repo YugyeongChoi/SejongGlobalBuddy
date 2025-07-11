@@ -3,6 +3,7 @@ import {useParams, useNavigate} from 'react-router-dom';
 import {getReviewDetail} from '../../../api/reviewApi';
 import './ReadPage.css';
 import { likeReview } from '../../../api/reviewApi';
+import {formatDateKST} from "../../../utils/reportWebVitals";
 
 const ReadPage = () => {
     const {id} = useParams();
@@ -60,7 +61,7 @@ const ReadPage = () => {
 
                 <div className="review-author-info">
                     <span className="review-nickname">{review.nickname}</span>
-                    <span className="review-date">{formatDate(review.createdTime)}</span>
+                    <span className="review-date">{formatDateKST(review.createdTime)}</span>
                 </div>
 
                 <div className="review-content">{review.content}</div>
@@ -100,13 +101,5 @@ const ReadPage = () => {
 
     );
 };
-
-const formatDate = (isoString) => {
-    if (!isoString) return '작성일 없음';
-    const date = new Date(isoString);
-    if (isNaN(date)) return '유효하지 않은 날짜';
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
-};
-
 
 export default ReadPage;
