@@ -112,9 +112,44 @@
     right: 14px;
     font-size: 14px;
     font-weight: bold;
-    color: #e74c3c;
+    color: black;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
+@media (max-width: 680px) {
+    .review-list-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 12px;
+    }
+
+    .review-card {
+        height: auto;
+        padding: 20px;
+    }
+
+    .title-section h3 {
+        font-size: 1.1rem;
+        -webkit-line-clamp: 2;
+    }
+
+    .review-content {
+        font-size: 0.9rem;
+    }
+
+    .thumbnail-img {
+        height: 180px;
+    }
+
+    .thumbnail-overlay {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+
+    .thumbnail-likes {
+        font-size: 13px;
+        gap: 4px;
+    }
+}

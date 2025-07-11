@@ -1,7 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Form from '../../../components/Review/Write/Form';
-import { postReview } from '../../../api/reviewApi';
+import {postReview} from '../../../api/reviewApi';
 import './WritePage.css';
 
 const WritePage = () => {
@@ -25,16 +25,15 @@ const WritePage = () => {
             title, content, password, nationality, generation, nickname
         };
 
-        await postReview({ review, images });
+        await postReview({review, images});
     };
-
-
 
     return (
         <div className="review-write-container">
-            <div className="top-bar">
+            <div className="button-row">
+
                 <button className="back-btn" onClick={() => navigate('/review')}>
-                    <img src="images/back.png" alt="Back" className="back-icon" />
+                    <img src="images/back.png" alt="Back" className="back-icon"/>
                 </button>
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Post</button>
             </div>

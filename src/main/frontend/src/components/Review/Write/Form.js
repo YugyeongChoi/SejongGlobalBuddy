@@ -46,6 +46,12 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'nickname' && value.length > 10) return;
+
+        if (name === "title" && value.length > 30) {
+            alert("제목은 30자까지 입력할 수 있습니다.");
+            return;
+        }
+
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
@@ -88,6 +94,9 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
 
             onSubmit({ ...form, images });
             navigate('/review');
+            setTimeout(() => {
+                window.location.reload();
+            }, 100);
         },
     }));
 

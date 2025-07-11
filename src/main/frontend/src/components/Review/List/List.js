@@ -91,7 +91,8 @@ const List = ({ reviews }) => {
                         </div>
 
                         <div className="thumbnail-likes">
-                            ❤️ {review.likes}
+                            <img src="/images/likes.ico" alt="like" className="like-icon" />
+                            <span>{review.likes}</span>
                         </div>
                     </div>
                 </div>

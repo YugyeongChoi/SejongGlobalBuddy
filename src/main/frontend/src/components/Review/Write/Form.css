@@ -54,6 +54,8 @@
     font-size: 32px;
     font-weight: bold;
     padding-bottom: 20px;
+    width: 100%;
+    max-width: 100%;
 
     border: none !important;
     outline: none !important;
@@ -311,12 +313,105 @@
 .consent-label input[type="checkbox"]:checked + .custom-checkbox::after {
     content: '✓';
     position: absolute;
-    left: 2px;
-    top: -1px;
-    font-size: 16px;
-    color: #2c7a7b;
+    left: -1px;
+    top: -7px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #C52030;
 }
 
 .consent-text {
     color: #333;
+}
+@media (max-width: 768px) {
+    .review-form-container {
+        padding: 20px;
+    }
+
+    .title-input {
+        font-size: 24px;
+        padding-bottom: 16px;
+    }
+
+    .content-textarea {
+        font-size: 14px;
+        height: 200px;
+    }
+
+    .input-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        max-width: 100%;
+    }
+
+    .review-label {
+        text-align: left;
+        min-width: unset;
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    .button-group {
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .select-btn {
+        font-size: 14px;
+        padding: 6px 14px;
+    }
+
+    .submit-btn {
+        padding: 12px 20px;
+        font-size: 15px;
+        align-items: center;
+    }
+
+    .image-preview-container {
+        gap: 8px;
+        padding-top: 16px;
+    }
+
+    .image-box {
+        width: 100px;
+        height: 100px;
+    }
+
+    .custom-upload-wrapper {
+        justify-content: center;
+        margin-top: 12px;
+    }
+
+    .custom-upload-box {
+        margin-left: 0;
+    }
+
+    .review-modal {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .close-modal-btn {
+        top: 10px;
+        right: 10px;
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+
+    .consent-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+    }
+
+    .consent-label {
+        flex-direction: row;
+        width: 100%;
+        max-width: 100%;
+    }
 }

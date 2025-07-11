@@ -40,3 +40,29 @@
 .social-icons img:hover {
     transform: scale(1.15);
 }
+
+@media (max-width: 768px) {
+    .social-footer {
+        padding: 30px 16px 80px;
+    }
+
+    .social-footer h2 {
+        font-size: 24px;
+    }
+
+    .social-footer p {
+        font-size: 14px;
+    }
+
+    .social-icons {
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .social-icons img {
+        width: 36px;
+        height: 36px;
+    }
+}
+

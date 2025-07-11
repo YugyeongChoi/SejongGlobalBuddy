@@ -168,17 +168,16 @@ public class ReviewController {
         return reviewRepository.findById(id)
                 .map(existing -> {
                     if (!existing.getPassword().equals(dto.getPassword())) {
-                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                .body("Incorrect password");
                     }
 
-                    // 기존 객체에 데이터 업데이트
                     existing.setTitle(dto.getTitle());
                     existing.setContent(dto.getContent());
                     existing.setNationality(dto.getNationality());
                     existing.setGeneration(dto.getGeneration());
                     existing.setNickname(dto.getNickname());
 
-                    // 기존 사진은 삭제하거나 유지 (지금은 무시됨)
                     if (images != null && !images.isEmpty()) {
                         File uploadPath = new File(uploadDir);
                         if (!uploadPath.exists()) uploadPath.mkdirs();
@@ -203,13 +202,11 @@ public class ReviewController {
                         }
                     }
 
-                    reviewRepository.save(existing); // 기존 객체 저장
+                    reviewRepository.save(existing);
                     return ResponseEntity.ok("updated");
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
-
-
 
 
     @GetMapping("/images/{filename:.+}")

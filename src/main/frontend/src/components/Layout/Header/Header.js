@@ -39,6 +39,14 @@ const Header = () => {
                 <Link to="/review" onClick={() => setMenuOpen(false)}>Review</Link>
                 <Link to="/team" onClick={() => setMenuOpen(false)}>Team</Link>
                 <Link to="/faq" onClick={() => setMenuOpen(false)}>FAQ</Link>
+
+                <div className="side-menu-footer">
+                    <div className="side-menu-background-text">
+                        <div className="line">SEJONG</div>
+                        <div className="line">GLOBAL BUDDY</div>
+                    </div>
+                    <img src="/logo.png" alt="logo" className="side-menu-image" />
+                </div>
             </div>
 
             {menuOpen && <div className="overlay" onClick={() => setMenuOpen(false)}></div>}

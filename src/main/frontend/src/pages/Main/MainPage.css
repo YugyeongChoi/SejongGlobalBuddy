@@ -143,3 +143,23 @@
         max-width: 280px;
     }
 }
+
+@media (max-width: 768px) {
+    .calendar-content {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .calendar-image{
+        height: auto;
+        width: 100%;
+    }
+    .mood-image {
+        height: auto;
+        width: 40%;
+    }
+
+    .calendar-wrapper {
+        padding: 10px;
+    }
+}

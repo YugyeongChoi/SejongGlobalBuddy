@@ -60,3 +60,35 @@
 .review-edit-popup button:hover {
     background-color: #1e3542;
 }
+@media (max-width: 768px) {
+    .review-edit-popup {
+        right: -10px;
+        left: auto;
+        min-width: 200px;
+        padding: 12px 14px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .review-edit-popup input {
+        flex: 1;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+        transition: border 0.2s ease;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .review-edit-popup button {
+        width: 100%;
+        font-size: 13px;
+        padding: 9px 12px;
+    }
+
+    .review-edit-dots {
+        font-size: 20px;
+    }
+}

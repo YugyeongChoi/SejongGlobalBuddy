@@ -73,3 +73,51 @@
 .faq-toggle-buttons {
     margin-bottom: 1.5rem;
 }
+
+@media (max-width: 768px) {
+    .faq-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .faq-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .faq-lang-buttons {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .faq-lang-buttons .submit-btn {
+        flex: 1 1 120px;
+        text-align: center;
+    }
+
+    .faq-item {
+        padding: 1.2rem 1.4rem;
+    }
+
+    .faq-question {
+        font-size: 1.1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .faq-icon {
+        font-size: 1.5rem;
+    }
+
+    .faq-answer {
+        font-size: 0.95rem;
+    }
+
+    .faq-toggle-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+}
