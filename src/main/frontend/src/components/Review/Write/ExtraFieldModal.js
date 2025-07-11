@@ -81,7 +81,7 @@ const ExtraFieldModal = ({
                         />
                         <span className="custom-checkbox" />
                         <span className="consent-text">
-                            다른 사람의 얼굴이 뚜렷하게 보이는 사진은 초상권 보호를 위해 삼가 부탁드립니다.<br />이에 동의합니다.<br /><br />
+                            다른 사람의 얼굴이 뚜렷하게 보이는 사진은 초상권 보호를 위해 삼가 부탁드립니다. 이에 동의합니다.<br /><br />
                             Please avoid uploading photos in which other people's faces are clearly visible to respect their portrait rights. I agree to this guideline.
                         </span>
                     </label>

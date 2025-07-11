@@ -25,7 +25,13 @@ const WritePage = () => {
             title, content, password, nationality, generation, nickname
         };
 
-        await postReview({review, images});
+        try {
+            await postReview({ review, images });
+            navigate('/review');
+        } catch (error) {
+            console.error("리뷰 작성 실패:", error);
+            alert("리뷰 작성 중 오류가 발생했습니다.");
+        }
     };
 
     return (

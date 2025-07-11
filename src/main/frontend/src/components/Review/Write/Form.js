@@ -9,7 +9,7 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
         content: '',
         password: '',
         nationality: 'Korean',
-        generation: '',
+        generation: '23th',
         nickname: '',
     });
 
@@ -81,7 +81,7 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
     };
 
     useImperativeHandle(ref, () => ({
-        submit: () => {
+        submit: async () => {
             if (!showExtraFields) {
                 setShowExtraFields(true);
                 return;
@@ -92,11 +92,13 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
                 return;
             }
 
-            onSubmit({ ...form, images });
-            navigate('/review');
-            setTimeout(() => {
-                window.location.reload();
-            }, 100);
+            try {
+                await onSubmit({ ...form, images });
+                navigate('/review', { state: { refresh: true } });
+            } catch (error) {
+                console.error("Error submitting review:", error);
+                alert("There was an error posting your review. Please try again.");
+            }
         },
     }));
 
