@@ -108,7 +108,6 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
                     placeholder="Please enter a title"
                     value={form.title}
                     onChange={handleChange}
-                    required
                     className="title-input"
                 />
             </div>
