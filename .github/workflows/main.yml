@@ -20,8 +20,8 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         script: |
           cd /home/ec2-user/SejongGlobalBuddy
-          git pull origin main
-            ./gradlew clean copyReactBuildFiles build --info && echo "Build Success" || { echo "Build Failed"; exit 1; }
+          git pull origin main || { echo "Git pull failed"; exit 1; }
+          ./gradlew clean copyReactBuildFiles build --info && echo "Build Success" || { echo "Build Failed"; exit 1; }
 
     - name: Restart service and check status
       uses: appleboy/ssh-action@v0.1.10
