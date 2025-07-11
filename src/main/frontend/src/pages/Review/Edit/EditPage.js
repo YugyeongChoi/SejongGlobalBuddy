@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getReviewDetail, updateReview } from '../../../api/reviewApi';
+import React, {useEffect, useState, useRef} from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
+import {getReviewDetail, updateReview} from '../../../api/reviewApi';
 import Form from "../../../components/Review/Write/Form";
 import '../Write/WritePage.css'
 
 const EditPage = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const navigate = useNavigate();
     const formRef = useRef();
     const [initialData, setInitialData] = useState(null);
@@ -19,7 +19,7 @@ const EditPage = () => {
 
     const handleSubmit = async (formData) => {
         try {
-            const { title, content, password, nationality, generation, nickname, images } = formData;
+            const {title, content, password, nationality, generation, nickname, images} = formData;
 
             await updateReview(id, {
                 review: {
@@ -45,9 +45,11 @@ const EditPage = () => {
 
     return (
         <div className="review-write-container">
-            <div className="top-bar">
-                <button className="back-btn" onClick={() => navigate('/review')}>←</button>
-                <button className="post-btn" onClick={() => formRef.current?.submit()}>Edit</button>
+            <div className="button-row">
+            <button className="back-btn" onClick={() => navigate('/review')}>
+                <img src="images/back.png" alt="Back" className="back-icon"/>
+            </button>
+            <button className="post-btn" onClick={() => formRef.current?.submit()}>Edit</button>
             </div>
 
             <Form
