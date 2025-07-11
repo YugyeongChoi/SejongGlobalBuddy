@@ -21,7 +21,7 @@ jobs:
         script: |
           cd /home/ec2-user/SejongGlobalBuddy
           git pull origin main
-          ./gradlew clean build copyReactBuildFiles --info && echo "Build Success" || { echo "Build Failed"; exit 1; }
+            ./gradlew clean copyReactBuildFiles build --info && echo "Build Success" || { echo "Build Failed"; exit 1; }
 
     - name: Restart service and check status
       uses: appleboy/ssh-action@v0.1.10
