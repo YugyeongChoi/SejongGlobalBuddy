@@ -46,7 +46,7 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
         if (name === 'nickname' && value.length > 10) return;
 
         if (name === "title" && value.length > 30) {
-            alert("제목은 30자까지 입력할 수 있습니다.");
+            alert("The title can be up to 30 characters long.");
             return;
         }
 
@@ -92,7 +92,6 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
 
             try {
                 await onSubmit({ ...form, images });
-                // navigate('/review', { state: { refresh: true } });
             } catch (error) {
                 console.error("Error submitting review:", error);
                 alert("There was an error posting your review. Please try again.");

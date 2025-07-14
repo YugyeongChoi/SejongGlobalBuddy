@@ -12,7 +12,7 @@ const EditPage = () => {
 
     useEffect(() => {
         getReviewDetail(id).then(setInitialData).catch(() => {
-            alert('리뷰 정보를 불러오지 못했습니다.');
+            alert("Failed to load the review information.");
             navigate(-1);
         });
     }, [id, navigate]);
@@ -35,7 +35,7 @@ const EditPage = () => {
 
             navigate(`/review/${id}`);
         } catch (error) {
-            const message = error?.response?.data || "리뷰 수정 중 오류가 발생했습니다.";
+            const message = error?.response?.data || "An error occurred while updating the review.";
             alert(message);
         }
     };

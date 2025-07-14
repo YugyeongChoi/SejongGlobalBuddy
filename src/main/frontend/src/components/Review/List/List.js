@@ -19,33 +19,33 @@ const List = ({ reviews }) => {
             });
 
             if (!res.ok) {
-                alert('비밀번호가 틀렸습니다.');
+                alert('Incorrect password');
                 return;
             }
 
             if (actionType === 'edit') {
-                const confirmEdit = window.confirm('수정하시겠습니까?');
+                const confirmEdit = window.confirm('Do you want to edit this review?');
                 if (confirmEdit) {
                     navigate(`/review/edit/${review.id}`);
                 }
             } else if (actionType === 'delete') {
-                const confirmDelete = window.confirm('삭제하시겠습니까?');
+                const confirmDelete = window.confirm('Do you want to delete this review?');
                 if (confirmDelete) {
                     await deleteReview(review.id);
-                    alert('삭제되었습니다.');
+                    alert('Review deleted');
                     window.location.reload();
                 }
             }
         } catch (error) {
             console.error(error);
-            alert('서버 오류');
+            alert('Server error');
         } finally {
             setPopupOpenReview(null);
         }
     };
 
     const handleReport = async (reviewId) => {
-        const confirmed = window.confirm('이 포스트를 신고하겠습니까?');
+        const confirmed = window.confirm('Do you want to report this post?');
         if (!confirmed) return;
 
         try {
@@ -58,13 +58,13 @@ const List = ({ reviews }) => {
             });
 
             if (res.ok) {
-                alert('게시글이 신고되었습니다!');
+                alert('The post has been reported.');
             } else {
-                alert('신고 중 오류가 발생했습니다.');
+                alert('An error occurred while reporting.');
             }
         } catch (err) {
             console.error(err);
-            alert('서버 오류가 발생했습니다.');
+            alert('Server error occurred.');
         }
     };
 

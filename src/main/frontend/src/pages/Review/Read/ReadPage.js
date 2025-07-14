@@ -24,7 +24,7 @@ const ReadPage = () => {
         const likedKey = `liked-review-${review.id}`;
 
         if (localStorage.getItem(likedKey)) {
-            alert("이미 좋아요를 누르셨어요!");
+            alert("You have already liked this!");
             return;
         }
 
@@ -34,7 +34,7 @@ const ReadPage = () => {
         try {
             await likeReview(review.id);
         } catch (error) {
-            console.error("좋아요 실패:", error);
+            console.error("Failed to like:", error);
         }
     };
 

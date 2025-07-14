@@ -33,8 +33,8 @@ const WritePage = () => {
             }
 
         } catch (error) {
-            console.error("리뷰 작성 실패:", error);
-            const message = error?.response?.data || "리뷰 작성 중 오류가 발생했습니다.";
+            console.error("Failed to submit review:", error);
+            const message = error?.response?.data || "An error occurred while submitting the review.";
             alert(message);
         }
     };
