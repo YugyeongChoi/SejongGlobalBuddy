@@ -46,7 +46,15 @@ const EditPage = () => {
     return (
         <div className="review-write-container">
             <div className="button-row">
-            <button className="back-btn" onClick={() => navigate('/review')}>
+                <button
+                    className="back-btn"
+                    onClick={() => {
+                        const shouldLeave = window.confirm('Are you sure you want to leave? Your progress will not be saved.');
+                        if (shouldLeave) {
+                            navigate('/review');
+                        }
+                    }}
+                >
                 <img src="images/back.png" alt="Back" className="back-icon"/>
             </button>
             <button className="post-btn" onClick={() => formRef.current?.submit()}>Edit</button>

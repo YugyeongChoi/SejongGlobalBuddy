@@ -29,6 +29,8 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     z-index: 9999;
     min-width: 240px;
+    flex-direction: column;
+
 }
 
 .review-edit-popup input {
@@ -42,7 +44,7 @@
 }
 
 .review-edit-popup input:focus {
-    border-color: #2d4a5c;
+    border-color: #91C1E5;
 }
 
 .popup-actions {
@@ -53,20 +55,21 @@
 
 
 .review-edit-popup button {
-    background-color: #2d4a5c;
+    background-color: #cccccc;
     color: white;
     border: none;
     border-radius: 6px;
     padding: 10px 14px;
     font-size: 14px;
-    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .review-edit-popup button:hover {
-    background-color: #1e3542;
+    background-color: gray;
+    color: #000000;
 }
+
 @media (max-width: 768px) {
     .review-edit-popup {
         right: -10px;

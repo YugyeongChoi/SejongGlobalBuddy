@@ -46,8 +46,10 @@ const ActionMenu = ({ isOpen, setOpen, onSubmitPassword, onReport }) => {
                         <>
                             <button onClick={() => handleActionClick('edit')}>Edit</button>
                             <button onClick={() => handleActionClick('delete')}>Delete</button>
-                            <button onClick={handleReportClick}>Report Post</button>
-
+                            <button className="report-button" onClick={handleReportClick}>
+                                {/*<img src="/icons/report-icon.svg" alt="Report" className="report-icon" />*/}
+                                Report Post
+                            </button>
                         </>
                     ) : (
                         <>
