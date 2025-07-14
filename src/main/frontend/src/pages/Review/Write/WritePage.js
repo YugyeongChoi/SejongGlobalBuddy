@@ -26,11 +26,16 @@ const WritePage = () => {
         };
 
         try {
-            await postReview({ review, images });
-            navigate('/review');
+            const response = await postReview({ review, images });
+
+            if (response.status === 200 && response.data === "saved") {
+                navigate('/review', { state: { refresh: true } });
+            }
+
         } catch (error) {
             console.error("리뷰 작성 실패:", error);
-            alert("리뷰 작성 중 오류가 발생했습니다.");
+            const message = error?.response?.data || "리뷰 작성 중 오류가 발생했습니다.";
+            alert(message);
         }
     };
 

@@ -8,27 +8,36 @@ const List = ({ reviews }) => {
     const navigate = useNavigate();
     const [popupOpenId, setPopupOpenId] = useState([]);
 
-    const handlePasswordSubmit = (inputPassword, review) => {
-        if (inputPassword === review.password) {
-            const confirmEdit = window.confirm('수정하시겠습니까? (취소 시 삭제)');
-            if (confirmEdit) {
-                navigate(`/review/edit/${review.id}`);
+    const handlePasswordSubmit = async (inputPassword, review) => {
+        try {
+            const res = await fetch(`/review/${review.id}/verify-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ password: inputPassword })
+            });
+
+            if (res.ok) {
+                const confirmEdit = window.confirm('수정하시겠습니까? (취소 시 삭제)');
+                if (confirmEdit) {
+                    navigate(`/review/edit/${review.id}`);
+                } else {
+                    await deleteReview(review.id);
+                    alert('삭제되었습니다.');
+                    window.location.reload();
+                }
             } else {
-                deleteReview(review.id)
-                    .then(() => {
-                        alert('삭제되었습니다.');
-                        window.location.reload();
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                        alert('삭제 실패');
-                    });
+                alert('비밀번호가 틀렸습니다.');
             }
-        } else {
-            alert('비밀번호가 틀렸습니다.');
+        } catch (error) {
+            console.error(error);
+            alert('서버 오류');
+        } finally {
+            setPopupOpenId(null); // 팝업 닫기
         }
-        setPopupOpenId(null); // 팝업 닫기
     };
+
 
     const handleCardClick = (review) => {
         if (popupOpenId === review.id) return; // 팝업 열려있으면 이동 막기

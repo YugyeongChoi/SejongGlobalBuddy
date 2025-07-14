@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './Form.css';
 
 const ExtraFieldModal = ({
@@ -71,6 +70,7 @@ const ExtraFieldModal = ({
                         required
                         className="input"
                     />
+
                 </div>
                 <div className="consent-wrapper">
                     <label className="consent-label">

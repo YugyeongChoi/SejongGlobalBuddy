@@ -35,8 +35,8 @@ const EditPage = () => {
 
             navigate(`/review/${id}`);
         } catch (error) {
-            alert('수정 중 오류가 발생했습니다.');
-            console.error(error);
+            const message = error?.response?.data || "리뷰 수정 중 오류가 발생했습니다.";
+            alert(message);
         }
     };
 

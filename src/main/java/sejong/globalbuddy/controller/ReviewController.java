@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +11,7 @@ import sejong.globalbuddy.dto.ReviewDto;
 import sejong.globalbuddy.entity.PhotoEntity;
 import sejong.globalbuddy.entity.ReviewEntity;
 import sejong.globalbuddy.repository.ReviewRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +20,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 public class ReviewController {
 
     private final ReviewRepository reviewRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
@@ -43,7 +45,6 @@ public class ReviewController {
                     dto.setId(post.getId());
                     dto.setTitle(post.getTitle());
                     dto.setContent(post.getContent());
-                    dto.setPassword(post.getPassword());
                     dto.setNationality(post.getNationality());
                     dto.setGeneration(post.getGeneration());
                     dto.setNickname(post.getNickname());
@@ -69,19 +70,17 @@ public class ReviewController {
             @RequestPart(value = "images", required = false) List<MultipartFile> images) {
 
         try {
-            System.out.println("review DTO = " + dto);
-            System.out.println("password = " + dto.getPassword());
-
-            if (!dto.getPassword().matches("^\\d{6}$")) {
+            if (dto.getPassword() == null || !dto.getPassword().matches("^\\d{6}$")) {
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
                         .body("Please enter a 6-digit password!");
             }
 
+
             ReviewEntity post = ReviewEntity.builder()
                     .title(dto.getTitle())
                     .content(dto.getContent())
-                    .password(dto.getPassword())
+                    .password(passwordEncoder.encode(dto.getPassword()))
                     .nationality(dto.getNationality())
                     .generation(dto.getGeneration())
                     .nickname(dto.getNickname())
@@ -133,7 +132,6 @@ public class ReviewController {
                     dto.setId(post.getId());
                     dto.setTitle(post.getTitle());
                     dto.setContent(post.getContent());
-                    dto.setPassword(post.getPassword());
                     dto.setNationality(post.getNationality());
                     dto.setGeneration(post.getGeneration());
                     dto.setNickname(post.getNickname());
@@ -165,18 +163,22 @@ public class ReviewController {
             @RequestPart("review") ReviewDto dto,
             @RequestPart(value = "images", required = false) List<MultipartFile> images) {
 
+
         return reviewRepository.findById(id)
                 .map(existing -> {
-                    if (!existing.getPassword().equals(dto.getPassword())) {
-                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                .body("Incorrect password");
-                    }
-
                     existing.setTitle(dto.getTitle());
                     existing.setContent(dto.getContent());
                     existing.setNationality(dto.getNationality());
                     existing.setGeneration(dto.getGeneration());
                     existing.setNickname(dto.getNickname());
+
+                    if (!dto.getPassword().matches("^\\d{6}$")) {
+                        return ResponseEntity
+                                .status(HttpStatus.BAD_REQUEST)
+                                .body("Please enter a 6-digit password!");
+                    }
+
+                    existing.setPassword(passwordEncoder.encode(dto.getPassword()));
 
                     if (images != null && !images.isEmpty()) {
                         File uploadPath = new File(uploadDir);
@@ -243,5 +245,21 @@ public class ReviewController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+    @PostMapping("/{id}/verify-password")
+    public ResponseEntity<?> verifyPassword(
+            @PathVariable("id") Long id,
+            @RequestBody Map<String, String> request) {
 
+        String inputPassword = request.get("password");
+
+        return reviewRepository.findById(id)
+                .map(review -> {
+                    if (passwordEncoder.matches(inputPassword, review.getPassword())) {
+                        return ResponseEntity.ok().build();
+                    } else {
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
+                    }
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

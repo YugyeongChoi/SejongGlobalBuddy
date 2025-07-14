@@ -1,5 +1,4 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Form.css';
 import ExtraFieldModal from './ExtraFieldModal';
 
@@ -13,7 +12,6 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
         nickname: '',
     });
 
-    const navigate = useNavigate();
     const [images, setImages] = useState([]);
     const [previewUrls, setPreviewUrls] = useState([]);
     const [showExtraFields, setShowExtraFields] = useState(initialShowExtraFields);
@@ -94,7 +92,7 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
 
             try {
                 await onSubmit({ ...form, images });
-                navigate('/review', { state: { refresh: true } });
+                // navigate('/review', { state: { refresh: true } });
             } catch (error) {
                 console.error("Error submitting review:", error);
                 alert("There was an error posting your review. Please try again.");

@@ -11,8 +11,6 @@ const ReadPage = () => {
     const [review, setReview] = useState(null);
 
     const [likes, setLikes] = useState(0);
-    const [reported, setReported] = useState(false);
-
 
     useEffect(() => {
         getReviewDetail(id).then((data) => {
@@ -30,7 +28,7 @@ const ReadPage = () => {
             return;
         }
 
-        setLikes(prev => prev + 1); // 👍 UI 먼저 업데이트
+        setLikes(prev => prev + 1);
         localStorage.setItem(likedKey, "true");
 
         try {
