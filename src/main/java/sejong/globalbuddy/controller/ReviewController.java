@@ -163,7 +163,6 @@ public class ReviewController {
             @RequestPart("review") ReviewDto dto,
             @RequestPart(value = "images", required = false) List<MultipartFile> images) {
 
-
         return reviewRepository.findById(id)
                 .map(existing -> {
                     existing.setTitle(dto.getTitle());
@@ -180,6 +179,21 @@ public class ReviewController {
 
                     existing.setPassword(passwordEncoder.encode(dto.getPassword()));
 
+                    // 기존 이미지 삭제
+                    List<PhotoEntity> existingPhotos = existing.getPhotos();
+                    if (existingPhotos != null && !existingPhotos.isEmpty()) {
+                        for (PhotoEntity photo : existingPhotos) {
+                            // 실제 파일도 삭제
+                            String fileName = Paths.get(photo.getUrl()).getFileName().toString();
+                            File file = new File(uploadDir, fileName);
+                            if (file.exists()) {
+                                file.delete();
+                            }
+                        }
+                        existingPhotos.clear();
+                    }
+
+                    // 새 이미지 추가
                     if (images != null && !images.isEmpty()) {
                         File uploadPath = new File(uploadDir);
                         if (!uploadPath.exists()) uploadPath.mkdirs();
@@ -187,6 +201,8 @@ public class ReviewController {
                         for (MultipartFile image : images) {
                             try {
                                 String originalName = image.getOriginalFilename();
+                                if (originalName == null || originalName.isBlank()) continue;
+
                                 String sanitized = originalName.replaceAll("[^a-zA-Z0-9.\\-_]", "_");
                                 String fileName = UUID.randomUUID() + "_" + sanitized;
                                 Path filePath = Paths.get(uploadDir, fileName);
@@ -194,7 +210,7 @@ public class ReviewController {
 
                                 PhotoEntity photo = PhotoEntity.builder()
                                         .url("/images/" + fileName)
-                                        .post(existing) // 기존 객체에 연결
+                                        .post(existing)
                                         .build();
 
                                 existing.addPhoto(photo);
