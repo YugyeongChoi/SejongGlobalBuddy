@@ -1,46 +1,76 @@
 import React, { useState } from 'react';
 import './List.css';
 import { useNavigate } from 'react-router-dom';
-import Setting from './Setting';
+import ActionMenu from './ActionMenu';
 import { deleteReview } from '../../../api/reviewApi';
 
 const List = ({ reviews }) => {
     const navigate = useNavigate();
-    const [popupOpenId, setPopupOpenId] = useState([]);
+    const [popupOpenReview, setPopupOpenReview] = useState(null);
 
-    const handlePasswordSubmit = async (inputPassword, review) => {
+    const handlePasswordSubmit = async (inputPassword, actionType, review) => {
         try {
             const res = await fetch(`/review/${review.id}/verify-password`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ password: inputPassword })
+                body: JSON.stringify({ password: inputPassword }),
             });
 
-            if (res.ok) {
-                const confirmEdit = window.confirm('수정하시겠습니까? (취소 시 삭제)');
+            if (!res.ok) {
+                alert('비밀번호가 틀렸습니다.');
+                return;
+            }
+
+            if (actionType === 'edit') {
+                const confirmEdit = window.confirm('수정하시겠습니까?');
                 if (confirmEdit) {
                     navigate(`/review/edit/${review.id}`);
-                } else {
+                }
+            } else if (actionType === 'delete') {
+                const confirmDelete = window.confirm('삭제하시겠습니까?');
+                if (confirmDelete) {
                     await deleteReview(review.id);
                     alert('삭제되었습니다.');
                     window.location.reload();
                 }
-            } else {
-                alert('비밀번호가 틀렸습니다.');
             }
         } catch (error) {
             console.error(error);
             alert('서버 오류');
         } finally {
-            setPopupOpenId(null); // 팝업 닫기
+            setPopupOpenReview(null);
+        }
+    };
+
+    const handleReport = async (reviewId) => {
+        const confirmed = window.confirm('이 포스트를 신고하겠습니까?');
+        if (!confirmed) return;
+
+        try {
+            const res = await fetch(`/review/report`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ postId: reviewId }),
+            });
+
+            if (res.ok) {
+                alert('게시글이 신고되었습니다!');
+            } else {
+                alert('신고 중 오류가 발생했습니다.');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('서버 오류가 발생했습니다.');
         }
     };
 
 
     const handleCardClick = (review) => {
-        if (popupOpenId === review.id) return; // 팝업 열려있으면 이동 막기
+        if (popupOpenReview?.id === review.id) return;
         navigate(`/review/${review.id}`);
     };
 
@@ -59,15 +89,16 @@ const List = ({ reviews }) => {
                                         ? `${review.generation} ${review.nickname}`
                                         : `International ${review.nickname}`}
                                 </span>
-                            <Setting
-                                isOpen={popupOpenId === review.id}
-                                setOpen={(isOpen) =>
-                                    setPopupOpenId(isOpen ? review.id : null)
+                            <ActionMenu
+                                isOpen={popupOpenReview?.id === review.id}
+                                reviewId={review.id}
+                                setOpen={(isOpen) => setPopupOpenReview(isOpen ? review : null)}
+                                onSubmitPassword={(pw, actionType) =>
+                                    handlePasswordSubmit(pw, actionType, popupOpenReview)
                                 }
-                                onPasswordSubmit={(inputPassword) =>
-                                    handlePasswordSubmit(inputPassword, review)
-                                }
+                                onReport={() => handleReport(review.id)}
                             />
+
                         </div>
                         {review.photoUrls && review.photoUrls.length > 0 && (
                             <div className="thumbnail-wrapper">

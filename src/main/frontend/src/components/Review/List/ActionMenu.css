@@ -45,6 +45,13 @@
     border-color: #2d4a5c;
 }
 
+.popup-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+
 .review-edit-popup button {
     background-color: #2d4a5c;
     color: white;

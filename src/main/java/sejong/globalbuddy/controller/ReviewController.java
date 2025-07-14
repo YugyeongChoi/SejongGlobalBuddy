@@ -179,22 +179,19 @@ public class ReviewController {
 
                     existing.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-                    // 기존 이미지 삭제
-                    List<PhotoEntity> existingPhotos = existing.getPhotos();
-                    if (existingPhotos != null && !existingPhotos.isEmpty()) {
-                        for (PhotoEntity photo : existingPhotos) {
-                            // 실제 파일도 삭제
-                            String fileName = Paths.get(photo.getUrl()).getFileName().toString();
-                            File file = new File(uploadDir, fileName);
-                            if (file.exists()) {
-                                file.delete();
-                            }
-                        }
-                        existingPhotos.clear();
-                    }
-
-                    // 새 이미지 추가
                     if (images != null && !images.isEmpty()) {
+                        // 기존 이미지 삭제
+                        List<PhotoEntity> existingPhotos = existing.getPhotos();
+                        if (existingPhotos != null && !existingPhotos.isEmpty()) {
+                            for (PhotoEntity photo : existingPhotos) {
+                                String fileName = Paths.get(photo.getUrl()).getFileName().toString();
+                                File file = new File(uploadDir, fileName);
+                                if (file.exists()) file.delete();
+                            }
+                            existingPhotos.clear();
+                        }
+
+                        // 새 이미지 저장
                         File uploadPath = new File(uploadDir);
                         if (!uploadPath.exists()) uploadPath.mkdirs();
 
