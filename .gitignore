@@ -42,5 +42,6 @@ application.properties
 node_modules/
 build/
 #src/main/resources/static/
+src/main/frontend/.env
 
 

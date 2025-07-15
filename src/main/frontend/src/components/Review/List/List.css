@@ -8,6 +8,9 @@
 }
 
 .review-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: relative;
     background: white;
     border-radius: 16px;
@@ -106,15 +109,14 @@
 }
 
 .thumbnail-likes {
-    bottom: 10px;
-    right: 14px;
+    margin-top: auto;
+    display: flex;
     font-size: 14px;
     font-weight: bold;
     color: black;
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-top: auto;
 }
 
 .no-review {
