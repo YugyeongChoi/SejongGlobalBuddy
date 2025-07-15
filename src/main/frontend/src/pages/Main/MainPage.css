@@ -148,7 +148,6 @@
     overflow: hidden;
     border-radius: 16px;
     cursor: pointer;
-    pointer-events: none;
 }
 
 .photo-grid-img {
