@@ -33,6 +33,7 @@ function ImageSwitcher() {
                     src={mainImage.src}
                     alt={mainImage.alt}
                     className="main-image"
+                    onContextMenu={(e) => e.preventDefault()}
                 />
             </div>
 
@@ -45,6 +46,7 @@ function ImageSwitcher() {
                             alt={img.alt}
                             className="thumbnail"
                             onClick={() => handleThumbnailClick(img, idx)}
+                            onContextMenu={(e) => e.preventDefault()}
                         />
                     ))}
                 </div>

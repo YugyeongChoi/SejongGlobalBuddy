@@ -48,7 +48,11 @@ function Description() {
                 >
                     <h3 className="team-title">{item.title}</h3>
                     <div className="team-content">
-                        <img src={item.image} alt={item.title} className="team-image" />
+                        <img src={item.image}
+                             alt={item.title}
+                             className="team-image"
+                             onContextMenu={(e) => e.preventDefault()}
+                        />
                         <p className="team-description">{item.description}</p>
                     </div>
                 </div>

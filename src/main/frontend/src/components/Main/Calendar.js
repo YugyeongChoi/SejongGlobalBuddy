@@ -8,10 +8,12 @@ function Calendar() {
                 <img
                     src="/images/calendar.jpg"
                     className="calendar-image"
+                    onContextMenu={(e) => e.preventDefault()}
                 />
                 <img
                     src="/images/calendar_mood.png"
                     className="mood-image"
+                    onContextMenu={(e) => e.preventDefault()}
                 />
             </div>
         </div>
