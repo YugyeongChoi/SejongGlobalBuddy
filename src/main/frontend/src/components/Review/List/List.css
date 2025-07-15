@@ -24,20 +24,20 @@
     transform: translateY(-4px);
 }
 .review-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    margin-bottom: 0;
+    padding: 0;
+    line-height: 1;
 }
 
 .title-section {
-    display: flex;
-    align-items: center;
     gap: 12px;
+    margin-bottom: -12px;
 }
 
 .title-section h3 {
     margin: 0;
     font-size: 1.25rem;
+    line-height: 1.2;
     font-weight: bold;
     overflow: hidden;
     display: -webkit-box;
@@ -69,7 +69,7 @@
 }
 
 .review-content {
-    margin-top: 12px;
+    margin-top: 0px;
     color: #666;
     font-size: 0.95rem;
     line-height: 1.5;
@@ -82,6 +82,8 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     white-space: normal;
+    margin: 0;
+    padding: 0;
 }
 
 .thumbnail-img {
@@ -91,6 +93,7 @@
     border-radius: 8px;
     margin-bottom: 10px;
 }
+
 .thumbnail-wrapper {
     position: relative;
 }
@@ -169,4 +172,3 @@
         gap: 4px;
     }
 }
-

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './List.css';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import ActionMenu from './ActionMenu';
-import { deleteReview } from '../../../api/reviewApi';
+import {deleteReview} from '../../../api/reviewApi';
 
-const List = ({ reviews }) => {
+const List = ({reviews}) => {
     const navigate = useNavigate();
     const [popupOpenReview, setPopupOpenReview] = useState(null);
 
@@ -15,7 +15,7 @@ const List = ({ reviews }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ password: inputPassword }),
+                body: JSON.stringify({password: inputPassword}),
             });
 
             if (!res.ok) {
@@ -54,7 +54,7 @@ const List = ({ reviews }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ postId: reviewId }),
+                body: JSON.stringify({postId: reviewId}),
             });
 
             if (res.ok) {
@@ -102,8 +102,8 @@ const List = ({ reviews }) => {
                                 }
                                 onReport={() => handleReport(review.id)}
                             />
-
                         </div>
+
                         {review.photoUrls && review.photoUrls.length > 0 && (
                             <div className="thumbnail-wrapper">
                                 <img
@@ -130,12 +130,12 @@ const List = ({ reviews }) => {
                             </div>
                         </div>
 
-                        <div className="review-content">
-                            <p>{review.content}</p>
-                        </div>
+                            <div className="review-content">
+                                <p>{review.content}</p>
+                            </div>
 
                         <div className="thumbnail-likes">
-                            <img src="/images/likes.ico" alt="like" className="like-icon" />
+                            <img src="/images/likes.ico" alt="like" className="like-icon"/>
                             <span>{review.likes}</span>
                         </div>
                     </div>

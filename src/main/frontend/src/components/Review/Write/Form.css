@@ -50,7 +50,7 @@
 }
 
 .title-input{
-    color: #858585;
+    color: #757575;
     font-size: 32px;
     font-weight: bold;
     padding-bottom: 20px;
@@ -93,6 +93,14 @@
     appearance: none !important;
     border-radius: 0 !important;
 }
+
+.text-length-info {
+    color: #757575;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+
 .review-modal-overlay {
     position: fixed;
     top: 0;
