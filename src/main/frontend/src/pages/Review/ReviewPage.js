@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { fetchReviews } from "../../api/reviewApi";
+import React, {useEffect, useState} from 'react';
+import {fetchReviews} from "../../api/reviewApi";
 import List from "../../components/Review/List/List";
-import { Link, useLocation } from 'react-router-dom';
-import { FiEdit3 } from "react-icons/fi";
+import {Link, useLocation} from 'react-router-dom';
+import {FiEdit3} from "react-icons/fi";
 import './Write/WritePage.css';
 import './ReviewPage.css';
 import FilterDropdown from "../../components/Review/List/FilterDropdown";
@@ -14,7 +14,7 @@ const ReviewPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    const [filter, setFilter] = useState('전체');
+    const [filter, setFilter] = useState('All');
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -40,7 +40,7 @@ const ReviewPage = () => {
     }, [location.state]);
 
     const filteredReviews =
-        filter === '전체'
+        filter === 'All'
             ? reviews
             : reviews.filter((review) =>
                 filter === 'International'
@@ -56,15 +56,17 @@ const ReviewPage = () => {
 
     return (
         <div className="review-page">
-            <h1>Global Buddy Review</h1>
+            <div className="review-header">
 
-            <FilterDropdown selected={filter} setSelected={(val) => {
-                setFilter(val);
-                setCurrentPage(1);
-            }} />
+                <h1>Global Buddy Review</h1>
 
+                <FilterDropdown selected={filter} setSelected={(val) => {
+                    setFilter(val);
+                    setCurrentPage(1);
+                }}/>
+            </div>
 
-            <List reviews={currentReviews} />
+            <List reviews={currentReviews}/>
 
             <div className="pagination">
                 {[...Array(totalPages)].map((_, index) => (
@@ -79,7 +81,7 @@ const ReviewPage = () => {
             </div>
 
             <Link to="/review/write" className="fab-button">
-                <FiEdit3 color="white" size={28} />
+                <FiEdit3 color="white" size={28}/>
             </Link>
         </div>
     );

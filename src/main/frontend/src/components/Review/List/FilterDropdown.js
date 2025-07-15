@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './FilterDropdown.css';
 
 const FILTERS = [
-    { label: '전체', value: '전체' },
+    { label: 'All', value: 'All' },
     { label: '23th', value: '23th' },
     { label: '24th', value: '24th' },
     { label: 'OB', value: 'OB' },

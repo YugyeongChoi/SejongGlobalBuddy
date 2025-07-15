@@ -75,7 +75,7 @@ const List = ({ reviews }) => {
     };
 
     if (!reviews || reviews.length === 0) {
-        return <div className="no-review">아직 리뷰가 없습니다. 리뷰를 작성해주세요!</div>;
+        return <div className="no-review">No reviews yet. Be the first to share your experience!</div>;
     }
 
     return (
