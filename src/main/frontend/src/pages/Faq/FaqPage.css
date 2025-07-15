@@ -66,10 +66,12 @@
 }
 
 .faq-answer {
-    margin-top: 1rem;
+    overflow: hidden;
     color: #666;
     line-height: 1.6;
+    margin-top: 1rem;
 }
+
 .faq-toggle-buttons {
     margin-bottom: 1.5rem;
 }

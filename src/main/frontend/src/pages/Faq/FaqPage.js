@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './FaqPage.css';
 import qnAData from '../../components/Faq/QnAData';
 
@@ -14,12 +15,12 @@ function FaqPage() {
     };
 
     const toggleFAQ = (index) => {
-        const newStates = [...openStates];
-        newStates[index] = !newStates[index];
-        setOpenStates(newStates);
+        setOpenStates((prev) =>
+            prev.map((isOpen, i) => (i === index ? !isOpen : isOpen))
+        );
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         setOpenStates(new Array(faqs.length).fill(false));
     }, [language]);
 
@@ -45,12 +46,25 @@ function FaqPage() {
             </div>
 
             {faqs.map((item, index) => (
-                <div className={`faq-item ${openStates[index] ? 'open' : ''}`} key={index}>
+                <div className="faq-item" key={index}>
                     <div className="faq-question" onClick={() => toggleFAQ(index)}>
                         <strong>{item.question}</strong>
                         <span className="faq-icon">{openStates[index] ? '−' : '+'}</span>
                     </div>
-                    {openStates[index] && <div className="faq-answer">{item.answer}</div>}
+
+                    <AnimatePresence initial={false}>
+                        {openStates[index] && (
+                            <motion.div
+                                className="faq-answer"
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            >
+                                {item.answer}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             ))}
         </div>
