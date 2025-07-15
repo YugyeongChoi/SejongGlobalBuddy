@@ -74,6 +74,10 @@ const List = ({ reviews }) => {
         navigate(`/review/${review.id}`);
     };
 
+    if (!reviews || reviews.length === 0) {
+        return <div className="no-review">아직 리뷰가 없습니다. 리뷰를 작성해주세요!</div>;
+    }
+
     return (
         <div className="review-list-container">
             {reviews.map((review) => (

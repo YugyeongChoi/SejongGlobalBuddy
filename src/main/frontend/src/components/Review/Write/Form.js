@@ -117,14 +117,14 @@ const Form = forwardRef(({ onSubmit, initialData, showExtraFields: initialShowEx
                     placeholder="Write your content here..."
                     value={form.content}
                     onChange={(e) => {
-                        if (e.target.value.length <= 1000) {
+                        if (e.target.value.length <= 5000) {
                             handleChange(e);
                         }
                     }}
                     required
                     className="content-textarea"
                 />
-                <div className="text-length-info">{form.content.length} / 1000</div>
+                <div className="text-length-info">{form.content.length} / 5000</div>
 
                 <div className="image-preview-container">
                     {previewUrls.map((url, index) => (

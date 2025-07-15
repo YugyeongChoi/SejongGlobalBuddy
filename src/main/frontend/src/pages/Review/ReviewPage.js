@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FiEdit3 } from "react-icons/fi";
 import './Write/WritePage.css';
 import './ReviewPage.css';
+import FilterDropdown from "../../components/Review/List/FilterDropdown";
 
 const ReviewPage = () => {
     const [reviews, setReviews] = useState([]);
@@ -13,10 +14,7 @@ const ReviewPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentReviews = reviews.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(reviews.length / itemsPerPage);
+    const [filter, setFilter] = useState('전체');
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -41,9 +39,31 @@ const ReviewPage = () => {
         }
     }, [location.state]);
 
+    const filteredReviews =
+        filter === '전체'
+            ? reviews
+            : reviews.filter((review) =>
+                filter === 'International'
+                    ? review.nationality !== 'Korean'
+                    : review.generation === filter
+            );
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentReviews = filteredReviews.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredReviews.length / itemsPerPage);
+
+
     return (
         <div className="review-page">
             <h1>Global Buddy Review</h1>
+
+            <FilterDropdown selected={filter} setSelected={(val) => {
+                setFilter(val);
+                setCurrentPage(1);
+            }} />
+
+
             <List reviews={currentReviews} />
 
             <div className="pagination">
