@@ -11,7 +11,7 @@
     margin-bottom: 24px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 680px) {
     .review-page {
         padding: 24px 16px;
     }
@@ -19,7 +19,7 @@
     .review-page h1 {
         font-size: 22px;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
 }
 .fab-button {

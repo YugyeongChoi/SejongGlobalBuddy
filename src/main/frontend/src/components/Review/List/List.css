@@ -18,7 +18,7 @@
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     cursor: pointer;
     transition: transform 0.15s ease;
-    height: 460px;
+    height: 430px;
 }
 .review-card:hover {
     transform: translateY(-4px);
@@ -151,11 +151,12 @@
 
     .title-section h3 {
         font-size: 1.1rem;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
     }
 
     .review-content {
         font-size: 0.9rem;
+        padding-bottom: 12px;
     }
 
     .thumbnail-img {

@@ -25,7 +25,7 @@ const ReviewPage = () => {
             const data = await fetchReviews();
             setReviews(data);
         } catch (err) {
-            console.error('리뷰 가져오기 실패:', err);
+            console.error('Failed:', err);
         }
     };
 

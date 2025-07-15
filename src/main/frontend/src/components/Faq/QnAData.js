@@ -21,12 +21,18 @@ const qnAData = {
             answer: '능숙한 외국어 실력보다는 적극적으로 소통하려는 태도가 더욱 중요합니다.',
         },
         {
+            question: '내향적인 사람도 잘 어울릴 수 있을까요?',
+            answer: '물론입니다! 글로벌버디에는 내향적인 분들도 많이 활동하고 있습니다. ' +
+                '비슷한 성향의 버디들과 천천히 친해지며, 뜻깊은 시간을 보내는 경우도 많답니다. ' +
+                '진심과 열정을 가지고 있다면, 성격에 상관없이 충분히 잘 어울릴 수 있으니 걱정하지 않으셔도 됩니다!\n'
+        },
+        {
             question: '회의 공결 처리 기준이 어떻게 되나요?',
             answer: '보충 수업, 학교 내 시험, 직계 가족의 경조사, 병결, 인턴십, 대회 참석 등이 인정되며, 모든 사유에 대해 발급일이 포함된 증빙서류를 제출해야 합니다.',
         },
         {
             question: '[영상팀 & 홍보팀] 포토샵이나 프리미어 등의 툴을 반드시 다룰 수 있어야 하나요?',
-            answer: '반드시 다룰 수 있어야 하는 것은 아니지만, 가능하다면 선발에 긍정적으로 반영됩니다.',
+            answer: '반드시 다룰 수 있어야 하는 것은 아니지만, 가능하다면 선발에 긍정적으로 반영될 수 있습니다.',
         },
     ],
     en: [
@@ -45,6 +51,13 @@ const qnAData = {
         {
             question: 'Are there opportunities to interact with other international buddies as well?',
             answer: 'Yes. Through group activities and official events, there are many opportunities to build friendships. Each Korean buddy is matched with two to three international students, encouraging more interaction.',
+        },
+        {
+            question: 'Can introverted people also fit in well?',
+            answer: 'Absolutely! Many introverted students are active members of Global Buddy.\n' +
+                'They often build meaningful connections with buddies who share a similar personality,\n' +
+                'taking the time to get to know each other.\n' +
+                'As long as you bring sincerity and passion, you\'ll fit in just fine, so there\'s no need to worry!',
         },
     ]
 };

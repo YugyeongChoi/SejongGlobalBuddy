@@ -80,6 +80,7 @@ const ReadPage = () => {
                                     src={`${imageBaseURL}/review/images/${encodedFilename}`}
                                     alt={`uploaded-${index}`}
                                     className="review-photo"
+                                    onContextMenu={(e) => e.preventDefault()}
                                 />
                             );
                         })}

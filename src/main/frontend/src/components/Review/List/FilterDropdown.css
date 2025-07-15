@@ -83,7 +83,7 @@
         transform: translateY(0);
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 680px) {
     .dropdown-toggle {
         min-width: 30%;
         font-size: 13px;

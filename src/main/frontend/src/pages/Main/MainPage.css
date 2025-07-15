@@ -155,8 +155,7 @@
         width: 100%;
     }
     .mood-image {
-        height: auto;
-        width: 40%;
+        display: none;
     }
 
     .calendar-wrapper {

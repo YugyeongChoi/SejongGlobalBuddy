@@ -116,6 +116,7 @@ const List = ({reviews}) => {
                                         review.photoUrls[0].substring('/images/'.length)
                                     )}`}
                                     alt="thumbnail"
+                                    onContextMenu={(e) => e.preventDefault()}
                                 />
                                 {review.photoUrls.length > 1 && (
                                     <div className="thumbnail-overlay">
