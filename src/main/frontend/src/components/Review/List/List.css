@@ -15,8 +15,7 @@
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     cursor: pointer;
     transition: transform 0.15s ease;
-    height: 430px;
-    padding-bottom: 30px;
+    height: 460px;
 }
 .review-card:hover {
     transform: translateY(-4px);
@@ -107,7 +106,6 @@
 }
 
 .thumbnail-likes {
-    position: flex;
     bottom: 10px;
     right: 14px;
     font-size: 14px;
