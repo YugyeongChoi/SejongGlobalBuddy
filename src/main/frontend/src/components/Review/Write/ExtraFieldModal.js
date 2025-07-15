@@ -25,7 +25,13 @@ const ExtraFieldModal = ({
                             key={type}
                             type="button"
                             className={`select-btn ${form.nationality === type ? 'active' : ''}`}
-                            onClick={() => handleSelect('nationality', type)}
+                            onClick={() => {
+                                handleSelect('nationality', type);
+
+                                if (type === 'International') {
+                                    handleSelect('generation', '');
+                                }
+                            }}
                         >
                             {type}
                         </button>
