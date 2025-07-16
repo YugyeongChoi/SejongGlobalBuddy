@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 const ReviewPhotoGrid = ({reviews}) => {
     const navigate = useNavigate();
-    const targetIds = [66, 71, 75, 73];
+    const targetIds = [73, 71, 75, 79];
     const selectedReviews = targetIds
         .map(id => reviews.find(review => review.id === id))
         .filter(Boolean);
