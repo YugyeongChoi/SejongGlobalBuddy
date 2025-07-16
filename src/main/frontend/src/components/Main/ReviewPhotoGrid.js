@@ -4,9 +4,10 @@ import {useNavigate} from 'react-router-dom';
 
 const ReviewPhotoGrid = ({reviews}) => {
     const navigate = useNavigate();
-    const targetIds = [66, 71, 73, 75];
-    const selectedReviews = reviews.filter(review => targetIds.includes(review.id));
-
+    const targetIds = [66, 71, 75, 73];
+    const selectedReviews = targetIds
+        .map(id => reviews.find(review => review.id === id))
+        .filter(Boolean);
 
     const imageBaseURL =
         process.env.NODE_ENV === 'development'
