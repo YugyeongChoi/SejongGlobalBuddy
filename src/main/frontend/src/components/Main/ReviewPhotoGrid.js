@@ -4,7 +4,9 @@ import {useNavigate} from 'react-router-dom';
 
 const ReviewPhotoGrid = ({reviews}) => {
     const navigate = useNavigate();
-    const sliced = reviews.slice(0, 4); // 딱 4개만!
+    const targetIds = [66, 71, 73, 75];
+    const selectedReviews = reviews.filter(review => targetIds.includes(review.id));
+
 
     const imageBaseURL =
         process.env.NODE_ENV === 'development'
@@ -14,7 +16,7 @@ const ReviewPhotoGrid = ({reviews}) => {
     return (
         <div>
             <div className="review-photo-grid-container">
-                {sliced.map((review) => {
+                {selectedReviews.map((review) => {
                     const imagePath = review.photoUrls?.[0];
                     if (!imagePath) return null;
 

@@ -80,7 +80,7 @@ const List = ({reviews}) => {
 
     return (
         <div className="review-list-container">
-            {reviews.map((review) => (
+            {reviews.slice().reverse().map((review) => (
                 <div
                     key={review.id}
                     className="review-card-link"
