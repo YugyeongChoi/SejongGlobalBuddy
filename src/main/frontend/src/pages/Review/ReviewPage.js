@@ -39,20 +39,19 @@ const ReviewPage = () => {
         }
     }, [location.state]);
 
-    const filteredReviews =
-        filter === 'All'
-            ? reviews
-            : reviews.filter((review) =>
-                filter === 'International'
-                    ? review.nationality !== 'Korean'
-                    : review.generation === filter
-            );
+    const filtered = filter === 'All'
+        ? reviews
+        : reviews.filter(r =>
+            filter === 'International'
+                ? r.nationality !== 'Korean'
+                : r.generation === filter
+        );
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentReviews = filteredReviews.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(filteredReviews.length / itemsPerPage);
+    const sorted = [...filtered].sort((a, b) => b.id - a.id);
 
+    const start = (currentPage - 1) * itemsPerPage;
+    const paged = sorted.slice(start, start + itemsPerPage);
+    const totalPages = Math.ceil(sorted.length / itemsPerPage);
 
     return (
         <div className="review-page">
@@ -66,7 +65,8 @@ const ReviewPage = () => {
                 }}/>
             </div>
 
-            <List reviews={currentReviews}/>
+            <List reviews={paged}/>
+
 
             <div className="pagination">
                 {[...Array(totalPages)].map((_, index) => (
