@@ -1,10 +1,25 @@
-import React, { useRef } from 'react';
-function DataPage() {
+import React, { useState } from 'react';
+import PasswordModal from "../../components/Data/PasswordModal";
+
+const DataPage = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const handleSuccess = () => {
+        setIsAuthenticated(true);
+    };
+
     return (
-        <div>
-            <h1>Data 페이지</h1>
+        <div className="data-page">
+            {!isAuthenticated && (
+                <PasswordModal onSuccess={handleSuccess} />
+            )}
+            {isAuthenticated && (
+                <div className="content">
+                    <h1>DATA</h1>
+                </div>
+            )}
         </div>
     );
-}
+};
 
 export default DataPage;
