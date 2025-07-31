@@ -1,0 +1,87 @@
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 20px;
+}
+
+.file-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 100%;
+    min-width: 0;
+}
+
+.file-btn:hover {
+    transform: translateY(-4px);
+}
+
+.ppt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 20px;
+}
+
+.ppt-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.ppt-card:hover {
+    transform: translateY(-4px);
+}
+
+.ppt-thumbnail {
+    width: 100%;
+    height: auto;
+}
+
+.ppt-footer {
+    padding: 12px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.download-btn {
+    background-color: #ffd9df;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn:hover {
+    background-color: #ffbfc9;
+    transform: scale(1.1);
+}
+
+.download-icon {
+    width: 16px;
+    height: 16px;
+}

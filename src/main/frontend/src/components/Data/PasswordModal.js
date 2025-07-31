@@ -8,7 +8,7 @@ const PasswordModal = ({onSuccess, onClose}) => {
     const navigate = useNavigate();
 
     const checkPassword = () => {
-        if (input === 'globalbuddy!') {
+        if (input === 't') {
             onSuccess();
         } else {
             setError('비밀번호가 올바르지 않습니다.');
