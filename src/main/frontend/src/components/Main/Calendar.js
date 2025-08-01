@@ -6,7 +6,7 @@ function Calendar() {
         <div className="calendar-wrapper">
             <div className="calendar-content">
                 <img
-                    src="/images/calendar.jpg"
+                    src="/images/calendar.png"
                     className="calendar-image"
                     onContextMenu={(e) => e.preventDefault()}
                 />
