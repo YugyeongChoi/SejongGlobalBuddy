@@ -1,6 +1,6 @@
 import React from 'react';
 import './Data.css';
-import files from "./FileData";
+import files from "./files/FileData";
 
 const BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 
@@ -18,7 +18,7 @@ const File = () => {
             {files.map((file, idx) => (
                 <div key={idx} className="file-btn">
                     <span>{file.label}</span>
-                    <button className="download-btn" onClick={() => handleDownload(file)}>
+                    <button className="download-btn" onClick={() => handleDownload(file.path)}>
                         <img src="/images/download.png" alt="Download" className="download-icon" />
                     </button>
                 </div>

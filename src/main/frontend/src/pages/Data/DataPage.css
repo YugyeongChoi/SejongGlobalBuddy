@@ -1,25 +1,13 @@
 .data-page {
-    padding-left: 300px;
-    padding-right: 300px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-@media screen and (max-width: 1200px) {
-    .data-page {
-        padding-left: 200px;
-        padding-right: 200px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .data-page {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .data-page {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+.content h2 {
+    font-size: 24px;
+    color: #222;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
 }

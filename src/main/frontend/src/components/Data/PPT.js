@@ -1,27 +1,29 @@
 import React from 'react';
 import './Data.css';
 
-const PPT = () => {
-    const handleDownload = () => {
-        const link = document.createElement('a');
-        link.href = `${process.env.PUBLIC_URL}/files/0818_OT.pdf`;
-        link.download = '0818_OT.pdf';
-        link.click();
-    };
+const BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
+
+const PPT = ({ file, onPreview }) => {
+    const fileUrl = `${BASE_URL}/${encodeURIComponent(file.path)}`;
 
     return (
-        <div className="ppt-card">
-            <img
-                src="/images/ppt-thumbnail.png"
-                alt="PPT thumbnail"
-                className="ppt-thumbnail"
-            />
-            <div className="ppt-footer">
-                <p>0818_OT ppt 자료</p>
-                <button className="download-btn" button onClick={handleDownload}>
-                    <img src="/images/download.png" alt="Download" className="download-icon" />
-                </button>
+        <div className="ppt-item">
+            <div className="ppt-info">
+                <span className="ppt-label">{file.label}</span>
+                <span className="ppt-date">{file.date}</span>
             </div>
+
+            <button
+                className="download-btn"
+                onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = fileUrl;
+                    link.download = file.path;
+                    link.click();
+                }}
+            >
+                <img src="/images/download.png" alt="Download" className="download-icon" />
+            </button>
         </div>
     );
 };
