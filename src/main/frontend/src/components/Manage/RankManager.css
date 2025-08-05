@@ -1,0 +1,44 @@
+.input-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-form input {
+    padding: 10px;
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.input-form button {
+    padding: 10px 20px;
+    background-color: #91C1E5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.input-form button:hover {
+    background-color: #91C1E5;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.ranking-table th,
+.ranking-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.ranking-table th {
+    background-color: #f0f0f0;
+}

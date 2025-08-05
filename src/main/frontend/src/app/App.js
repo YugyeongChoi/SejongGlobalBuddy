@@ -10,6 +10,8 @@ import WritePage from '../pages/Review/Write/WritePage';
 import Layout from '../components/Layout/Layout';
 import ReadPage from "../pages/Review/Read/ReadPage";
 import EditPage from "../pages/Review/Edit/EditPage";
+import RankPage from "../pages/Rank/RankPage";
+import ManagePage from "../pages/Manage/ManagePage";
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -33,6 +35,8 @@ const AppRoutes = () => {
                         <Route path="/faq" element={<FaqPage />} />
                         <Route path="/review/:id" element={<ReadPage />} />
                         <Route path="/review/edit/:id" element={<EditPage />} />
+                        <Route path="/rank" element={<RankPage />} />
+                        <Route path="/manage" element={<ManagePage />} />
                     </Routes>
                 </Layout>
             )}

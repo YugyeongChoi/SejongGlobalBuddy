@@ -22,6 +22,7 @@ const Header = () => {
             </div>
 
             <nav className="nav-menu">
+                <Link to="/rank">Rank</Link>
                 <Link to="/data">Data</Link>
                 <Link to="/review">Review</Link>
                 <Link to="/team">Team</Link>
@@ -37,6 +38,7 @@ const Header = () => {
 
             <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
                 <div className="close-btn" onClick={() => setMenuOpen(false)}>✕</div>
+                <Link to="/rank" onClick={() => setMenuOpen(false)}>Rank</Link>
                 <Link to="/data" onClick={() => setMenuOpen(false)}>Data</Link>
                 <Link to="/review" onClick={() => setMenuOpen(false)}>Review</Link>
                 <Link to="/team" onClick={() => setMenuOpen(false)}>Team</Link>
