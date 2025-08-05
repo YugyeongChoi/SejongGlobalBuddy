@@ -26,11 +26,14 @@ public class BuddyCrossService {
         return buddyCrossRepository.findAllByOrderByScoreDesc();
     }
 
-    public void update(Long id, int newScore) {
+    public void update(Long id, BuddyCrossDto dto) {
         BuddyCrossEntity entity = buddyCrossRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 ID가 존재하지 않습니다: " + id));
 
-        entity.setScore(newScore);
+        entity.setName(dto.getName());
+        entity.setGeneration(dto.getGeneration());
+        entity.setScore(dto.getScore());
+
         buddyCrossRepository.save(entity);
     }
 

@@ -27,7 +27,7 @@ public class BuddyCrossController {
 
     @PutMapping("/{id}")
     public void update(@PathVariable Long id, @RequestBody BuddyCrossDto dto) {
-        buddyCrossService.update(id, dto.getScore());
+        buddyCrossService.update(id, dto);
     }
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
