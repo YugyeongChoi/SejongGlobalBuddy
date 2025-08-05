@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './DataManager.css';
 
 const DataManager = () => {
     const [fileList, setFileList] = useState([]);
@@ -43,13 +44,20 @@ const DataManager = () => {
     return (
         <div className="data-manager">
             <h3>📁 자료 업로드</h3>
-            <input
-                type="file"
-                onChange={(e) => setSelectedFile(e.target.files[0])}
-            />
-            <button onClick={handleUpload} disabled={!selectedFile}>
-                업로드
-            </button>
+            <div className="upload-actions">
+                <div className="custom-file-upload">
+                    <label htmlFor="fileInput">📎 파일 선택</label>
+                    <input
+                        type="file"
+                        id="fileInput"
+                        onChange={(e) => setSelectedFile(e.target.files[0])}
+                    />
+                    {selectedFile && <span>{selectedFile.name}</span>}
+                </div>
+                <button onClick={handleUpload} disabled={!selectedFile}>
+                    업로드
+                </button>
+            </div>
 
             <h3>📄 업로드된 파일 목록</h3>
             <ul>

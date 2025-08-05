@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import './RankManager.css';
 
@@ -79,7 +79,7 @@ const RankManager = () => {
     };
 
     return (
-        <>
+        <div className="ranking-container">
             <h2>BuddyCross</h2>
             <h3>{editId ? '✏️ 점수 수정하기' : '✏️ 점수 입력하기'}</h3>
             <form onSubmit={handleSubmit} className="input-form">
@@ -140,7 +140,7 @@ const RankManager = () => {
                 ))}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 };
 

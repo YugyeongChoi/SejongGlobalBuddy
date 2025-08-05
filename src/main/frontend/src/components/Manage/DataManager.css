@@ -1,0 +1,116 @@
+.data-manager h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.data-manager input[type="file"] {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.data-manager button {
+    background-color: #91C1E5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 4px;
+}
+
+.data-manager button:hover {
+    background-color: #304C61;
+}
+
+.data-manager button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.data-manager ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.data-manager li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.data-manager li a {
+    text-decoration: none;
+    font-size: 14px;
+    word-break: break-all;
+    flex-grow: 1;
+}
+
+.data-manager li button {
+    background-color: #e74c3c;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.data-manager li button:hover {
+    background-color: #c0392b;
+}
+
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload label {
+    background-color: #91C1E5;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    max-width: 300px;
+}
+
+.custom-file-upload label:hover {
+    background-color: #304C61;
+}
+
+.custom-file-upload span {
+    font-size: 14px;
+    color: #333;
+    word-break: break-word;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.upload-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.upload-actions .custom-file-upload {
+    margin-bottom: 0;
+}
+
+.upload-actions button {
+    margin-left: 0;
+}
