@@ -1,6 +1,6 @@
 import React from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import './Data.css';
+import './File.css';
 
 const BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 

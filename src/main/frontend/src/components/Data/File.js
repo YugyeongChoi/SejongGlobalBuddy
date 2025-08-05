@@ -1,10 +1,31 @@
-import React from 'react';
-import './Data.css';
-import files from "./files/FileData";
+import React, { useEffect, useState } from 'react';
+import './File.css';
+import axios from 'axios';
 
 const BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 
 const File = () => {
+    const [allFiles, setAllFiles] = useState([]);
+    const previewExtensions = ['.pdf', '.pptx'];
+
+    const getDownloadBtnClass = (filename) => {
+        const lower = filename.toLowerCase();
+        return lower.endsWith('.pdf') || lower.endsWith('.pptx') ? 'preview' : 'normal';
+    };
+
+    useEffect(() => {
+        axios.get('/api/files')
+            .then(res => setAllFiles(res.data))
+            .catch(err => console.error('파일 목록 불러오기 실패:', err));
+    }, []);
+
+    const normalFiles = allFiles.filter(
+        f => !previewExtensions.some(ext => f.toLowerCase().endsWith(ext))
+    );
+    const pptFiles = allFiles.filter(
+        f => previewExtensions.some(ext => f.toLowerCase().endsWith(ext))
+    );
+
     const handleDownload = (filename) => {
         const url = `${BASE_URL}/${encodeURIComponent(filename)}`;
         const link = document.createElement('a');
@@ -14,16 +35,42 @@ const File = () => {
     };
 
     return (
-        <div className="file-grid">
-            {files.map((file, idx) => (
-                <div key={idx} className="file-btn">
-                    <span>{file.label}</span>
-                    <button className="download-btn" onClick={() => handleDownload(file.path)}>
-                        <img src="/images/download.png" alt="Download" className="download-icon" />
-                    </button>
-                </div>
-            ))}
-        </div>
+        <>
+            <h2>File</h2>
+            <div className="file-grid">
+                {normalFiles.map((file, idx) => (
+                    <div key={idx} className="file-btn">
+                        <span>{decodeURIComponent(file)}</span>
+                        <button
+                            className={`download-btn ${getDownloadBtnClass(file)}`}
+                            onClick={() => handleDownload(file)}
+                        >
+                            <img src="/images/download.png" alt="Download" className="download-icon" />
+                        </button>
+                    </div>
+                ))}
+            </div>
+
+            {pptFiles.length > 0 && (
+                <>
+                    <h2 style={{ marginTop: '40px' }}>PPT</h2>
+                    <div className="file-grid">
+                        {pptFiles.map((file, idx) => (
+                            <div key={idx} className="file-btn">
+                                <span>{decodeURIComponent(file)}</span>
+                                <button
+                                    className={`download-btn ${getDownloadBtnClass(file)}`}
+                                    onClick={() => handleDownload(file)}
+                                >
+                                    <img src="/images/download.png" alt="Download" className="download-icon" />
+                                </button>
+
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
+        </>
     );
 };
 

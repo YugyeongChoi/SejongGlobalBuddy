@@ -1,0 +1,65 @@
+.file-grid, .ppt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+.file-btn, .ppt-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 100%;
+    min-width: 0;
+}
+
+.file-btn:hover,
+.ppt-item:hover {
+    transform: translateY(-4px);
+}
+
+.download-btn {
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn.normal {
+    background-color: #ffcdd2;
+}
+
+.download-btn.normal:hover {
+    background-color: #f8a5b0;
+    transform: scale(1.1);
+}
+
+.download-btn.preview {
+    background-color: #bbdefb;
+}
+
+.download-btn.preview:hover {
+    background-color: #90caf9;
+    transform: scale(1.1);
+}
+
+.download-icon {
+    width: 20px;
+    height: 20px;
+}
