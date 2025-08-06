@@ -63,3 +63,12 @@
     width: 20px;
     height: 20px;
 }
+
+.copyright-warning {
+    color: #C52030;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.6;
+}
