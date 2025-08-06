@@ -1,61 +1,103 @@
-
 .buddy-container {
-    padding: 40px;
-    font-family: 'Arial', sans-serif;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 24px;
     background-color: #f9f9f9;
-    color: #333;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.buddy-table {
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    overflow: hidden;
+.buddy-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #2c3e50;
 }
 
-.buddy-row {
-    display: table-row;
+.buddy-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
 }
 
-.buddy-cell {
-    display: table-cell;
-    padding: 20px;
-    border: 1px solid #ddd;
-    vertical-align: top;
-    text-align: center;
+.buddy-card {
+    flex: 1 1 calc(33.333% - 24px);
+    background-color: white;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    min-width: 280px;
+}
+
+.buddy-card h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.buddy-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.sub-info {
     font-size: 14px;
-}
-
-.buddy-header .buddy-cell {
-    font-weight: bold;
-    background-color: #f1f1f1;
-}
-
-.buddy-footer .buddy-cell {
-    background-color: #fafafa;
-    font-weight: bold;
-    text-align: center;
+    color: #555;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed #bbb;
 }
 
 .monthly {
-    background-color: #ffe4ec;
-    font-weight: bold;
+    background-color: #ffeff5;
 }
 
 .plus {
-    background-color: #e3f3ff;
-    font-weight: bold;
+    background-color: #e1f5fe;
+    background-color: #304C61;
+    background-color: rgba(48, 76, 97, 0.1);
 }
 
 .cross {
-    background-color: #dbe8f2;
-    font-weight: bold;
+    background-color: #e1f5fe;
 }
 
 .highlight {
-    color: #d70035;
-    font-weight: bold;
+    color: #C52030;
+    font-weight: 700;
+}
+
+.buddy-footer-info {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    font-size: 15px;
+    line-height: 1.6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    text-align: center;
+}
+.buddy-card h4{
+    padding-bottom: 10px;
+    color : gray;
+    gap: 5px;
+    font-weight: normal;
+    border-bottom: 1px dashed #bbb;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .buddy-grid {
+        flex-direction: column;
+    }
+
+    .buddy-card {
+        flex: 1 1 100%;
+    }
+
+    .buddy-title {
+        font-size: 24px;
+    }
 }
