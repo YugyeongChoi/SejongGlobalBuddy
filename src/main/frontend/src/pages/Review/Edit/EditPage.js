@@ -3,6 +3,7 @@ import {useParams, useNavigate} from 'react-router-dom';
 import {getReviewDetail, updateReview} from '../../../api/reviewApi';
 import Form from "../../../components/Review/Write/Form";
 import '../Write/WritePage.css'
+import { FaArrowLeft } from 'react-icons/fa';
 
 const EditPage = () => {
     const {id} = useParams();
@@ -55,7 +56,7 @@ const EditPage = () => {
                         }
                     }}
                 >
-                <img src="./../../../../public/images/back.png" alt="Back" className="back-icon"/>
+                    <FaArrowLeft className="back-icon" />
             </button>
             <button className="post-btn" onClick={() => formRef.current?.submit()}>Edit</button>
             </div>

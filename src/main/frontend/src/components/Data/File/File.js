@@ -37,7 +37,7 @@ const File = () => {
     return (
         <>
             <p className="copyright-warning">
-                본 문서는 세종대학교 글로벌버디(Global Buddy) 활동을 위해 제작된 전용 자료입니다.<br />
+                본 문서는 세종대학교 글로벌버디 활동을 위해 제작된 전용 자료입니다.<br />
                 무단 복제, 배포, 공유를 금하며, 사전 허가 없이 외부에 제공하거나 사용하는 것을 금지합니다.
             </p>
             <h2>Document</h2>
@@ -57,7 +57,7 @@ const File = () => {
 
             {pptFiles.length > 0 && (
                 <>
-                    <h2>PPT</h2>
+                    <h2>Official Presentation</h2>
                     <div className="file-grid">
                         {pptFiles.map((file, idx) => (
                             <div key={idx} className="file-btn">

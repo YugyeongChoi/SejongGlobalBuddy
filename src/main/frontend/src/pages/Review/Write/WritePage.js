@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import Form from '../../../components/Review/Write/Form';
 import {postReview} from '../../../api/reviewApi';
 import './WritePage.css';
+import {FaArrowLeft} from "react-icons/fa";
 
 const WritePage = () => {
     const navigate = useNavigate();
@@ -52,7 +53,7 @@ const WritePage = () => {
                         }
                     }}
                 >
-                    <img src="./../../../../public/images/back.png" alt="Back" className="back-icon"/>
+                    <FaArrowLeft className="back-icon" />
                 </button>
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Post</button>
             </div>

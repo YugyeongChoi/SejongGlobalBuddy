@@ -1,0 +1,61 @@
+
+.buddy-container {
+    padding: 40px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.buddy-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.buddy-row {
+    display: table-row;
+}
+
+.buddy-cell {
+    display: table-cell;
+    padding: 20px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    text-align: center;
+    font-size: 14px;
+}
+
+.buddy-header .buddy-cell {
+    font-weight: bold;
+    background-color: #f1f1f1;
+}
+
+.buddy-footer .buddy-cell {
+    background-color: #fafafa;
+    font-weight: bold;
+    text-align: center;
+}
+
+.monthly {
+    background-color: #ffe4ec;
+    font-weight: bold;
+}
+
+.plus {
+    background-color: #e3f3ff;
+    font-weight: bold;
+}
+
+.cross {
+    background-color: #dbe8f2;
+    font-weight: bold;
+}
+
+.highlight {
+    color: #d70035;
+    font-weight: bold;
+}

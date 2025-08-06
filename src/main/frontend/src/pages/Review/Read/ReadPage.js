@@ -4,6 +4,7 @@ import {getReviewDetail} from '../../../api/reviewApi';
 import './ReadPage.css';
 import { likeReview } from '../../../api/reviewApi';
 import {formatDateKST} from "../../../utils/reportWebVitals";
+import { FaArrowLeft } from 'react-icons/fa';
 
 const ReadPage = () => {
     const {id} = useParams();
@@ -44,7 +45,7 @@ const ReadPage = () => {
         <div className="review-detail-wrapper">
             <div className="top-bar">
                 <button className="back-btn" onClick={() => navigate('/review')}>
-                    <img src="./../../../../public/images/back.png" alt="Back" className="back-icon"/>
+                    <FaArrowLeft className="back-icon" />
                 </button>
             </div>
 
