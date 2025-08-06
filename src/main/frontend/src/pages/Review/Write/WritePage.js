@@ -52,7 +52,7 @@ const WritePage = () => {
                         }
                     }}
                 >
-                    <img src="images/back.png" alt="Back" className="back-icon"/>
+                    <img src="./../../../../public/images/back.png" alt="Back" className="back-icon"/>
                 </button>
                 <button className="post-btn" onClick={() => formRef.current?.submit()}>Post</button>
             </div>

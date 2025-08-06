@@ -10,7 +10,7 @@ const ManagePage = () => {
         <div className="manage-container">
             <>
                 <div className="tab-menu">
-                    {['rank', 'main', 'data', 'review', 'team', 'faq'].map((tab) => (
+                    {['main', 'rank', 'data', 'review', 'team', 'faq'].map((tab) => (
                         <button
                             key={tab}
                             className={currentTab === tab ? 'active' : ''}

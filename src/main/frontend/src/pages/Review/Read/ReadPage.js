@@ -44,7 +44,7 @@ const ReadPage = () => {
         <div className="review-detail-wrapper">
             <div className="top-bar">
                 <button className="back-btn" onClick={() => navigate('/review')}>
-                    <img src="images/back.png" alt="Back" className="back-icon" />
+                    <img src="./../../../../public/images/back.png" alt="Back" className="back-icon"/>
                 </button>
             </div>
 
