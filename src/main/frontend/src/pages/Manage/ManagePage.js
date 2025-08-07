@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import './ManagePage.css';
-import RankManager from "../../components/Manage/RankManager";
-import DataManager from "../../components/Manage/DataManager";
+import RankManager from "../../components/Manage/Rank/RankManager";
+import DataManager from "../../components/Manage/Data/DataManager";
+import CalendarManager from "../../components/Manage/Main/CalendarManager";
 
 const ManagePage = () => {
     const [currentTab, setCurrentTab] = useState('rank');
@@ -21,6 +22,7 @@ const ManagePage = () => {
                     ))}
                 </div>
                 <div className="background-container">
+                    {currentTab === 'main' && <CalendarManager/>}
                     {currentTab === 'rank' && <RankManager/>}
                     {currentTab === 'data' && <DataManager/>}
                 </div>
