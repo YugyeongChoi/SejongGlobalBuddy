@@ -1,0 +1,96 @@
+.review-manager h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.review-manager table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.review-manager thead {
+    background-color: #f0f4f8;
+}
+
+.review-manager th,
+.review-manager td {
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+.review-manager th {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.review-manager tr:hover {
+    background-color: #f8fbfd;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.review-manager td:nth-child(2) {
+    text-align: left;
+    padding-left: 20px;
+    word-break: break-word;
+}
+
+.review-manager button {
+    padding: 6px 14px;
+    background-color: #e74c3c;
+    color: white;
+    font-size: 13px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.review-manager button:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+    .review-manager table,
+    .review-manager thead,
+    .review-manager tbody,
+    .review-manager th,
+    .review-manager td,
+    .review-manager tr {
+        display: block;
+    }
+
+    .review-manager thead {
+        display: none;
+    }
+
+    .review-manager tr {
+        margin-bottom: 16px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        padding: 12px;
+    }
+
+    .review-manager td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .review-manager td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #666;
+    }
+}

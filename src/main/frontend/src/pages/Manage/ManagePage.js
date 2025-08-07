@@ -3,9 +3,10 @@ import './ManagePage.css';
 import RankManager from "../../components/Manage/Rank/RankManager";
 import DataManager from "../../components/Manage/Data/DataManager";
 import CalendarManager from "../../components/Manage/Main/CalendarManager";
+import ReviewManager from "../../components/Manage/Review/ReviewManager";
 
 const ManagePage = () => {
-    const [currentTab, setCurrentTab] = useState('rank');
+    const [currentTab, setCurrentTab] = useState('main');
 
     return (
         <div className="manage-container">
@@ -25,6 +26,7 @@ const ManagePage = () => {
                     {currentTab === 'main' && <CalendarManager/>}
                     {currentTab === 'rank' && <RankManager/>}
                     {currentTab === 'data' && <DataManager/>}
+                    {currentTab === 'review' && <ReviewManager/>}
                 </div>
             </>
         </div>

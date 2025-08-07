@@ -131,10 +131,10 @@ const RankManager = () => {
                         <td>{entry.generation}</td>
                         <td>{entry.score}</td>
                         <td>
-                            <button onClick={() => handleEdit(entry)}>수정</button>
+                            <button className="edit-btn" onClick={() => handleEdit(entry)}>수정</button>
                         </td>
                         <td>
-                            <button onClick={() => handleDelete(entry.id)}>삭제</button>
+                            <button className="delete-btn" onClick={() => handleDelete(entry.id)}>삭제</button>
                         </td>
                     </tr>
                 ))}
