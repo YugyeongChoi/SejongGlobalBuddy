@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import './RankManager.css';
+import '../Manage.css';
 
 const RankManager = () => {
     const [name, setName] = useState('');
@@ -80,7 +81,8 @@ const RankManager = () => {
 
     return (
         <div className="ranking-container">
-            <h2>BuddyCross</h2>
+            <h2>랭킹 관리</h2>
+            <h3>BuddyCross</h3>
             <h3>{editId ? '✏️ 점수 수정' : ' ➕점수 입력'}</h3>
             <form onSubmit={handleSubmit} className="input-form">
                 <input
@@ -110,7 +112,7 @@ const RankManager = () => {
                     }}
                     required
                 />
-                <button type="submit">{editId ? '수정' : '제출'}</button>
+                <button type="submit">{editId ? '수정' : '완료'}</button>
             </form>
 
             <h3> 🗓️ 전체 리스트</h3>

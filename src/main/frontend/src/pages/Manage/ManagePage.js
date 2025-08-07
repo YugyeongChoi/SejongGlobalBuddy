@@ -5,6 +5,7 @@ import DataManager from "../../components/Manage/Data/DataManager";
 import CalendarManager from "../../components/Manage/Main/CalendarManager";
 import ReviewManager from "../../components/Manage/Review/ReviewManager";
 import FaqManager from "../../components/Manage/Faq/FaqManager";
+import TeamManager from "../../components/Manage/Team/TeamManager";
 
 const ManagePage = () => {
     const [currentTab, setCurrentTab] = useState('main');
@@ -28,6 +29,7 @@ const ManagePage = () => {
                     {currentTab === 'rank' && <RankManager/>}
                     {currentTab === 'data' && <DataManager/>}
                     {currentTab === 'review' && <ReviewManager/>}
+                    {currentTab === 'team' && <TeamManager/>}
                     {currentTab === 'faq' && <FaqManager/>}
                 </div>
             </>

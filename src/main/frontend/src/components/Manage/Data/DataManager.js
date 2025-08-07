@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DataManager.css';
+import '../Manage.css';
 
 const DataManager = () => {
     const [fileList, setFileList] = useState([]);
@@ -43,7 +44,9 @@ const DataManager = () => {
 
     return (
         <div className="data-manager">
-            <h3>📁 자료 업로드</h3>
+            <h2>자료 관리</h2>
+
+            <h3>📁 문서 업로드</h3>
             <div className="upload-actions">
                 <div className="custom-file-upload">
                     <label htmlFor="fileInput">📎 파일 선택</label>
@@ -61,7 +64,9 @@ const DataManager = () => {
 
             <h3>📄 업로드된 파일 목록</h3>
             <ul>
-                {fileList.map((file) => (
+                {fileList
+                    .filter((file) => !file.toLowerCase().endsWith('.jpg'))
+                    .map((file) => (
                     <li key={file}>
                         <a href={`https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev/${encodeURIComponent(file)}`} target="_blank" rel="noreferrer">
                             {file}

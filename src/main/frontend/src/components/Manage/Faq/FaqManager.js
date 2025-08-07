@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './FaqManager.css';
+import '../Manage.css';
 
 function FaqManager() {
     const [language, setLanguage] = useState('ko');
@@ -99,9 +100,16 @@ function FaqManager() {
                     required
                     rows={4}
                 />
-                <button type="submit">{editId ? '수정' : '등록'}</button>
+                <button type="submit" className="action-btn">
+                    {editId ? '수정' : '완료'}
+                </button>
+
                 {editId && (
-                    <button type="button" onClick={resetForm} style={{ marginLeft: '10px' }}>
+                    <button
+                        type="button"
+                        className="action-btn cancel-btn"
+                        onClick={resetForm}
+                    >
                         취소
                     </button>
                 )}

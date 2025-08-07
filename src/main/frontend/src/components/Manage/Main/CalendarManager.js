@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../Data/DataManager.css';
+import '../Manage.css';
 
 const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 
@@ -58,6 +59,7 @@ const CalendarManager = () => {
 
     return (
         <div className="data-manager">
+            <h2>메인 관리</h2>
             <h3>🗓️ 달력 이미지 업로드</h3>
             <p className="calendar-info">
                 ※ 파일 이름이 반드시 <strong>calendar.jpg</strong> 또는 <strong>calendar_mood.jpg</strong> 여야 합니다.

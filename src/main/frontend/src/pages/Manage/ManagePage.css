@@ -4,6 +4,20 @@
     padding: 20px;
 }
 
+.manage-container h2{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.manage-container h3{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .tab-menu {
     display: flex;
     justify-content: space-around;
