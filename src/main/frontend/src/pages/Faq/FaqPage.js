@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './FaqPage.css';
-import qnAData from '../../components/Faq/QnAData';
 
 function FaqPage() {
     const [language, setLanguage] = useState('ko');
+    const [faqs, setFaqs] = useState([]);
     const [openStates, setOpenStates] = useState([]);
-
-    const faqs = qnAData[language];
 
     const handleLangChange = (lang) => {
         setLanguage(lang);
-        setOpenStates(new Array(qnAData[lang].length).fill(false));
     };
 
     const toggleFAQ = (index) => {
@@ -21,7 +18,12 @@ function FaqPage() {
     };
 
     useEffect(() => {
-        setOpenStates(new Array(faqs.length).fill(false));
+        fetch(`/api/faqs?lang=${language}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setFaqs(data);
+                setOpenStates(new Array(data.length).fill(false));
+            });
     }, [language]);
 
     return (
@@ -46,7 +48,7 @@ function FaqPage() {
             </div>
 
             {faqs.map((item, index) => (
-                <div className="faq-item" key={index}>
+                <div className="faq-item" key={item.id}>
                     <div className="faq-question" onClick={() => toggleFAQ(index)}>
                         <strong>{item.question}</strong>
                         <span className="faq-icon">{openStates[index] ? '−' : '+'}</span>

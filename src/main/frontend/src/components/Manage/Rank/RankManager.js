@@ -81,7 +81,7 @@ const RankManager = () => {
     return (
         <div className="ranking-container">
             <h2>BuddyCross</h2>
-            <h3>{editId ? '✏️ 점수 수정하기' : '✏️ 점수 입력하기'}</h3>
+            <h3>{editId ? '✏️ 점수 수정' : ' ➕점수 입력'}</h3>
             <form onSubmit={handleSubmit} className="input-form">
                 <input
                     type="text"

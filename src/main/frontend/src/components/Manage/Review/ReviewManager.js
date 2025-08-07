@@ -40,7 +40,7 @@ const ReviewManager = () => {
 
     return (
         <div className="review-manager">
-            <h2>📋 리뷰 관리</h2>
+            <h2>리뷰 관리</h2>
             <table>
                 <thead>
                 <tr>
