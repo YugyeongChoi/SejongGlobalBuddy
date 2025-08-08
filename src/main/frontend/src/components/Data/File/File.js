@@ -42,7 +42,9 @@ const File = () => {
             </p>
             <h2>Document</h2>
             <div className="file-grid">
-                {normalFiles.map((file, idx) => (
+                {normalFiles
+                    .filter(f => !f.toLowerCase().endsWith('.jpg'))
+                    .map((file, idx) => (
                     <div key={idx} className="file-btn">
                         <span>{decodeURIComponent(file)}</span>
                         <button
@@ -59,7 +61,9 @@ const File = () => {
                 <>
                     <h2>Official Presentation</h2>
                     <div className="file-grid">
-                        {pptFiles.map((file, idx) => (
+                        {pptFiles
+                            .filter(f => !f.toLowerCase().endsWith('.jpg'))
+                            .map((file, idx) => (
                             <div key={idx} className="file-btn">
                                 <span>{decodeURIComponent(file)}</span>
                                 <button

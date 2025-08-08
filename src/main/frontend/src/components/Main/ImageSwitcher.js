@@ -20,10 +20,12 @@ function ImageSwitcher() {
     const [thumbnails, setThumbnails] = useState(initialImages);
 
     const handleThumbnailClick = (clickedImage, index) => {
-        const newThumbnails = [...thumbnails];
-        newThumbnails[index] = mainImage;
+        setThumbnails(prev => {
+            const next = [...prev];
+            next[index] = mainImage;
+            return next;
+        });
         setMainImage(clickedImage);
-        setThumbnails(newThumbnails);
     };
 
     return (
