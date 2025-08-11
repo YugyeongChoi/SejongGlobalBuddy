@@ -3,7 +3,7 @@ import axios from 'axios';
 import './RankManager.css';
 import '../Manage.css';
 
-const RankManager = () => {
+const BuddyCrossManager = () => {
     const [name, setName] = useState('');
     const [generation, setGeneration] = useState('');
     const [score, setScore] = useState('');
@@ -81,8 +81,7 @@ const RankManager = () => {
 
     return (
         <div className="ranking-container">
-            <h2>랭킹 관리</h2>
-            <h3>BuddyCross</h3>
+            <h2>BuddyCross 관리</h2>
             <h3>{editId ? '✏️ 점수 수정' : ' ➕점수 입력'}</h3>
             <form onSubmit={handleSubmit} className="input-form">
                 <input
@@ -146,4 +145,4 @@ const RankManager = () => {
     );
 };
 
-export default RankManager;
+export default BuddyCrossManager;

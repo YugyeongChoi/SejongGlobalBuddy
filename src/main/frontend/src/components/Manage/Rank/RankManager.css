@@ -1,11 +1,26 @@
-.input-form {
+.ranking-container,
+.bp-manager {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.input-form{
     display: flex;
     gap: 10px;
     margin-bottom: 30px;
     flex-wrap: wrap;
 }
 
-.input-form input {
+.bp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 560px;
+}
+
+.input-form input,
+.bp-form input {
     padding: 10px;
     flex: 1;
     border: 1px solid #ccc;
@@ -14,7 +29,8 @@
     min-width: 100px;
 }
 
-.input-form button {
+.input-form button,
+.bp-form .action-btn {
     padding: 10px 20px;
     background-color: #304C61;
     color: white;
@@ -24,8 +40,32 @@
     transition: background-color 0.2s;
 }
 
-.input-form button:hover {
+.input-form button:hover,
+.bp-form .action-btn:hover {
     background-color: #2c3e50;
+}
+
+.bp-form .cancel-btn {
+    background: #aaa;
+}
+
+.upload-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.custom-file-upload label {
+    cursor: pointer;
+    padding: 6px 10px;
+    background: #f2f2f2;
+    border-radius: 6px;
 }
 
 .ranking-table {
@@ -59,4 +99,80 @@
 .ranking-table tr:hover {
     background-color: #f8fbfd;
     transition: background-color 0.2s ease-in-out;
+}
+
+.bp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px;
+    display: grid;
+    gap: 10px;
+}
+
+.bp-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.bp-item-main {
+    flex: 1;
+}
+
+.bp-item-title {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.bp-item-names {
+    margin: 4px 0;
+    color: #666;
+}
+
+.bp-ko {
+    display: block;
+    padding-bottom: 10px;
+}
+
+.bp-en {
+    display: block;
+    color: #888;
+    padding-bottom: 10px;
+}
+
+.bp-item-score {
+    margin: 4px 0;
+}
+
+.bp-item-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.thumbnail {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #eaeaea;
+    aspect-ratio: 3/2;
+}
+
+.bp-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.bp-empty {
+    text-align: center;
+    color: #666;
+    padding: 16px 0;
 }
