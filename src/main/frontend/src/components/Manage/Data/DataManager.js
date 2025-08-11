@@ -65,7 +65,7 @@ const DataManager = () => {
             <h3>📄 업로드된 파일 목록</h3>
             <ul>
                 {fileList
-                    .filter((file) => !file.toLowerCase().endsWith('.jpg'))
+                    .filter((file) => !/\.(jpg|png)$/i.test(file))
                     .map((file) => (
                     <li key={file}>
                         <a href={`https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev/${encodeURIComponent(file)}`} target="_blank" rel="noreferrer">

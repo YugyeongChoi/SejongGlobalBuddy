@@ -146,7 +146,7 @@ function BuddyPlusManager() {
         <div className="bp-manager">
             <h2>BuddyPlus 관리</h2>
 
-            <h3>{editId ? '✏️ 수정' : '➕ 새 항목 입력'}</h3>
+            <h3>{editId ? '✏️ 수정' : '➕ 새 팀 입력'}</h3>
             <div className="bp-form">
                 <input
                     type="number"
@@ -176,6 +176,12 @@ function BuddyPlusManager() {
                     min={0}
                 />
 
+                <div className="notice-danger">
+                    <p>※ 이미지 파일 이름이 반드시 <strong>Team 번호</strong>여야 합니다.</p>
+                    <p>예) Team 5 → 5.jpg</p>
+                    <p>※ 확장자는 <strong>jpg</strong> / <strong>JPG</strong> / <strong>png</strong> 형식만 허용됩니다.</p>
+                </div>
+
                 <div className="upload-actions">
                     <div className="custom-file-upload">
                         <label htmlFor="buddyplus-image-upload">📎 이미지 선택</label>
@@ -200,7 +206,7 @@ function BuddyPlusManager() {
                 </div>
             </div>
 
-            <h3>📋 목록 (bingo 높은 순)</h3>
+            <h3>📋 팀 목록 (BINGO 높은 순)</h3>
             {loading ? (
                 <div className="bp-empty">불러오는 중…</div>
             ) : (

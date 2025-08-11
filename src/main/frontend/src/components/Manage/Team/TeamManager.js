@@ -1,9 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import axios from 'axios';
 import './TeamManager.css';
 import '../Manage.css';
 
 const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
+
+function TeamImage({ name, className }) {
+    const candidates = useMemo(
+        () => ['.jpg', '.JPG', '.png'].map(ext => `${R2_BASE_URL}/${encodeURIComponent(name)}${ext}`),
+        [name]
+    );
+    const [idx, setIdx] = useState(0);
+
+    useEffect(() => { setIdx(0); }, [name]);
+
+    const handleError = (e) => {
+        if (idx < candidates.length - 1) {
+            setIdx(idx + 1);
+        } else {
+            e.currentTarget.style.display = 'none';
+        }
+    };
+
+    return (
+        <img
+            src={candidates[idx]}
+            alt={name}
+            className={className}
+            onError={handleError}
+            loading="lazy"
+        />
+    );
+}
 
 function TeamManager() {
     const [teams, setTeams] = useState([]);
@@ -11,9 +39,7 @@ function TeamManager() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [editId, setEditId] = useState(null);
 
-    useEffect(() => {
-        fetchTeams();
-    }, []);
+    useEffect(() => { fetchTeams(); }, []);
 
     const fetchTeams = async () => {
         try {
@@ -33,9 +59,16 @@ function TeamManager() {
             }
 
             if (selectedFile) {
+                const ext = (selectedFile.name.split('.').pop() || '').trim();
+                const isOk = /^(jpg|JPG|png)$/.test(ext);
+                if (!isOk) {
+                    alert('이미지 확장자는 jpg / JPG / png 만 가능합니다.');
+                    return;
+                }
+
                 const formData = new FormData();
                 formData.append('file', selectedFile);
-                formData.append('filename', `${newTeam.name}.jpg`);
+                formData.append('filename', `${newTeam.name}.${ext}`);
                 await axios.post('/api/files/upload', formData, {
                     headers: {'Content-Type': 'multipart/form-data'},
                 });
@@ -59,7 +92,6 @@ function TeamManager() {
 
     const handleDelete = async (id) => {
         if (!window.confirm('정말 삭제하시겠습니까?')) return;
-
         try {
             await axios.delete(`/api/teams/${id}`);
             fetchTeams();
@@ -88,13 +120,19 @@ function TeamManager() {
                 onChange={(e) => setNewTeam({...newTeam, description: e.target.value})}
             />
 
+            <div className="notice-danger">
+                <p>※ 이미지 파일 이름이 반드시 <strong>Team 이름</strong>이어야 합니다.</p>
+                <p>예) 기획팀 → 기획팀.jpg 또는 기획팀.png</p>
+                <p>※ 확장자는 <strong>jpg</strong> / <strong>JPG</strong> / <strong>png</strong> 형식만 허용됩니다.</p>
+            </div>
+
             <div className="upload-actions">
                 <div className="custom-file-upload">
                     <label htmlFor="team-image-upload">📎이미지 선택</label>
                     <input
                         id="team-image-upload"
                         type="file"
-                        accept=".jpg"
+                        accept=".jpg,.JPG,.png"
                         onChange={(e) => setSelectedFile(e.target.files[0])}
                     />
                     <span>{selectedFile?.name}</span>
@@ -116,7 +154,6 @@ function TeamManager() {
                         취소
                     </button>
                 )}
-
             </div>
 
             <h3>📋 팀 목록</h3>
@@ -129,17 +166,10 @@ function TeamManager() {
                         </div>
 
                         <div className="team-footer">
-                            <img
-                                src={`${R2_BASE_URL}/${encodeURIComponent(team.name)}.jpg`}
-                                alt={team.name}
-                                className="thumbnail"
-                                onError={(e) => (e.target.style.display = 'none')}
-                            />
+                            <TeamImage name={team.name} className="thumbnail" />
                             <div className="team-actions">
                                 <button className="edit-btn" onClick={() => handleEdit(team)}>수정</button>
-                                <button className="delete-btn"
-                                        onClick={() => handleDelete(team.id)}>삭제
-                                </button>
+                                <button className="delete-btn" onClick={() => handleDelete(team.id)}>삭제</button>
                             </div>
                         </div>
                     </li>

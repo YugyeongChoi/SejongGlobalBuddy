@@ -152,6 +152,20 @@
     margin-top: 30px;
 }
 
+.no-save,
+.no-save * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.no-save img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
+
+
 @media (max-width: 1000px) {
     .top3-grid {
         grid-template-columns: 1fr;

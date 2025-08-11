@@ -10,7 +10,7 @@ function Description() {
     useEffect(() => {
         const fetchTeams = async () => {
             try {
-                const res = await axios.get('/api/teams'); // 백엔드 API 호출
+                const res = await axios.get('/api/teams');
                 setTeams(res.data);
             } catch (err) {
                 console.error('팀 정보 불러오기 실패:', err);
@@ -30,7 +30,7 @@ function Description() {
                     <h3 className="team-title">{team.name}</h3>
                     <div className="team-content">
                         <img
-                            src={`${R2_BASE_URL}/${encodeURIComponent(team.name)}.jpg`}
+                            src={`${R2_BASE_URL}/${encodeURIComponent(team.name)}.${team.fileExt?.toLowerCase().match(/(jpg|png)$/) ? team.fileExt : 'jpg'}`}
                             alt={team.name}
                             className="team-image"
                             onContextMenu={(e) => e.preventDefault()}

@@ -10,7 +10,11 @@ function TeamImage({ team, alt, className, emphasize }) {
         () => ['.jpg', '.JPG', '.png'].map(ext => `${R2_BASE_URL}/${encodeURIComponent(team)}${ext}`),
         [team]
     );
+
     const [idx, setIdx] = useState(0);
+
+    const preventCtx = (e) => e.preventDefault();
+    const preventDrag = (e) => e.preventDefault();
 
     useEffect(() => { setIdx(0); }, [team]);
 
@@ -24,14 +28,21 @@ function TeamImage({ team, alt, className, emphasize }) {
     };
 
     return (
-        <div className={`pc-media ${emphasize ? 'large' : ''}`}>
+        <div
+            className={`pc-media no-save ${emphasize ? 'large' : ''}`}
+            onContextMenu={preventCtx}
+        >
             <img
                 src={candidates[idx]}
                 alt={alt}
                 loading="lazy"
                 onError={handleError}
+                onContextMenu={preventCtx}
+                onDragStart={preventDrag}
+                draggable={false}
             />
         </div>
+
     );
 }
 
@@ -66,6 +77,15 @@ const BuddyPlus = () => {
     const [top3, setTop3] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setErr] = useState(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 1000);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         let cancel = false;
@@ -100,8 +120,10 @@ const BuddyPlus = () => {
         return () => { cancel = true; };
     }, []);
 
-    const displayOrder = top3.length === 3 ? [1, 0, 2] : top3.map((_, i) => i);
-
+    const displayOrder =
+        isMobile || top3.length < 3
+            ? top3.map((_, i) => i)
+            : [1, 0, 2];
     return (
         <div className="top3-wrap">
             <h2 className="bp-title">BuddyPlus</h2>

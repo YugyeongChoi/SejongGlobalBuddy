@@ -11,8 +11,12 @@ function Calendar() {
                 const res = await axios.get('/api/files');
                 const files = res.data;
 
-                const calendarFile = files.find(f => f.includes('calendar.jpg'));
-                const moodFile = files.find(f => f.includes('calendar_mood.jpg'));
+                const calendarFile = files.find(f =>
+                    f.toLowerCase().match(/calendar\.(jpg|png)$/)
+                );
+                const moodFile = files.find(f =>
+                    f.toLowerCase().match(/calendar_mood\.(jpg|png)$/)
+                );
 
                 setCalendarImg(calendarFile);
                 setMoodImg(moodFile);
@@ -34,6 +38,7 @@ function Calendar() {
                         src={`${R2_BASE_URL}/${encodeURIComponent(calendarImg)}`}
                         className="calendar-image"
                         onContextMenu={(e) => e.preventDefault()}
+                        alt="Calendar"
                     />
                 )}
                 {moodImg && (
@@ -41,6 +46,7 @@ function Calendar() {
                         src={`${R2_BASE_URL}/${encodeURIComponent(moodImg)}`}
                         className="mood-image"
                         onContextMenu={(e) => e.preventDefault()}
+                        alt="Mood"
                     />
                 )}
             </div>

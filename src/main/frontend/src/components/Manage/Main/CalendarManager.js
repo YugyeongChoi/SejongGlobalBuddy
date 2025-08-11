@@ -9,15 +9,25 @@ const CalendarManager = () => {
     const [calendarFile, setCalendarFile] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
 
+    const pickPreferred = (files, base) => {
+        const candidates = files.filter((f) =>
+            new RegExp(`^${base}\\.(jpg|png)$`, 'i').test(f)
+        );
+        const order = { png: 0, jpg: 1 };
+        candidates.sort((a, b) => {
+            const extA = a.split('.').pop().toLowerCase();
+            const extB = b.split('.').pop().toLowerCase();
+            return (order[extA] ?? 9) - (order[extB] ?? 9);
+        });
+        return candidates[0] || null;
+    };
+
     const fetchFiles = async () => {
         const res = await axios.get('/api/files');
-        const files = res.data;
-
-        const calendarImage = files.find(f => f === 'calendar.jpg');
-        const moodImage = files.find(f => f === 'calendar_mood.jpg');
+        const files = Array.isArray(res.data) ? res.data : [];
         setCalendarFile({
-            calendar: calendarImage,
-            mood: moodImage,
+            calendar: pickPreferred(files, 'calendar'),
+            mood: pickPreferred(files, 'calendar_mood'),
         });
     };
 
@@ -28,9 +38,9 @@ const CalendarManager = () => {
     const handleUpload = async () => {
         if (!selectedFile) return;
 
-        const allowedNames = ['calendar.jpg', 'calendar_mood.jpg'];
-        if (!allowedNames.includes(selectedFile.name)) {
-            alert('calendar.jpg 또는 calendar_mood.jpg 파일만 업로드 가능합니다.');
+        const validName = /^(calendar|calendar_mood)\.(jpg|png)$/i.test(selectedFile.name);
+        if (!validName) {
+            alert('calendar.jpg | calendar.png | calendar_mood.jpg | calendar_mood.png 파일만 업로드 가능합니다.');
             return;
         }
 
@@ -61,9 +71,10 @@ const CalendarManager = () => {
         <div className="data-manager">
             <h2>메인 관리</h2>
             <h3>🗓️ 달력 이미지 업로드</h3>
-            <p className="calendar-info">
-                ※ 파일 이름이 반드시 <strong>calendar.jpg</strong> 또는 <strong>calendar_mood.jpg</strong> 여야 합니다.
-            </p>
+            <div className="calendar-info">
+                <p>※ 이미지 이름은 <strong>calendar</strong> 또는 <strong>calendar_mood</strong> 이어야 합니다.</p>
+                <p>※ 확장자는 <strong>jpg</strong> / <strong>JPG</strong> / <strong>png</strong> 형식만 허용됩니다.</p>
+            </div>
 
             <div className="upload-actions">
                 <div className="custom-file-upload">
@@ -71,6 +82,7 @@ const CalendarManager = () => {
                     <input
                         type="file"
                         id="calendarFileInput"
+                        accept=".jpg,.JPG,.png"
                         onChange={(e) => setSelectedFile(e.target.files[0])}
                     />
                     {selectedFile && <span>{selectedFile.name}</span>}
@@ -84,7 +96,11 @@ const CalendarManager = () => {
             <ul>
                 {calendarFile?.calendar && (
                     <li>
-                        <a href={`${R2_BASE_URL}/${calendarFile.calendar}`} target="_blank" rel="noreferrer">
+                        <a
+                            href={`${R2_BASE_URL}/${encodeURIComponent(calendarFile.calendar)}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
                             {calendarFile.calendar}
                         </a>
                         <button onClick={() => handleDelete(calendarFile.calendar)}>삭제</button>
@@ -92,7 +108,11 @@ const CalendarManager = () => {
                 )}
                 {calendarFile?.mood && (
                     <li>
-                        <a href={`${R2_BASE_URL}/${calendarFile.mood}`} target="_blank" rel="noreferrer">
+                        <a
+                            href={`${R2_BASE_URL}/${encodeURIComponent(calendarFile.mood)}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
                             {calendarFile.mood}
                         </a>
                         <button onClick={() => handleDelete(calendarFile.mood)}>삭제</button>
