@@ -15,6 +15,7 @@
     font-size: 32px;
     font-weight: bold;
     margin: 0 0 20px;
+    padding-bottom: 30px;
 }
 
 .top3-wrap {
@@ -65,7 +66,9 @@
     line-height: 1;
 }
 
-.pc-title { min-width: 0; }
+.pc-title {
+    min-width: 0;
+}
 
 .pc-name {
     margin: 0;
@@ -76,18 +79,31 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-bottom: 8px;
 }
 
-.pc-members {
+.pc-members-ko,
+.pc-members-en
+{
     margin: 4px 0 0;
     color: var(--muted);
     font-size: 14px;
     line-height: 1.4;
+    height: 1.4em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     white-space: normal;
 }
 
+.pc-members-en{
+    height: 2.8em;
+}
+
+
 .pc-score {
-    color: #9db9d9;
+    color: #91C1E5;
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -95,7 +111,7 @@
 }
 
 .pc-score strong { color: #7aa7dd; font-size: 20px; }
-.pc-score span { color: #9db9d9; font-size: 16px; font-weight: 700; }
+.pc-score span { color: #91C1E5; font-size: 16px; font-weight: 700; }
 
 .pc-media {
     width: 100%;

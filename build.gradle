@@ -68,7 +68,8 @@ task installReact(type: Exec) {
 task buildReact(type: Exec) {
     dependsOn installReact
     workingDir "$frontendDir"
-    environment 'NODE_OPTIONS', '--max-old-space-size=4096'
+//  environment 'NODE_OPTIONS', '--max-old-space-size=4096'
+    //노드 힙 사이즈 키워서 빌드
     group = BasePlugin.BUILD_GROUP
 
     if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {

@@ -43,8 +43,8 @@ function Card({ index, team, koName, enName, bingo, emphasize = false }) {
                 <span className="pc-rank">{rank}</span>
                 <div className="pc-title">
                     <h3 className="pc-name">Team {team}</h3>
-                    <p className="pc-members">{koName}</p>
-                    <p className="pc-members">{enName}</p>
+                    <p className="pc-members-ko">{koName}</p>
+                    <p className="pc-members-en">{enName}</p>
                 </div>
                 <div className="pc-score">
                     <strong>{bingo}</strong>

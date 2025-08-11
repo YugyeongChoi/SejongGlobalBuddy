@@ -62,3 +62,25 @@
     font-weight: bold;
     color: #91C1E5;
 }
+
+
+.rank-page {
+    padding: 8px 0 0;
+}
+
+.rank-trophy {
+    width: 50%;
+    height: 50%;
+    display: block;
+    margin: 0 auto 12px;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,.15));
+    user-select: none;
+    cursor: pointer;
+    animation: trophy-pop .6s ease;
+}
+
+@keyframes trophy-pop {
+    0%   { transform: scale(.6); opacity: 0; }
+    60%  { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); }
+}
