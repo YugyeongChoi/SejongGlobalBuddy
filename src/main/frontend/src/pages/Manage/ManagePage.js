@@ -7,6 +7,7 @@ import ReviewManager from "../../components/Manage/Review/ReviewManager";
 import FaqManager from "../../components/Manage/Faq/FaqManager";
 import TeamManager from "../../components/Manage/Team/TeamManager";
 import BuddyPlusManager from "../../components/Manage/Rank/BuddyPlusManager";
+import PreviewManager from "../../components/Manage/Main/PreviewManager";
 
 const ManagePage = () => {
     const [currentTab, setCurrentTab] = useState('main');
@@ -26,7 +27,16 @@ const ManagePage = () => {
                     ))}
                 </div>
                 <div className="background-container">
-                    {currentTab === 'main' && <CalendarManager/>}
+                    {currentTab === 'main' &&
+                        <div className="main-managers">
+                            <div className="main-section">
+                                <PreviewManager/>
+                            </div>
+                            <div className="main-section">
+                                <CalendarManager/>
+                            </div>
+                        </div>
+                    }
                     {currentTab === 'rank' && (
                         <div className="rank-managers">
                             <div className="rank-section">

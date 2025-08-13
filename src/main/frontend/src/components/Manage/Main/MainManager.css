@@ -1,0 +1,100 @@
+.preview-item {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.preview-item span {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.preview-input {
+    width: 120px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    margin-right: auto;
+}
+.preview-input:focus {
+    border-color: #91C1E5;
+}
+
+.preview-image {
+    width: 70%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: block;
+    user-select: none;
+}
+
+.calendar-manager input[type="file"] {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.calendar-manager button {
+    background-color: #91C1E5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 4px;
+}
+
+.calendar-manager button:hover {
+    background-color: #304C61;
+}
+
+.calendar-manager button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.calendar-manager ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.calendar-manager li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.calendar-manager li a {
+    text-decoration: none;
+    font-size: 14px;
+    word-break: break-all;
+    flex-grow: 1;
+}
+
+.calendar-manager li button {
+    background-color: #e74c3c;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.calendar-manager li button:hover {
+    background-color: #c0392b;
+}

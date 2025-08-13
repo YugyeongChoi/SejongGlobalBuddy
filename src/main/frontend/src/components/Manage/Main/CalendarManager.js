@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../Data/DataManager.css';
 import '../Manage.css';
+import './MainManager.css';
 
 const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 
@@ -68,7 +68,7 @@ const CalendarManager = () => {
     };
 
     return (
-        <div className="data-manager">
+        <div className="calendar-manager">
             <h2>메인 관리</h2>
             <h3>🗓️ 달력 이미지 업로드</h3>
             <div className="calendar-info">
@@ -82,6 +82,7 @@ const CalendarManager = () => {
                     <input
                         type="file"
                         id="calendarFileInput"
+                        style={{ display: 'none' }}
                         accept=".jpg,.JPG,.png"
                         onChange={(e) => setSelectedFile(e.target.files[0])}
                     />

@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../pages/Main/MainPage.css';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ReviewPhotoGrid = ({reviews}) => {
     const navigate = useNavigate();
-    const targetIds = [73, 71, 75, 79];
-    const selectedReviews = targetIds
-        .map(id => reviews.find(review => review.id === id))
-        .filter(Boolean);
+    const [previewIds, setPreviewIds] = useState([]);
+
+    useEffect(() => {
+        const fetchPreviewIds = async () => {
+            try {
+                const response = await axios.get('/api/previews');
+                setPreviewIds(response.data);
+            } catch (error) {
+                console.error('Failed to fetch preview IDs:', error);
+            }
+        };
+
+        fetchPreviewIds();
+    }, []);
 
     const imageBaseURL =
         process.env.NODE_ENV === 'development'
             ? 'http://localhost:8081'
             : 'https://www.sejongglobalbuddy.kr';
+
+    const selectedReviews = previewIds
+        .map(id => reviews.find(review => review.id === id))
+        .filter(Boolean);
 
     return (
         <div>
