@@ -8,6 +8,7 @@ import FaqManager from "../../components/Manage/Faq/FaqManager";
 import TeamManager from "../../components/Manage/Team/TeamManager";
 import BuddyPlusManager from "../../components/Manage/Rank/BuddyPlusManager";
 import PreviewManager from "../../components/Manage/Main/PreviewManager";
+import MainImageManager from "../../components/Manage/Main/MainImageManager";
 
 const ManagePage = () => {
     const [currentTab, setCurrentTab] = useState('main');
@@ -29,6 +30,9 @@ const ManagePage = () => {
                 <div className="background-container">
                     {currentTab === 'main' &&
                         <div className="main-managers">
+                            <div className="main-section">
+                                <MainImageManager/>
+                            </div>
                             <div className="main-section">
                                 <PreviewManager/>
                             </div>

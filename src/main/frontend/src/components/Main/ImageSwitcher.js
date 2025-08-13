@@ -1,32 +1,76 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../../pages/Main/MainPage.css';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 
 function ImageSwitcher() {
-    const initialImages = [
-        {id: 2, src: '/images/group2.jpg', alt: 'Image 2'},
-        {id: 3, src: '/images/group3.jpg', alt: 'Image 3'},
-        {id: 4, src: '/images/group4.jpg', alt: 'Image 4'},
-        {id: 5, src: '/images/group5.JPG', alt: 'Image 5'},
-        //사진 확장자
-    ];
+    const [mainImage, setMainImage] = useState(null);
+    const [thumbnails, setThumbnails] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const [mainImage, setMainImage] = useState({
-        id: 1,
-        src: '/images/group1.jpg',
-        alt: 'MainPage Image',
-    });
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const res = await axios.get('/api/files');
+                const files = Array.isArray(res.data) ? res.data : [];
 
-    const [thumbnails, setThumbnails] = useState(initialImages);
+                const groupImages = files
+                    .filter(f => /^group[1-9]\.(jpg|jpeg|png)$/i.test(f))
+                    .sort((a, b) => {
+                        const numA = parseInt(a.match(/group(\d+)/i)?.[1], 10);
+                        const numB = parseInt(b.match(/group(\d+)/i)?.[1], 10);
+                        return numA - numB;
+                    });
+
+                const [main, ...thumbs] = groupImages;
+
+                const mainObj = {
+                    id: 1,
+                    src: `${R2_BASE_URL}/${encodeURIComponent(main)}`,
+                    alt: 'MainPage Image',
+                    name: main,
+                };
+
+                const thumbObjs = thumbs.map((file, idx) => ({
+                    id: idx + 2,
+                    src: `${R2_BASE_URL}/${encodeURIComponent(file)}`,
+                    alt: `Image ${idx + 2}`,
+                    name: file,
+                }));
+
+                setMainImage(mainObj);
+                setThumbnails(thumbObjs);
+            } catch (err) {
+                console.error('이미지 불러오기 실패:', err);
+            }
+        };
+
+        fetchImages();
+    }, []);
+
+    useEffect(() => {
+        const preload = (url) => {
+            const img = new Image();
+            img.src = url;
+        };
+        thumbnails.forEach(img => preload(img.src));
+    }, [thumbnails]);
 
     const handleThumbnailClick = (clickedImage, index) => {
+        const preloadMain = new Image();
+        preloadMain.src = clickedImage.src;
+
         setThumbnails(prev => {
-            const next = [...prev];
-            next[index] = mainImage;
-            return next;
+            const updated = [...prev];
+            updated[index] = mainImage;
+            return updated;
         });
         setMainImage(clickedImage);
     };
+
+    if (!mainImage) return null;
 
     return (
         <div className="main-container">
@@ -34,7 +78,8 @@ function ImageSwitcher() {
                 <img
                     src={mainImage.src}
                     alt={mainImage.alt}
-                    className="main-image"
+                    className={`main-image ${loading ? 'loading' : ''}`}
+                    onLoad={() => setLoading(false)}
                     onContextMenu={(e) => e.preventDefault()}
                 />
             </div>
@@ -61,9 +106,7 @@ function ImageSwitcher() {
                 <Link to="/review" className="cta-button">
                     후기 보러가기
                 </Link>
-
             </div>
-
         </div>
     );
 }

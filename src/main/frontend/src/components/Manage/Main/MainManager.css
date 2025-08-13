@@ -98,3 +98,11 @@
 .calendar-manager li button:hover {
     background-color: #c0392b;
 }
+.main-image {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.main-image.loading {
+    opacity: 0;
+}
