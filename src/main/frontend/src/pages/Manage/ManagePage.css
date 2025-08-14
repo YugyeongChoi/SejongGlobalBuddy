@@ -48,3 +48,53 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+@media (max-width: 768px) {
+    .manage-container {
+        padding: 10px;
+    }
+
+    .tab-menu {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .tab-menu button {
+        font-size: 14px;
+        padding: 8px 12px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .background-container {
+        padding: 16px;
+    }
+
+    .manage-container h2 {
+        font-size: 22px;
+    }
+
+    .manage-container h3 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-menu {
+        gap: 6px;
+    }
+
+    .tab-menu button {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .manage-container h2 {
+        font-size: 20px;
+    }
+
+    .background-container {
+        padding: 12px;
+    }
+}

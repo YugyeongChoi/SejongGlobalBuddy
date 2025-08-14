@@ -62,7 +62,7 @@ const Guideline = () => {
             </div>
 
             <div className="buddy-footer-info">
-                <span className="highlight">인증 필수 활동: 먼슬리버디 3회, 버디플러스 1회</span><br />
+                <span className="highlight">인증 필수 활동: 먼슬리버디 3회, 버디플러스 1회, 소모임 1회</span><br />
                 그 외 활동은 <span>선택 활동</span>으로 인정됩니다.
             </div>
         </div>

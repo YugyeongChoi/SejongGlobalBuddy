@@ -9,9 +9,24 @@ import TeamManager from "../../components/Manage/Team/TeamManager";
 import BuddyPlusManager from "../../components/Manage/Rank/BuddyPlusManager";
 import PreviewManager from "../../components/Manage/Main/PreviewManager";
 import MainImageManager from "../../components/Manage/Main/MainImageManager";
+import PasswordModal from "../../components/Password/PasswordModal";
 
 const ManagePage = () => {
     const [currentTab, setCurrentTab] = useState('main');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const handlePasswordSuccess = () => {
+        setIsAuthenticated(true);
+    };
+
+    if (!isAuthenticated) {
+        return <PasswordModal
+            onSuccess={handlePasswordSuccess}
+            titleKr="이 탭은 글로벌 버디 운영진만 접근 가능합니다."
+            titleEn="This tab is only available for Global Buddy management team."
+            correctPassword="admin25"
+        />;
+    }
 
     return (
         <div className="manage-container">

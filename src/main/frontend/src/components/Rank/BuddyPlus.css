@@ -171,4 +171,9 @@
         grid-template-columns: 1fr;
         gap: 20px;
     }
+    .top3-grid > .podium-card:first-child,
+    .top3-grid > .podium-card:last-child {
+        margin-top: 0;
+    }
 }
+

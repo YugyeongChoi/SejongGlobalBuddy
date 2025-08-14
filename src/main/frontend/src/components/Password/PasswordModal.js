@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PasswordModal.css';
 
-const PasswordModal = ({onSuccess, onClose}) => {
+const PasswordModal = ({ onSuccess, titleKr, titleEn, correctPassword }) => {
     const [input, setInput] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const checkPassword = () => {
-        if (input === 't') {
+        if (input === correctPassword) {
             onSuccess();
         } else {
             setError('비밀번호가 올바르지 않습니다.');
@@ -24,8 +24,9 @@ const PasswordModal = ({onSuccess, onClose}) => {
             <div className="modal-box">
                 <button className="close-modal-btn" onClick={handleClose}>✕</button>
 
-                <p className="modal-text-kr">이 탭은 글로벌 버디 한국인 부원들만 볼 수 있습니다.</p>
-                <p className="modal-text-en">This tab is only available for Global Buddy Korean members.</p>
+                <p className="modal-text-kr">{titleKr}</p>
+                <p className="modal-text-en">{titleEn}</p>
+
                 <div className="modal-form">
                     <input
                         className="password-input"

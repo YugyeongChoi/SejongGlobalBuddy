@@ -140,3 +140,53 @@ body {
     font-size: 14px;
     margin-bottom: 4px;
 }
+
+@media (max-width: 768px) {
+    .rule-box {
+        flex-direction: column;
+    }
+
+    .reason-box {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .section {
+        padding: 16px;
+    }
+
+    .section h2 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        margin: 30px auto;
+    }
+
+    .section {
+        margin: 20px auto;
+        padding: 14px;
+    }
+
+    .section h2 {
+        font-size: 20px;
+    }
+
+    .box {
+        padding: 16px;
+    }
+
+    .reason-box {
+        gap: 16px;
+    }
+
+    .box p,
+    .box li,
+    .attendance-box li {
+        font-size: 13px;
+    }
+}
+
