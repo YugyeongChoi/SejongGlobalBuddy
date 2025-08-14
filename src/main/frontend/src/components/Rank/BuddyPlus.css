@@ -2,7 +2,7 @@
     --ink: #1f2937;
     --muted: #6b7280;
     --card: #fff;
-    --shadow: 0 12px 30px rgba(0,0,0,.08);
+    --shadow: 0 12px 30px rgba(0, 0, 0, .08);
     --gold: #f59e0b;
     --silver: #c0c7d1;
     --bronze: #cd7f32;
@@ -10,7 +10,9 @@
     --surface: #f5f7fb;
 }
 
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 .bp-title {
     text-align: center;
@@ -46,7 +48,9 @@
     transform: translateZ(0);
 }
 
-.podium-card:hover { transform: translateY(-4px); }
+.podium-card:hover {
+    transform: translateY(-4px);
+}
 
 .podium-card.is-first {
     outline: 2px solid rgba(245, 158, 11, .25);
@@ -54,40 +58,44 @@
 
 .pc-head {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
     gap: 14px;
     margin-bottom: 14px;
+    padding-left: 24px;
+    position: relative;
 }
+
 
 .pc-rank {
     position: absolute;
-    top: -12px;
-    left: -12px;
+    top: -30px;
+    left: -30px;
+    width: 45px; height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
     border-radius: 50%;
     font-weight: 900;
     color: #fff;
     font-size: 18px;
     box-shadow: 0 4px 12px rgba(0,0,0,.12);
-    z-index: 2;
+    z-index: 3;
 }
 
 .podium-card.is-first .pc-rank {
     background: linear-gradient(135deg, #ffcf6b, var(--gold));
 }
+
 .podium-card.rank-2 .pc-rank {
     background: linear-gradient(135deg, #e5e9f0, var(--silver));
 }
+
 .podium-card.rank-3 .pc-rank {
     background: linear-gradient(135deg, #efb37a, var(--bronze));
 }
 
-.pc-rank::after{
+.pc-rank::after {
     content: "";
     position: absolute;
     bottom: -8px;
@@ -96,12 +104,14 @@
     width: 10px;
     height: 14px;
     border-radius: 2px;
-    background: rgba(0,0,0,.12);
-    clip-path: polygon(0 0,100% 0,50% 100%);
+    background: rgba(0, 0, 0, .12);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
     opacity: .25;
 }
 
-.pc-title { min-width: 0; }
+.pc-title {
+    min-width: 0;
+}
 
 .pc-name {
     margin: 0;
@@ -129,17 +139,29 @@
     white-space: normal;
 }
 
-.pc-members-en { height: 2.8em; }
+.pc-members-en {
+    height: 2.8em;
+}
 
 .pc-score {
+    align-self: baseline;
     color: #91C1E5;
     font-weight: 800;
     display: flex;
     align-items: center;
     gap: 2px;
 }
-.pc-score strong { color: #7aa7dd; font-size: 20px; }
-.pc-score span   { color: #91C1E5; font-size: 16px; font-weight: 700; }
+
+.pc-score strong {
+    color: #7aa7dd;
+    font-size: 20px;
+}
+
+.pc-score span {
+    color: #91C1E5;
+    font-size: 16px;
+    font-weight: 700;
+}
 
 .pc-media {
     width: 100%;
@@ -149,6 +171,7 @@
     background: #f2f4f7;
     display: block;
 }
+
 .pc-media img {
     width: 100%;
     height: 100%;
@@ -163,6 +186,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .ph-inner {
     width: 88%;
     height: 84%;
@@ -172,7 +196,7 @@
 
 .top3-grid > .podium-card:first-child,
 .top3-grid > .podium-card:last-child {
-    margin-top: 0;
+    margin-top: 22px;
 }
 
 .no-save, .no-save * {
@@ -180,6 +204,7 @@
     -moz-user-select: none;
     user-select: none;
 }
+
 .no-save img {
     -webkit-user-drag: none;
     user-drag: none;
@@ -187,28 +212,66 @@
 }
 
 @media (max-width: 1000px) {
+    .top3-wrap {
+        padding: 10px 32px;
+    }
+
     .top3-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    .pc-media { aspect-ratio: 16 / 9; }
+
+    .pc-media {
+        aspect-ratio: 16 / 9;
+    }
+
+    .top3-grid > .podium-card:first-child,
+    .top3-grid > .podium-card:last-child {
+        margin-top: 0;
+    }
 }
 
 @media (max-width: 768px) {
-    .bp-title { font-size: 28px; }
-    .podium-card { padding: 18px; border-radius: 18px; }
-    .pc-score strong { font-size: 18px; }
-    .pc-score span   { font-size: 14px; }
+    .bp-title {
+        font-size: 28px;
+    }
+
+    .podium-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .pc-score strong {
+        font-size: 18px;
+    }
+
+    .pc-score span {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 480px) {
-    .bp-title { font-size: 24px; padding-bottom: 20px; }
-    .podium-card { padding: 16px; border-radius: 16px; }
-    .pc-name { font-size: 18px; }
+    .bp-title {
+        font-size: 24px;
+        padding-bottom: 20px;
+    }
+
+    .podium-card {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .pc-name {
+        font-size: 18px;
+    }
+
     .pc-members-ko, .pc-members-en {
         font-size: 12.5px;
         -webkit-line-clamp: 3;
         height: auto;
     }
-    .pc-media { border-radius: 12px; }
+
+    .pc-media {
+        border-radius: 12px;
+    }
 }

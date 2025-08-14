@@ -34,18 +34,39 @@
 .rank-item:hover {
     transform: translateY(-4px);
 }
+.rank-item:first-child .rank-badge::after {
+    content: "👑";
+    position: absolute;
+    top: -24px;
+    left: +5px;
+    font-size: 30px;
+}
 
 .rank-badge {
-    font-size: 22px;
+    position: relative;
+    font-size: 18px !important;
     font-weight: bold;
-    color: #FCB61A;
-    width: 30px;
+    color: #fff !important;
+    background: linear-gradient(135deg, #ffcf6b, var(--gold));
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
+
 
 .rank-content {
     flex: 1;
     margin-left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
 
 .rank-name {
     font-size: 18px;
@@ -62,4 +83,17 @@
     font-size: 18px;
     font-weight: bold;
     color: #91C1E5;
+}
+
+
+@media (max-width: 768px) {
+    .rank-title {
+        font-size: 28px !important;
+        margin-bottom: 28px;
+        padding-top: 48px;
+    }
+
+    .rank-page {
+        padding: 20px 32px !important;
+    }
 }
