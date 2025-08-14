@@ -49,7 +49,7 @@ function TeamImage({ team, alt, className, emphasize }) {
 function Card({ index, team, koName, enName, bingo, emphasize = false }) {
     const rank = index + 1;
     return (
-        <article className={`podium-card ${emphasize ? 'is-first' : ''}`}>
+        <article className={`podium-card ${emphasize ? 'is-first' : ''} ${rank===2 ? 'rank-2' : ''} ${rank===3 ? 'rank-3' : ''}`}>
             <header className="pc-head">
                 <span className="pc-rank">{rank}</span>
                 <div className="pc-title">
