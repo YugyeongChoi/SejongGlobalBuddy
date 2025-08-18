@@ -71,3 +71,43 @@
     font-size: 14px;
     line-height: 1.6;
 }
+
+.file-grid, .ppt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+
+@media (max-width: 768px) {
+    .file-grid, .ppt-grid {
+        grid-template-columns: 1fr;
+        padding: 0 12px;
+    }
+
+    .file-btn, .ppt-item {
+        gap: 10px;
+        flex-direction: row;
+    }
+
+    .download-btn {
+        width: 36px;
+        height: 36px;
+        padding: 12px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .file-grid, .ppt-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1025px) {
+    .file-grid, .ppt-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}

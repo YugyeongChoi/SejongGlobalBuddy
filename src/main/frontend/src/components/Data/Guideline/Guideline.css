@@ -88,6 +88,11 @@
 }
 
 @media (max-width: 768px) {
+    .buddy-container {
+        padding: 16px;
+        margin: 24px 12px;
+    }
+
     .buddy-grid {
         flex-direction: column;
     }
