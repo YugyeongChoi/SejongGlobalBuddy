@@ -6,6 +6,7 @@ import '../Manage.css';
 const DataManager = () => {
     const [fileList, setFileList] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [category, setCategory] = useState('document');
 
     const fetchFiles = async () => {
         const res = await axios.get('/api/files');
@@ -21,6 +22,7 @@ const DataManager = () => {
 
         const formData = new FormData();
         formData.append('file', selectedFile);
+        formData.append('category', category);
 
         try {
             await axios.post('/api/files/upload', formData, {
@@ -37,8 +39,15 @@ const DataManager = () => {
 
     const handleDelete = async (filename) => {
         if (window.confirm(`${filename} 파일을 삭제하시겠습니까?`)) {
-            await axios.delete(`/api/files/${encodeURIComponent(filename)}`);
-            fetchFiles();
+            try {
+                await axios.delete('/api/files', {
+                    params: { filename }
+                });
+                fetchFiles();
+            } catch (err) {
+                console.error('삭제 실패:', err);
+                alert('파일 삭제 중 오류가 발생했습니다.');
+            }
         }
     };
 
@@ -48,6 +57,10 @@ const DataManager = () => {
 
             <h3>📁 문서 업로드</h3>
             <div className="upload-actions">
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option value="document">Document</option>
+                    <option value="presentation">Official Presentation</option>
+                </select>
                 <div className="custom-file-upload">
                     <label htmlFor="fileInput">📎 파일 선택</label>
                     <input
@@ -64,16 +77,23 @@ const DataManager = () => {
 
             <h3>📄 업로드된 파일 목록</h3>
             <ul>
-                {fileList
-                    .filter((file) => !/\.(jpg|png)$/i.test(file))
-                    .map((file) => (
-                    <li key={file}>
-                        <a href={`https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev/${encodeURIComponent(file)}`} target="_blank" rel="noreferrer">
-                            {file}
-                        </a>
-                        <button onClick={() => handleDelete(file)}>삭제</button>
-                    </li>
-                ))}
+                <ul>
+                    {fileList
+                        .filter(file => file.startsWith('document/') || file.startsWith('presentation/'))
+                        .map((file) => (
+                            <li key={file}>
+                                <a
+                                    href={`https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev/${encodeURIComponent(file)}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    {file}
+                                </a>
+                                <button onClick={() => handleDelete(file)}>삭제</button>
+                            </li>
+                        ))}
+                </ul>
+
             </ul>
         </div>
     );

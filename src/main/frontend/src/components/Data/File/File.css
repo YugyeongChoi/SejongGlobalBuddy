@@ -40,21 +40,20 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
-.download-btn.normal {
+.download-btn.document {
     background-color: #ffcdd2;
 }
 
-.download-btn.normal:hover {
+.download-btn.document:hover {
     background-color: #f8a5b0;
     transform: scale(1.1);
 }
 
-.download-btn.preview {
+.download-btn.presentation {
     background-color: #bbdefb;
 }
 
-.download-btn.preview:hover {
+.download-btn.presentation:hover {
     background-color: #90caf9;
     transform: scale(1.1);
 }

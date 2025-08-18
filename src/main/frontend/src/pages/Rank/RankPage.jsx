@@ -39,14 +39,14 @@ const RankPage = () => {
 
     return (
         <div className="rank-page">
-            <img
-                className="rank-trophy"
-                src={TROPHY_IMG}
-                alt="trophy"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                onClick={() => fireConfetti('pastel', 'square')}
-                draggable={false}
-            />
+            {/*<img*/}
+            {/*    className="rank-trophy"*/}
+            {/*    src={TROPHY_IMG}*/}
+            {/*    alt="trophy"*/}
+            {/*    onError={(e) => { e.currentTarget.style.display = 'none'; }}*/}
+            {/*    onClick={() => fireConfetti('pastel', 'square')}*/}
+            {/*    draggable={false}*/}
+            {/*/>*/}
             <BuddyPlus />
             <BuddyCross />
         </div>

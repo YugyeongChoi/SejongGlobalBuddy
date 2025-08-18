@@ -45,7 +45,7 @@ const Guideline = () => {
                     </p>
                     <p className="sub-info">
                         *빙고판 활동<br/>
-                        *빙고판을 가장 먼저 채운 조에게는 일정 수준의 활동비 지원
+                        *우수 활동 시 활동비 지원
                     </p>
                 </div>
 

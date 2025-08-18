@@ -22,16 +22,20 @@ public class DataService {
     @Value("${cloudflare.r2.bucket}")
     private String bucket;
 
-    public String uploadFile(MultipartFile file) throws IOException {
-        String fileName = file.getOriginalFilename();
+    public String uploadFile(MultipartFile file, String category) throws IOException {
+        String originalFileName = file.getOriginalFilename();
+        if (originalFileName == null) throw new IllegalArgumentException("파일 이름이 존재하지 않습니다.");
+
+        String key = category + "/" + originalFileName;
 
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(file.getSize());
 
-        amazonS3.putObject(bucket, fileName, file.getInputStream(), metadata);
+        amazonS3.putObject(bucket, key, file.getInputStream(), metadata);
 
-        return amazonS3.getUrl(bucket, fileName).toString();
+        return amazonS3.getUrl(bucket, key).toString();
     }
+
 
     public List<String> listFiles() {
         ListObjectsV2Result result = amazonS3.listObjectsV2(bucket);
