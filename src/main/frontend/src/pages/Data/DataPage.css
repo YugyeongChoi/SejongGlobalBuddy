@@ -16,7 +16,7 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 30px;
-    color: black;
+    color: black !important;
 }
 
 .tab-menu button {
