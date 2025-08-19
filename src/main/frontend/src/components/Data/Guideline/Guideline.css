@@ -17,9 +17,11 @@
 
 .buddy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
     gap: 24px;
     padding: 0;
+    justify-items: stretch;
 }
 
 .buddy-card {
@@ -90,6 +92,11 @@
     .buddy-container {
         padding: 16px;
         margin: 24px 12px;
+    }
+
+    .buddy-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
     }
 
     .buddy-title {
