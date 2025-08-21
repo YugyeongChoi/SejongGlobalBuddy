@@ -10,7 +10,7 @@ const List = ({reviews}) => {
 
     const handlePasswordSubmit = async (inputPassword, actionType, review) => {
         try {
-            const res = await fetch(`/review/${review.id}/verify-password`, {
+            const res = await fetch(`/api/review/${review.id}/verify-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const List = ({reviews}) => {
         if (!confirmed) return;
 
         try {
-            const res = await fetch(`/review/report`, {
+            const res = await fetch(`/api/review/report`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const List = ({reviews}) => {
                                         process.env.NODE_ENV === 'development'
                                             ? 'http://localhost:8081'
                                             : 'https://www.sejongglobalbuddy.kr'
-                                    }/review/images/${encodeURIComponent(
+                                    }/api/review/images/${encodeURIComponent(
                                         review.photoUrls[0].substring('/images/'.length)
                                     )}`}
                                     alt="thumbnail"
