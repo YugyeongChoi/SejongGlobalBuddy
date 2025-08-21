@@ -26,9 +26,9 @@ public class ReviewEntity {
     @Column(name = "title")
     private String title;
 
-    @Lob
-    @Column(name = "content")
+    @Column(name = "content", columnDefinition = "text")
     private String content;
+
 
     @Column(name = "password", nullable = false)
     private String password;
