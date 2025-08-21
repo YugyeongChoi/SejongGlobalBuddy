@@ -25,7 +25,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/api/review")
 @RequiredArgsConstructor
 public class ReviewController {
 
