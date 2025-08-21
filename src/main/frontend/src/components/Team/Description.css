@@ -35,6 +35,7 @@
     padding: 20px;
     align-items: center;
     justify-content: space-between;
+    white-space: pre-line;
 }
 
 .team-card.reverse .team-content {
