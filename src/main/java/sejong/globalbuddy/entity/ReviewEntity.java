@@ -33,21 +33,21 @@ public class ReviewEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "nationality")
-    private String nationality;
+    @Column(name = "created_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime createdTime;
 
     @Column(name = "generation")
     private String generation;
+
+    @Column(name = "nationality")
+    private String nationality;
 
     @Column(name = "nickname")
     private String nickname;
 
     @Column(name = "likes", nullable = false)
     private int likes = 0;
-
-    @Column(name = "created_time")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime createdTime;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -65,15 +65,15 @@ public class ReviewEntity {
 
     @Builder
     public ReviewEntity(Long id, String title, String content, String password,
-                        String nationality, String generation, String nickname,
-                        LocalDateTime createdTime) {
+                        LocalDateTime createdTime,
+                        String generation, String nationality, String nickname) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.password = password;
-        this.nationality = nationality;
-        this.generation = generation;
-        this.nickname = nickname;
         this.createdTime = createdTime != null ? createdTime : LocalDateTime.now();
+        this.generation = generation;
+        this.nationality = nationality;
+        this.nickname = nickname;
     }
 }
