@@ -16,7 +16,7 @@ public class PhotoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long photoId;
+    private Long id;
 
     @Column(name = "url")
     private String url;

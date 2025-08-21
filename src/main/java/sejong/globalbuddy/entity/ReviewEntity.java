@@ -4,19 +4,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Entity
+@Table(name = "post")
+@Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "post")
 public class ReviewEntity {
 
     @Id
@@ -31,8 +30,7 @@ public class ReviewEntity {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "password")
-    @NotNull
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "nationality")
@@ -41,10 +39,10 @@ public class ReviewEntity {
     @Column(name = "generation")
     private String generation;
 
-    @Column(name = "nickname", length = 10)
+    @Column(name = "nickname")
     private String nickname;
 
-    @Column(nullable = false)
+    @Column(name = "likes", nullable = false)
     private int likes = 0;
 
     @Column(name = "created_time")
@@ -65,20 +63,6 @@ public class ReviewEntity {
         photo.setPost(this);
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
-
     @Builder
     public ReviewEntity(Long id, String title, String content, String password,
                         String nationality, String generation, String nickname,
@@ -92,6 +76,4 @@ public class ReviewEntity {
         this.nickname = nickname;
         this.createdTime = createdTime != null ? createdTime : LocalDateTime.now();
     }
-
-
 }
