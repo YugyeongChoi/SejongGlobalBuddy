@@ -22,8 +22,8 @@ const ReviewPhotoGrid = ({reviews}) => {
 
     const imageBaseURL =
         process.env.NODE_ENV === 'development'
-            ? 'http://localhost:8081'
-            : 'https://www.sejongglobalbuddy.kr';
+            ? 'http://localhost:8081/api'
+            : 'https://www.sejongglobalbuddy.kr/api';
 
     const selectedReviews = previewIds
         .map(id => reviews.find(review => review.id === id))

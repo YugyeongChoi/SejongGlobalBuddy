@@ -70,8 +70,8 @@ const ReadPage = () => {
                         {review.photoUrls.map((url, index) => {
                             const imageBaseURL =
                                 process.env.NODE_ENV === 'development'
-                                    ? 'http://localhost:8081'
-                                    : 'https://www.sejongglobalbuddy.kr';
+                                    ? 'http://localhost:8081/api'
+                                    : 'https://www.sejongglobalbuddy.kr/api';
 
                             const encodedFilename = encodeURIComponent(url.substring('/images/'.length));
 
