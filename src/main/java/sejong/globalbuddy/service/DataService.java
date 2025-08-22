@@ -37,6 +37,21 @@ public class DataService {
     }
 
 
+    public String uploadFile(MultipartFile file) throws IOException {
+        String originalFileName = file.getOriginalFilename();
+        if (originalFileName == null) throw new IllegalArgumentException("파일 이름이 존재하지 않습니다.");
+
+        String key = originalFileName;
+
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(file.getSize());
+
+        amazonS3.putObject(bucket, key, file.getInputStream(), metadata);
+
+        return amazonS3.getUrl(bucket, key).toString();
+    }
+
+
     public List<String> listFiles() {
         ListObjectsV2Result result = amazonS3.listObjectsV2(bucket);
         return result.getObjectSummaries().stream()

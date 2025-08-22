@@ -35,4 +35,13 @@ public class BuddyPlusController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BuddyPlusEntity> update(
+            @PathVariable Long id,
+            @RequestBody BuddyPlusEntity entity
+    ) {
+        entity.setId(id);
+        return ResponseEntity.ok(service.save(entity));
+    }
 }

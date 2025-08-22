@@ -28,8 +28,8 @@ public class DataController {
 
     private final DataService dataService;
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(
+    @PostMapping("/uploadWithCategory")
+    public ResponseEntity<String> uploadFileWithCategory(
             @RequestParam("file") MultipartFile file,
             @RequestParam("category") String category
     ) throws IOException {
@@ -37,6 +37,13 @@ public class DataController {
         return ResponseEntity.ok(fileUrl);
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadFileWithoutCategory(
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
+        String fileUrl = dataService.uploadFile(file);
+        return ResponseEntity.ok(fileUrl);
+    }
 
     @GetMapping
     public ResponseEntity<List<String>> listFiles() {

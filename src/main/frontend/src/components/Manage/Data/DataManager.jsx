@@ -25,7 +25,7 @@ const DataManager = () => {
         formData.append('category', category);
 
         try {
-            await axios.post('/api/files/upload', formData, {
+            await axios.post('/api/files/uploadWithCategory', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             alert('업로드 성공!');
