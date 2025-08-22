@@ -63,7 +63,12 @@ function FaqPage() {
                                 exit={{ opacity: 0, height: 0 }}
                                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                             >
-                                {item.answer}
+                                {item.answer.split('\n').map((line, idx) => (
+                                    <span key={idx}>
+                                        {line}
+                                        <br />
+                                    </span>
+                                ))}
                             </motion.div>
                         )}
                     </AnimatePresence>

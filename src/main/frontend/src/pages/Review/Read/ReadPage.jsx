@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import {getReviewDetail} from '../../../api/reviewApi';
 import './ReadPage.css';
-import { likeReview } from '../../../api/reviewApi';
+import {likeReview} from '../../../api/reviewApi';
 import {formatDateKST} from "../../../utils/reportWebVitals";
-import { FaArrowLeft } from 'react-icons/fa';
+import {FaArrowLeft} from 'react-icons/fa';
 
 const ReadPage = () => {
     const {id} = useParams();
@@ -45,7 +45,7 @@ const ReadPage = () => {
         <div className="review-detail-wrapper">
             <div className="top-bar">
                 <button className="back-btn" onClick={() => navigate('/review')}>
-                    <FaArrowLeft className="back-icon" />
+                    <FaArrowLeft className="back-icon"/>
                 </button>
             </div>
 
@@ -63,7 +63,14 @@ const ReadPage = () => {
                     <span className="review-date">{formatDateKST(review.createdTime)}</span>
                 </div>
 
-                <div className="review-content">{review.content}</div>
+                <div className="review-content">
+                    {review.content.split('\n').map((line, idx) => (
+                        <span key={idx}>
+                            {line}
+                            <br/>
+                        </span>
+                    ))}
+                </div>
 
                 {review.photoUrls && review.photoUrls.length > 0 && (
                     <div className="review-photo-wrapper">
@@ -89,8 +96,8 @@ const ReadPage = () => {
                 )}
                 <div className="like-section">
                     <button className="like-button" onClick={handleLike}>
-                        <img src="/images/likes.ico" alt="like" className="like-icon" />
-                        <link rel="icon" href="%PUBLIC_URL%/images/likes.ico" />
+                        <img src="/images/likes.ico" alt="like" className="like-icon"/>
+                        <link rel="icon" href="%PUBLIC_URL%/images/likes.ico"/>
 
                     </button>
                     <span className="like-count">{likes}</span>

@@ -35,7 +35,14 @@ function Description() {
                             className="team-image"
                             onContextMenu={(e) => e.preventDefault()}
                         />
-                        <p className="team-description">{team.description}</p>
+                        <p className="team-description">
+                            {team.description.split('\n').map((line, idx) => (
+                                <span key={idx}>
+                                    {line}
+                                    <br />
+                                </span>
+                            ))}
+                        </p>
                     </div>
                 </div>
             ))}
