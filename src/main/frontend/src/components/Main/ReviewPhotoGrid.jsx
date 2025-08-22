@@ -15,6 +15,10 @@ const ReviewPhotoGrid = ({reviews}) => {
             } catch (error) {
                 console.error('Failed to fetch preview IDs:', error);
             }
+
+            console.log("previewIds:", previewIds);
+            console.log("reviews:", reviews);
+            console.log("selectedReviews:", selectedReviews);
         };
 
         fetchPreviewIds();
