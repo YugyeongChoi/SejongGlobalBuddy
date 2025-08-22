@@ -8,7 +8,7 @@ function MainPage() {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch('/review')
+        fetch('/api/review')
             .then(res => res.json())
             .then(data => setReviews(data))
             .catch(err => console.error('리뷰 불러오기 실패:', err));

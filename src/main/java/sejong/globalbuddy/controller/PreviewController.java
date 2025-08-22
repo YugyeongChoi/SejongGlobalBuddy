@@ -9,7 +9,7 @@ import sejong.globalbuddy.service.PreviewService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/previews")
+@RequestMapping("/previews")
 @RequiredArgsConstructor
 public class PreviewController {
 

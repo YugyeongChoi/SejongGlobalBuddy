@@ -7,24 +7,18 @@ const ReviewPhotoGrid = ({reviews}) => {
     const navigate = useNavigate();
     const [previewIds, setPreviewIds] = useState([]);
 
-    const apiBaseURL =
-        process.env.NODE_ENV === 'development'
-            ? 'http://localhost:8081/api'
-            : 'https://www.sejongglobalbuddy.kr/api';
-
     useEffect(() => {
         const fetchPreviewIds = async () => {
             try {
-                const response = await axios.get(`${apiBaseURL}/previews`);
+                const response = await axios.get('/previews');
                 setPreviewIds(response.data);
             } catch (error) {
-                console.error('리뷰 불러오기 실패:', error);
+                console.error('Failed to fetch preview IDs:', error);
             }
         };
 
         fetchPreviewIds();
-    }, [apiBaseURL]);
-
+    }, []);
 
     const imageBaseURL =
         process.env.NODE_ENV === 'development'
