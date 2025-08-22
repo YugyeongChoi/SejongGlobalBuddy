@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/api/review")
 public class EmailReportController {
 
     @Autowired
