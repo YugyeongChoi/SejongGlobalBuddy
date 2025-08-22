@@ -64,10 +64,10 @@ function FaqPage() {
                                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                             >
                                 {item.answer.split('\n').map((line, idx) => (
-                                    <span key={idx}>
+                                    <React.Fragment key={idx}>
                                         {line}
                                         <br />
-                                    </span>
+                                    </React.Fragment>
                                 ))}
                             </motion.div>
                         )}
