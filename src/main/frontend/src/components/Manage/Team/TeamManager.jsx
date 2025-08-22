@@ -38,6 +38,7 @@ function TeamManager() {
     const [newTeam, setNewTeam] = useState({name: '', description: ''});
     const [selectedFile, setSelectedFile] = useState(null);
     const [editId, setEditId] = useState(null);
+    const TEAM_ORDER = ['기획팀', '영상팀', '홍보팀', '행정팀'];
 
     useEffect(() => { fetchTeams(); }, []);
 
@@ -158,22 +159,25 @@ function TeamManager() {
 
             <h3>📋 팀 목록</h3>
             <ul className="team-list">
-                {teams.map((team) => (
-                    <li key={team.id}>
-                        <div>
-                            <strong>{team.name}</strong>
-                            <p>{team.description}</p>
-                        </div>
-
-                        <div className="team-footer">
-                            <TeamImage name={team.name} className="thumbnail" />
-                            <div className="team-actions">
-                                <button className="edit-btn" onClick={() => handleEdit(team)}>수정</button>
-                                <button className="delete-btn" onClick={() => handleDelete(team.id)}>삭제</button>
+                {teams
+                    .slice()
+                    .sort((a, b) => TEAM_ORDER.indexOf(a.name) - TEAM_ORDER.indexOf(b.name))
+                    .map((team) => (
+                        <li key={team.id}>
+                            <div>
+                                <strong>{team.name}</strong>
+                                <p>{team.description}</p>
                             </div>
-                        </div>
-                    </li>
-                ))}
+
+                            <div className="team-footer">
+                                <TeamImage name={team.name} className="thumbnail" />
+                                <div className="team-actions">
+                                    <button className="edit-btn" onClick={() => handleEdit(team)}>수정</button>
+                                    <button className="delete-btn" onClick={() => handleDelete(team.id)}>삭제</button>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
             </ul>
         </div>
     );

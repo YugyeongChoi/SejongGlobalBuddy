@@ -6,6 +6,7 @@ const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 
 function Description() {
     const [teams, setTeams] = useState([]);
+    const TEAM_ORDER = ['기획팀', '영상팀', '홍보팀', '행정팀'];
 
     useEffect(() => {
         const fetchTeams = async () => {
@@ -22,30 +23,33 @@ function Description() {
 
     return (
         <div className="team-wrapper">
-            {teams.map((team, index) => (
-                <div
-                    key={team.id}
-                    className={`team-card ${index % 2 === 1 ? 'reverse' : ''}`}
-                >
-                    <h3 className="team-title">{team.name}</h3>
-                    <div className="team-content">
-                        <img
-                            src={`${R2_BASE_URL}/${encodeURIComponent(team.name)}.${team.fileExt?.toLowerCase().match(/(jpg|png)$/) ? team.fileExt : 'jpg'}`}
-                            alt={team.name}
-                            className="team-image"
-                            onContextMenu={(e) => e.preventDefault()}
-                        />
-                        <p className="team-description">
-                            {team.description.split('\n').map((line, idx) => (
-                                <span key={idx}>
-                                    {line}
-                                    <br />
-                                </span>
-                            ))}
-                        </p>
+            {teams
+                .slice()
+                .sort((a, b) => TEAM_ORDER.indexOf(a.name) - TEAM_ORDER.indexOf(b.name))
+                .map((team, index) => (
+                    <div
+                        key={team.id}
+                        className={`team-card ${index % 2 === 1 ? 'reverse' : ''}`}
+                    >
+                        <h3 className="team-title">{team.name}</h3>
+                        <div className="team-content">
+                            <img
+                                src={`${R2_BASE_URL}/${encodeURIComponent(team.name)}.${team.fileExt?.toLowerCase().match(/(jpg|png)$/) ? team.fileExt : 'jpg'}`}
+                                alt={team.name}
+                                className="team-image"
+                                onContextMenu={(e) => e.preventDefault()}
+                            />
+                            <p className="team-description">
+                                {team.description.split('\n').map((line, idx) => (
+                                    <span key={idx}>
+                                        {line}
+                                        <br />
+                                    </span>
+                                ))}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
         </div>
     );
 }
