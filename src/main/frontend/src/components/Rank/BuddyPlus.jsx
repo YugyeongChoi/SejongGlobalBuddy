@@ -126,8 +126,6 @@ const BuddyPlus = () => {
             : [1, 0, 2];
     return (
         <div className="top3-wrap">
-            <h2 className="bp-title">BuddyPlus</h2>
-
             {loading && <div className="bp-empty">불러오는 중…</div>}
             {err && <div className="bp-error">⚠️ {err}</div>}
 

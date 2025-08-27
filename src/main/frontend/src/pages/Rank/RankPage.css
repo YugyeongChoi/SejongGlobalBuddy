@@ -69,18 +69,40 @@
 }
 
 .rank-trophy {
-    width: 50%;
-    height: 50%;
+    transform: rotate(-3deg);
+    height: 200px;
     display: block;
     margin: 0 auto 12px;
     filter: drop-shadow(0 6px 10px rgba(0,0,0,.15));
     user-select: none;
     cursor: pointer;
-    animation: trophy-pop .6s ease;
 }
 
+.rank-trophy-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 180px;
+}
+
+@media (max-width: 768px) {
+    .rank-trophy-wrapper {
+        display: none;
+    }
+    .bp-title {
+        font-size: 28px;
+        padding-top: 10px;
+    }
+}
 @keyframes trophy-pop {
     0%   { transform: scale(.6); opacity: 0; }
     60%  { transform: scale(1.12); opacity: 1; }
     100% { transform: scale(1); }
+}
+.bp-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 0 20px;
+    padding-bottom: 30px;
 }

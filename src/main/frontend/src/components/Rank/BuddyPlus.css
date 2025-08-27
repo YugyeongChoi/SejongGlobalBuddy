@@ -14,14 +14,6 @@
     box-sizing: border-box;
 }
 
-.bp-title {
-    text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-    margin: 0 0 20px;
-    padding-bottom: 30px;
-}
-
 .top3-wrap {
     max-width: 1180px;
     width: 100%;
@@ -228,10 +220,6 @@
     .top3-grid > .podium-card:first-child,
     .top3-grid > .podium-card:last-child {
         margin-top: 0;
-    }
-    .bp-title {
-        font-size: 28px;
-        padding-top: 10px;
     }
 
     .podium-card {

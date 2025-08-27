@@ -29,7 +29,7 @@ const BuddyCross = () => {
 
     return (
         <div className="buddycross-rank">
-            <h2 className="rank-title">BuddyCross</h2>
+            <h2 className="rank-title">🏆 BuddyCross Ranking 🏆</h2>
 
             {loading && <div className="rank-empty">불러오는 중…</div>}
             {err && <div className="rank-error">⚠️ {err}</div>}

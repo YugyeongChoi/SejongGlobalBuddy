@@ -3,7 +3,11 @@ import BuddyPlus from '../../components/Rank/BuddyPlus';
 import BuddyCross from '../../components/Rank/BuddyCross';
 import './RankPage.css';
 
-const TROPHY_IMG = '/images/trophy.png';
+const TROPHY_IMG1 = '/images/trophy1.png';
+const TROPHY_IMG2 = '/images/trophy2.png';
+const TROPHY_IMG3 = '/images/trophy3.png';
+
+const TROPHY_IMAGES = [TROPHY_IMG2, TROPHY_IMG1, TROPHY_IMG3];
 
 const palettes = {
     gold: ['#f59e0b', '#fbbf24', '#fde68a', '#fff7cc'],
@@ -39,14 +43,21 @@ const RankPage = () => {
 
     return (
         <div className="rank-page">
-            {/*<img*/}
-            {/*    className="rank-trophy"*/}
-            {/*    src={TROPHY_IMG}*/}
-            {/*    alt="trophy"*/}
-            {/*    onError={(e) => { e.currentTarget.style.display = 'none'; }}*/}
-            {/*    onClick={() => fireConfetti('pastel', 'square')}*/}
-            {/*    draggable={false}*/}
-            {/*/>*/}
+            <h2 className="bp-title">🎉 BuddyPlus Ranking 🎉</h2>
+
+            <div className="rank-trophy-wrapper">
+                {TROPHY_IMAGES.map((src, index) => (
+                    <img
+                        key={index}
+                        className="rank-trophy"
+                        src={src}
+                        alt="trophy"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        onClick={() => fireConfetti('pastel', 'square')}
+                        draggable={false}
+                    />
+                ))}
+            </div>
             <BuddyPlus />
             <BuddyCross />
         </div>
