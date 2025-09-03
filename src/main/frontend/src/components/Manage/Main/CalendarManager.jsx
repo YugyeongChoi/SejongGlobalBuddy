@@ -62,7 +62,9 @@ const CalendarManager = () => {
 
     const handleDelete = async (filename) => {
         if (window.confirm(`${filename} 파일을 삭제하시겠습니까?`)) {
-            await axios.delete(`/api/files/${encodeURIComponent(filename)}`);
+            await axios.delete(`/api/files`, {
+                params: { filename }
+            });
             fetchFiles();
         }
     };
