@@ -45,3 +45,5 @@ build/
 src/main/frontend/.env
 src/.env
 
+pgbouncer.ini
+userlist.txt
