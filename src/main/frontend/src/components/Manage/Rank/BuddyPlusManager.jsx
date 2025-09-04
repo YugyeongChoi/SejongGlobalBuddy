@@ -142,6 +142,39 @@ function BuddyPlusManager() {
         }
     };
 
+    const handleImageEdit = async (row) => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.jpg,.JPG,.png';
+
+        fileInput.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            try {
+                const rawExt = (file.name.split('.').pop() || '').trim();
+                const safeExt = /^(jpg|JPG|png)$/.test(rawExt) ? rawExt : 'jpg';
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('filename', `${row.team}.${safeExt}`);
+
+                await axios.post('/api/files/upload', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                });
+
+                alert('이미지 교체 성공!');
+                fetchItems();
+            } catch (e) {
+                console.error('이미지 교체 실패:', e);
+                alert('이미지 교체 중 오류 발생!');
+            }
+        };
+
+        fileInput.click();
+    };
+
+
     return (
         <div className="bp-manager">
             <h2>BuddyPlus 관리</h2>
@@ -235,6 +268,7 @@ function BuddyPlusManager() {
                                 <div className="bp-actions">
                                     <button className="edit-btn" onClick={() => handleEdit(row)}>수정</button>
                                     <button className="delete-btn" onClick={() => handleDelete(row.id)}>삭제</button>
+                                    <button className="image-btn" onClick={() => handleImageEdit(row)}>사진 교체</button>
                                 </div>
                             </div>
                         </li>
