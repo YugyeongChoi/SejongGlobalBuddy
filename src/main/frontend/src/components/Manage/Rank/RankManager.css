@@ -176,3 +176,17 @@
     color: #666;
     padding: 16px 0;
 }
+.image-btn {
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.image-btn:hover {
+    background-color: #e68900;
+}

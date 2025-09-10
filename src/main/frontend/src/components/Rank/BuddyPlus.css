@@ -30,6 +30,19 @@
     justify-content: center;
 }
 
+.top3-grid.one-item {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    height: auto;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.top3-grid.one-item .podium-card {
+    width: 100%;
+    max-width: 400px;
+}
+
 .podium-card {
     background: var(--card);
     border-radius: 20px;
@@ -202,6 +215,14 @@
     pointer-events: none;
 }
 
+.fade-image {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.fade-image.loaded {
+    opacity: 1;
+}
 
 @media (max-width: 768px) {
     .top3-wrap {

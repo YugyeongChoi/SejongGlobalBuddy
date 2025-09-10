@@ -53,6 +53,8 @@ public class DataController {
     @DeleteMapping
     public ResponseEntity<?> deleteFile(@RequestParam String filename) {
         dataService.deleteFile(filename);
+        amazonS3.deleteObject(bucket, filename);
+
         return ResponseEntity.ok().build();
     }
 

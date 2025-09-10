@@ -7,9 +7,10 @@ const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 
 function TeamImage({ name, className }) {
     const candidates = useMemo(
-        () => ['.jpg', '.JPG', '.png'].map(ext => `${R2_BASE_URL}/${encodeURIComponent(name)}${ext}`),
+        () => ['.jpg', '.JPG', '.png'].map(ext => `${R2_BASE_URL}/${encodeURIComponent(name)}${ext}?v=${Date.now()}`),
         [name]
     );
+
     const [idx, setIdx] = useState(0);
 
     useEffect(() => { setIdx(0); }, [name]);
@@ -24,7 +25,7 @@ function TeamImage({ name, className }) {
 
     return (
         <img
-            src={candidates[idx]}
+            src={`${candidates[idx]}?t=${new Date().getTime()}`}
             alt={name}
             className={className}
             onError={handleError}
@@ -102,6 +103,49 @@ function TeamManager() {
         }
     };
 
+    const handleImageEdit = async (row) => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.jpg,.JPG,.png';
+
+        fileInput.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            try {
+                const rawExt = (file.name.split('.').pop() || '').trim();
+                const safeExt = /^(jpg|JPG|png)$/.test(rawExt) ? rawExt : 'jpg';
+                const filename = `${row.name}.${safeExt}`;
+
+                for (const ext of ['jpg','JPG','png']) {
+                    try {
+                        await axios.delete(`/api/files`, { params: { filename: `${row.name}.${ext}` } });
+                    } catch (_) {}
+                }
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('filename', filename);
+
+                await axios.post('/api/files/upload', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                });
+
+                alert('이미지 교체 성공!');
+
+                setTeams(prev => prev.map(t =>
+                    t.id === row.id ? {...t} : t
+                ));
+
+            } catch (err) {
+                console.error('이미지 교체 실패:', err);
+                alert('이미지 교체 중 오류 발생!');
+            }
+        };
+        fileInput.click();
+    };
+
+
     return (
         <div className="team-manager">
             <h2>팀 관리</h2>
@@ -174,6 +218,7 @@ function TeamManager() {
                                 <div className="team-actions">
                                     <button className="edit-btn" onClick={() => handleEdit(team)}>수정</button>
                                     <button className="delete-btn" onClick={() => handleDelete(team.id)}>삭제</button>
+                                    <button className="replace-btn" onClick={() => handleImageEdit(team)}>사진 교체</button>
                                 </div>
                             </div>
                         </li>

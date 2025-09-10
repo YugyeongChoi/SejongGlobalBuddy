@@ -6,17 +6,24 @@ const DEFAULT_IMG = '/images/team.png';
 const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
 
 function TeamImage({ team, alt, className, emphasize }) {
+    const [cacheBuster] = useState(Date.now());
     const candidates = useMemo(
-        () => ['.jpg', '.JPG', '.png'].map(ext => `${R2_BASE_URL}/${encodeURIComponent(team)}${ext}`),
-        [team]
+        () => ['.jpg', '.JPG', '.png'].map(
+            ext => `${R2_BASE_URL}/${encodeURIComponent(team)}${ext}?t=${cacheBuster}`
+        ),
+        [team, cacheBuster]
     );
 
     const [idx, setIdx] = useState(0);
+    const [loaded, setLoaded] = useState(false);
 
     const preventCtx = (e) => e.preventDefault();
     const preventDrag = (e) => e.preventDefault();
 
-    useEffect(() => { setIdx(0); }, [team]);
+    useEffect(() => {
+        setIdx(0);
+        setLoaded(false);
+    }, [team]);
 
     const handleError = (e) => {
         if (idx < candidates.length - 1) {
@@ -36,15 +43,17 @@ function TeamImage({ team, alt, className, emphasize }) {
                 src={candidates[idx]}
                 alt={alt}
                 loading="lazy"
+                onLoad={() => setLoaded(true)}
                 onError={handleError}
                 onContextMenu={preventCtx}
                 onDragStart={preventDrag}
                 draggable={false}
+                className={`fade-image ${loaded ? 'loaded' : ''}`}
             />
         </div>
-
     );
 }
+
 
 function Card({ index, team, koName, enName, bingo, emphasize = false }) {
     const rank = index + 1;
@@ -120,17 +129,20 @@ const BuddyPlus = () => {
         return () => { cancel = true; };
     }, []);
 
-    const displayOrder =
-        isMobile || top3.length < 3
-            ? top3.map((_, i) => i)
-            : [1, 0, 2];
+    const displayOrder = isMobile
+        ? top3.map((_, i) => i)
+        : top3.length === 1
+            ? [0]
+            : [1, 0, 2].filter(i => i < top3.length);
+
+
     return (
         <div className="top3-wrap">
             {loading && <div className="bp-empty">불러오는 중…</div>}
             {err && <div className="bp-error">⚠️ {err}</div>}
 
             {!loading && !err && top3.length > 0 && (
-                <div className="top3-grid">
+                <div className={`top3-grid ${top3.length === 1 ? 'one-item' : ''}`}>
                     {displayOrder.map((idx) => {
                         const item = top3[idx];
                         return (

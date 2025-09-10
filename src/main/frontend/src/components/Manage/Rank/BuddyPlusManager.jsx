@@ -26,7 +26,7 @@ function TeamImage({ team, alt, className }) {
 
     return (
         <img
-            src={candidates[idx]}
+            src={`${candidates[idx]}?ts=${Date.now()}`}
             alt={alt}
             className={className}
             loading="lazy"
@@ -131,16 +131,25 @@ function BuddyPlusManager() {
         setSelectedFile(null);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id, teamNumber) => {
         if (!window.confirm('정말 삭제하시겠습니까?')) return;
         try {
             await axios.delete(`/api/buddyplus/${id}`);
+
+            for (const ext of ['jpg', 'JPG', 'png']) {
+                try {
+                    await axios.delete(`/api/files`, { params: { filename: `${teamNumber}.${ext}` } });
+                } catch (_) {
+                }
+            }
+
             fetchItems();
         } catch (e) {
             console.error('삭제 실패:', e);
             alert('삭제 중 오류가 발생했습니다.');
         }
     };
+
 
     const handleImageEdit = async (row) => {
         const fileInput = document.createElement('input');
@@ -154,10 +163,18 @@ function BuddyPlusManager() {
             try {
                 const rawExt = (file.name.split('.').pop() || '').trim();
                 const safeExt = /^(jpg|JPG|png)$/.test(rawExt) ? rawExt : 'jpg';
+                const filename = `${row.team}.${safeExt}`;
+
+                for (const ext of ['jpg', 'JPG', 'png']) {
+                    try {
+                        await axios.delete(`/api/files`, { params: { filename: `${row.team}.${ext}` } });
+                    } catch (_) {
+                    }
+                }
 
                 const formData = new FormData();
                 formData.append('file', file);
-                formData.append('filename', `${row.team}.${safeExt}`);
+                formData.append('filename', filename);
 
                 await axios.post('/api/files/upload', formData, {
                     headers: { 'Content-Type': 'multipart/form-data' },
@@ -170,9 +187,9 @@ function BuddyPlusManager() {
                 alert('이미지 교체 중 오류 발생!');
             }
         };
-
         fileInput.click();
     };
+
 
 
     return (
@@ -267,7 +284,7 @@ function BuddyPlusManager() {
                                 />
                                 <div className="bp-actions">
                                     <button className="edit-btn" onClick={() => handleEdit(row)}>수정</button>
-                                    <button className="delete-btn" onClick={() => handleDelete(row.id)}>삭제</button>
+                                    <button className="delete-btn" onClick={() => handleDelete(row.id, row.team)}>삭제</button>
                                     <button className="image-btn" onClick={() => handleImageEdit(row)}>사진 교체</button>
                                 </div>
                             </div>
