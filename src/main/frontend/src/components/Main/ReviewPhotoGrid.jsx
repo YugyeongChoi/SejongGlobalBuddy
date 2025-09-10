@@ -48,6 +48,7 @@ const ReviewPhotoGrid = ({reviews}) => {
                                 src={`${imageBaseURL}/review/images/${encoded}`}
                                 alt={`review-${review.id}`}
                                 className="photo-grid-img"
+                                onLoad={(e) => e.currentTarget.classList.add('loaded')}
                                 onContextMenu={(e) => e.preventDefault()}
                             />
                         </div>

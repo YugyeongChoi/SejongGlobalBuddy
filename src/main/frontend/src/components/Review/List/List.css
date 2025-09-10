@@ -123,6 +123,15 @@
     gap: 6px;
 }
 
+.thumbnail-img {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.thumbnail-img.loaded {
+    opacity: 1;
+}
+
 .no-review {
     text-align: center;
     font-size: 16px;

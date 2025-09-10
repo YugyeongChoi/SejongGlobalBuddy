@@ -34,9 +34,12 @@ function Description() {
                         <h3 className="team-title">{team.name}</h3>
                         <div className="team-content">
                             <img
-                                src={`${R2_BASE_URL}/${encodeURIComponent(team.name)}.${team.fileExt?.toLowerCase().match(/(jpg|png)$/) ? team.fileExt : 'jpg'}`}
+                                src={`${R2_BASE_URL}/${encodeURIComponent(team.name)}.${
+                                    team.fileExt?.toLowerCase().match(/(jpg|png)$/) ? team.fileExt : 'jpg'
+                                }`}
                                 alt={team.name}
                                 className="team-image"
+                                onLoad={(e) => e.currentTarget.classList.add('loaded')}
                                 onContextMenu={(e) => e.preventDefault()}
                             />
                             <p className="team-description">

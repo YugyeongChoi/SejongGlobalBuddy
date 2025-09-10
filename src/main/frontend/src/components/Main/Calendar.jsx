@@ -4,6 +4,8 @@ import axios from 'axios';
 function Calendar() {
     const [calendarImg, setCalendarImg] = useState(null);
     const [moodImg, setMoodImg] = useState(null);
+    const [loadedCalendar, setLoadedCalendar] = useState(false);
+    const [loadedMood, setLoadedMood] = useState(false);
 
     useEffect(() => {
         const fetchImages = async () => {
@@ -35,16 +37,26 @@ function Calendar() {
             <div className="calendar-content">
                 {calendarImg && (
                     <img
-                        src={`${R2_BASE_URL}/${encodeURIComponent(calendarImg)}`}
+                        src={`${R2_BASE_URL}/${encodeURIComponent(calendarImg)}?v=${Date.now()}`}
                         className="calendar-image"
+                        onLoad={() => setLoadedCalendar(true)}
+                        style={{
+                            opacity: loadedCalendar ? 1 : 0,
+                            transition: 'opacity 0.8s ease-in-out',
+                        }}
                         onContextMenu={(e) => e.preventDefault()}
                         alt="Calendar"
                     />
                 )}
                 {moodImg && (
                     <img
-                        src={`${R2_BASE_URL}/${encodeURIComponent(moodImg)}`}
+                        src={`${R2_BASE_URL}/${encodeURIComponent(moodImg)}?v=${Date.now()}`}
                         className="mood-image"
+                        onLoad={() => setLoadedMood(true)}
+                        style={{
+                            opacity: loadedMood ? 1 : 0,
+                            transition: 'opacity 0.8s ease-in-out',
+                        }}
                         onContextMenu={(e) => e.preventDefault()}
                         alt="Mood"
                     />

@@ -78,7 +78,7 @@ function ImageSwitcher() {
                 <img
                     src={mainImage.src}
                     alt={mainImage.alt}
-                    className={`main-image ${loading ? 'loading' : ''}`}
+                    className={`main-image ${loading ? '' : 'loaded'}`}
                     onLoad={() => setLoading(false)}
                     onContextMenu={(e) => e.preventDefault()}
                 />
@@ -92,6 +92,7 @@ function ImageSwitcher() {
                             src={img.src}
                             alt={img.alt}
                             className="thumbnail"
+                            onLoad={e => e.currentTarget.classList.add('loaded')}
                             onClick={() => handleThumbnailClick(img, idx)}
                             onContextMenu={(e) => e.preventDefault()}
                         />

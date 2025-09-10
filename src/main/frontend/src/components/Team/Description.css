@@ -63,3 +63,12 @@
 .team-card.reverse .team-title {
     text-align: right;
 }
+
+.team-image {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.team-image.loaded {
+    opacity: 1;
+}
