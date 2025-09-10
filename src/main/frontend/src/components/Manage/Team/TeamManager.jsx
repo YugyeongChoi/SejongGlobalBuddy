@@ -25,10 +25,10 @@ function TeamImage({ name, className }) {
 
     return (
         <img
-            src={`${candidates[idx]}`}
-            alt={name}
-            className={className}
+            src={candidates[idx]}
             onError={handleError}
+            alt="team preview"
+            className="preview-image"
         />
     );
 }
