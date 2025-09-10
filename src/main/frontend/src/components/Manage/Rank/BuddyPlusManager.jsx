@@ -26,11 +26,10 @@ function TeamImage({ team, alt, className }) {
 
     return (
         <img
-            src={`${candidates[idx]}?ts=${Date.now()}`}
-            alt={alt}
-            className={className}
-            loading="lazy"
+            src={candidates[idx]}
             onError={handleError}
+            alt="team preview"
+            className="preview-image"
         />
     );
 }
@@ -49,6 +48,8 @@ function BuddyPlusManager() {
             setLoading(true);
             const res = await axios.get('/api/buddyplus');
             const list = Array.isArray(res.data) ? res.data : [];
+            console.log('response.data:', res.data);
+
             const normalized = list
                 .map(it => ({
                     id: it.id,

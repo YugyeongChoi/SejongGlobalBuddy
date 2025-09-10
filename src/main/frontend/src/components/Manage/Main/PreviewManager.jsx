@@ -11,15 +11,18 @@ const PreviewManager = () => {
     const fetchPreviewIds = async () => {
         try {
             const response = await axios.get('/api/previews');
-            const data = response.data.map((id, idx) => ({
+            const list = Array.isArray(response.data) ? response.data : response.data?.previews || [];
+            const data = list.map((id, idx) => ({
                 reviewId: id,
                 position: idx
             }));
             setPreviewList(data);
         } catch (error) {
             console.error('Error loading previews', error);
+            setPreviewList([]);
         }
     };
+
 
     useEffect(() => {
         fetchPreviewIds();

@@ -25,11 +25,10 @@ function TeamImage({ name, className }) {
 
     return (
         <img
-            src={`${candidates[idx]}?t=${new Date().getTime()}`}
+            src={`${candidates[idx]}`}
             alt={name}
             className={className}
             onError={handleError}
-            loading="lazy"
         />
     );
 }
