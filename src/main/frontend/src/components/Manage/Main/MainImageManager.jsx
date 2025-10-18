@@ -55,12 +55,10 @@ const MainImageManager = () => {
 
     const handleDelete = async (filename) => {
         if (window.confirm(`${filename} 파일을 삭제하시겠습니까?`)) {
-            try {
-                await axios.delete(`/api/files/${encodeURIComponent(filename)}`);
-                fetchFiles();
-            } catch (err) {
-                console.error('삭제 실패:', err);
-            }
+            await axios.delete(`/api/files`, {
+                params: { filename }
+            });
+            fetchFiles();
         }
     };
 
