@@ -10,7 +10,7 @@ const ReviewPhotoGrid = ({reviews}) => {
     useEffect(() => {
         const fetchPreviewIds = async () => {
             try {
-                const response = await axios.get('/previews');
+                const response = await axios.get('/api/previews');
                 setPreviewIds(response.data);
             } catch (error) {
                 console.error('Failed to fetch preview IDs:', error);
