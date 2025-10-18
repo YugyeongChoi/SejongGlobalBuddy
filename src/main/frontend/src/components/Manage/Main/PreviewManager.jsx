@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './../Manage.css';
 import './MainManager.css';
+import './../Manage.css';
 
 const PreviewManager = () => {
     const [previewList, setPreviewList] = useState([]);
@@ -79,7 +79,7 @@ const PreviewManager = () => {
             <h2>프리뷰 관리</h2>
             <img
                 src="/images/preview.png"
-                className="preview-image"
+                className="example-image"
                 onContextMenu={(e) => e.preventDefault()}
             />
 

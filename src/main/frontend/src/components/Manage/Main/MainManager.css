@@ -28,15 +28,8 @@
     border-color: #91C1E5;
 }
 
-.preview-image {
-    width: 70%;
-    height: auto;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    display: block;
-    user-select: none;
+.example-image{
+    height: 200px;
 }
 
 .calendar-manager input[type="file"] {

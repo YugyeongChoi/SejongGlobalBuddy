@@ -29,7 +29,7 @@ function TeamImage({ team, alt, className }) {
             src={candidates[idx]}
             onError={handleError}
             alt="team preview"
-            className="preview-image"
+            className="rank-image"
         />
     );
 }

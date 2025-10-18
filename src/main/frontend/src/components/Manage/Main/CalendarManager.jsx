@@ -74,7 +74,9 @@ const CalendarManager = () => {
             <h2>메인 관리</h2>
             <h3>🗓️ 달력 이미지 업로드</h3>
             <div className="calendar-info">
-                <p>※ 이미지 이름은 <strong>calendar</strong> 또는 <strong>calendar_mood</strong> 이어야 합니다.</p>
+                <p>※ 달력 이미지 이름은 <strong>calendar</strong>이어야 합니다.</p>
+                <p>※ 달력 컨셉 이미지 이름은 <strong>calendar_mood</strong>이어야 합니다.</p>
+                <p>※ <strong>calendar_mood</strong>(달력 컨셉 이미지)는 모바일에서 보이지 않습니다.</p>
                 <p>※ 확장자는 <strong>jpg</strong> / <strong>JPG</strong> / <strong>png</strong> 형식만 허용됩니다.</p>
             </div>
 

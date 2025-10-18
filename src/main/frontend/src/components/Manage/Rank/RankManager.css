@@ -191,9 +191,9 @@
     background-color: #e68900;
 }
 
-.preview-image {
-    width: 120px !important;
-    height: 120px !important;
+.rank-image {
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid #ccc;
