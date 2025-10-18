@@ -11,6 +11,8 @@ const PreviewManager = () => {
     const fetchPreviewIds = async () => {
         try {
             const response = await axios.get('/api/previews');
+            console.log('response.data:', response.data);
+
             const list = Array.isArray(response.data) ? response.data : response.data?.previews || [];
             const data = list.map((id, idx) => ({
                 reviewId: id,
@@ -27,6 +29,10 @@ const PreviewManager = () => {
     useEffect(() => {
         fetchPreviewIds();
     }, []);
+
+    useEffect(() => {
+        console.log('previewList:', previewList);
+    }, [previewList]);
 
     const handleChange = (index, value) => {
         const updated = [...previewList];
