@@ -68,7 +68,7 @@ function Card({ index, team, koName, enName, bingo, emphasize = false }) {
                 </div>
                 <div className="pc-score">
                     <strong>{bingo}</strong>
-                    <span>BINGO!</span>
+                    <span>POINTS!</span>
                 </div>
             </header>
 

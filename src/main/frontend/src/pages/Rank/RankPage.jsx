@@ -43,7 +43,7 @@ const RankPage = () => {
 
     return (
         <div className="rank-page">
-            <h2 className="bp-title">🎉 BuddyPlus Ranking 🎉</h2>
+            <h2 className="bp-title">🎉 BuddyCross Ranking 🎉</h2>
 
             <div className="rank-trophy-wrapper">
                 {TROPHY_IMAGES.map((src, index) => (
@@ -59,7 +59,6 @@ const RankPage = () => {
                 ))}
             </div>
             <BuddyPlus />
-            <BuddyCross />
         </div>
     );
 };

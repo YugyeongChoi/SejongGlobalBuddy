@@ -61,9 +61,6 @@ const ManagePage = () => {
                             <div className="rank-section">
                                 <BuddyPlusManager/>
                             </div>
-                            <div className="rank-section">
-                                <BuddyCrossManager/>
-                            </div>
                         </div>
                     )}
                     {currentTab === 'data' && <DataManager/>}
