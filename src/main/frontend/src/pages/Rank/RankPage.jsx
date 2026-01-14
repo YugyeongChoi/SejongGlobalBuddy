@@ -4,7 +4,6 @@ import './RankPage.css';
 
 const TROPHY_IMG1 = '/images/trophy1.png';
 const TROPHY_IMG2 = '/images/trophy2.png';
-const TROPHY_IMG2 = '/images/trophy2.png';
 const TROPHY_IMG3 = '/images/trophy3.png';
 
 const TROPHY_IMAGES = [TROPHY_IMG2, TROPHY_IMG1, TROPHY_IMG3];
