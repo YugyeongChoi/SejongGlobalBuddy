@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import './ManagePage.css';
-import BuddyCrossManager from "../../components/Manage/Rank/BuddyCrossManager";
 import DataManager from "../../components/Manage/Data/DataManager";
 import CalendarManager from "../../components/Manage/Main/CalendarManager";
 import ReviewManager from "../../components/Manage/Review/ReviewManager";

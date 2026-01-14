@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import BuddyPlus from '../../components/Rank/BuddyPlus';
-import BuddyCross from '../../components/Rank/BuddyCross';
 import './RankPage.css';
 
 const TROPHY_IMG1 = '/images/trophy1.png';
+const TROPHY_IMG2 = '/images/trophy2.png';
 const TROPHY_IMG2 = '/images/trophy2.png';
 const TROPHY_IMG3 = '/images/trophy3.png';
 
