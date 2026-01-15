@@ -23,7 +23,7 @@ const ManagePage = () => {
             onSuccess={handlePasswordSuccess}
             titleKr="이 탭은 글로벌 버디 운영진만 접근 가능합니다."
             titleEn="This tab is only available for Global Buddy management team."
-            correctPassword="admin25"
+            correctPassword="gbadmin"
         />;
     }
 

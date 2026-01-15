@@ -21,7 +21,7 @@ const DataPage = () => {
                 onSuccess={handlePasswordSuccess}
                 titleKr="이 탭은 글로벌 버디 한국인 부원들만 볼 수 있습니다."
                 titleEn="This tab is only available for Global Buddy Korean members."
-                correctPassword="globalbuddy25"
+                correctPassword="globalbuddy!"
             />
             }
             {isAuthenticated && (
