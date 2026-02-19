@@ -2,16 +2,21 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './BuddyPlus.css';
 
+const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
+const DEFAULT_IMG = '/images/team.png';
+
 function Card({ index, koName, enName, bingo, emphasize = false }) {
     const rank = index + 1;
+
+    const safeName = encodeURIComponent(koName);
+    const imageSrc = `${R2_BASE_URL}/${safeName}.jpg`;
 
     return (
         <article className={`podium-card ${emphasize ? 'is-first' : ''} ${rank===2 ? 'rank-2' : ''} ${rank===3 ? 'rank-3' : ''}`}>
             <header className="pc-head">
                 <span className="pc-rank">{rank}</span>
                 <div className="pc-title">
-                    <h3 className="pc-name">TOP {rank}</h3>
-                    <p className="pc-members-ko">{koName}</p>
+                    <h3 className="pc-members-ko large">{koName}</h3>
                     <p className="pc-members-en">{enName}</p>
                 </div>
                 <div className="pc-score">
@@ -19,6 +24,14 @@ function Card({ index, koName, enName, bingo, emphasize = false }) {
                     <span>POINTS!</span>
                 </div>
             </header>
+            <div className="pc-image-wrap">
+                <img
+                    src={imageSrc}
+                    alt={koName}
+                    onError={(e) => e.target.src = DEFAULT_IMG}
+                    className="fade-image loaded"
+                />
+            </div>
         </article>
     );
 }

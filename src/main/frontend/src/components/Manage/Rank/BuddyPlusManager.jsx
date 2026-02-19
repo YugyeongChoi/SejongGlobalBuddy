@@ -1,11 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import '../Manage.css';
 import './RankManager.css';
 
+const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
+const DEFAULT_IMG = '/images/team.png';
+
+function TeamImage({ name, alt, className }) {
+    const candidates = useMemo(
+        () => ['.jpg', '.JPG', '.png'].map(ext => `${R2_BASE_URL}/${encodeURIComponent(name)}${ext}`),
+        [name]
+    );
+    const [idx, setIdx] = useState(0);
+
+    useEffect(() => { setIdx(0); }, [name]);
+
+    const handleError = (e) => {
+        if (idx < candidates.length - 1) {
+            setIdx(idx + 1);
+        } else {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = DEFAULT_IMG;
+        }
+    };
+
+    return (
+        <img
+            src={candidates[idx]}
+            onError={handleError}
+            alt={alt}
+            className={className}
+        />
+    );
+}
+
 function BuddyPlusManager() {
     const [items, setItems] = useState([]);
     const [form, setForm] = useState({ koName: '', enName: '', bingo: '' });
+    const [selectedFile, setSelectedFile] = useState(null);
     const [editId, setEditId] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -37,13 +69,14 @@ function BuddyPlusManager() {
 
     const resetForm = () => {
         setForm({ koName: '', enName: '', bingo: '' });
+        setSelectedFile(null);
         setEditId(null);
     };
 
     const validate = () => {
         if (!form.koName.trim()) return '한국어 이름을 입력하세요.';
         if (!form.enName.trim()) return '영어 이름을 입력하세요.';
-        if (form.bingo === '' || isNaN(form.bingo)) return '빙고 점수를 숫자로 입력하세요.';
+        if (form.bingo === '' || isNaN(form.bingo)) return '점수를 숫자로 입력하세요.';
         return null;
     };
 
@@ -64,6 +97,18 @@ function BuddyPlusManager() {
                 await axios.post('/api/buddyplus', payload);
             }
 
+            if (selectedFile) {
+                const rawExt = (selectedFile.name.split('.').pop() || '').trim();
+                const safeExt = /^(jpg|JPG|png)$/.test(rawExt) ? rawExt : 'jpg';
+
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+                formData.append('filename', `${payload.koName}.${safeExt}`);
+                await axios.post('/api/files/upload', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                });
+            }
+
             alert(editId ? '수정 성공!' : '등록 성공!');
             resetForm();
             fetchItems();
@@ -80,17 +125,63 @@ function BuddyPlusManager() {
             bingo: row.bingo,
         });
         setEditId(row.id);
+        setSelectedFile(null);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id, koName) => {
         if (!window.confirm('정말 삭제하시겠습니까?')) return;
         try {
             await axios.delete(`/api/buddyplus/${id}`);
+
+            for (const ext of ['jpg', 'JPG', 'png']) {
+                try {
+                    await axios.delete(`/api/files`, { params: { filename: `${koName}.${ext}` } });
+                } catch (_) {}
+            }
+
             fetchItems();
         } catch (e) {
             console.error('삭제 실패:', e);
             alert('삭제 중 오류가 발생했습니다.');
         }
+    };
+
+    const handleImageEdit = async (row) => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.jpg,.JPG,.png';
+
+        fileInput.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            try {
+                const rawExt = (file.name.split('.').pop() || '').trim();
+                const safeExt = /^(jpg|JPG|png)$/.test(rawExt) ? rawExt : 'jpg';
+                const filename = `${row.koName}.${safeExt}`;
+
+                for (const ext of ['jpg', 'JPG', 'png']) {
+                    try {
+                        await axios.delete(`/api/files`, { params: { filename: `${row.koName}.${ext}` } });
+                    } catch (_) {}
+                }
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('filename', filename);
+
+                await axios.post('/api/files/upload', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                });
+
+                alert('이미지 교체 성공!');
+                fetchItems();
+            } catch (e) {
+                console.error('이미지 교체 실패:', e);
+                alert('이미지 교체 중 오류 발생!');
+            }
+        };
+        fileInput.click();
     };
 
     return (
@@ -113,13 +204,30 @@ function BuddyPlusManager() {
                 />
                 <input
                     type="number"
-                    placeholder="빙고 (예: 5)"
+                    placeholder="점수 (예: 5)"
                     value={form.bingo}
                     onChange={(e) => setForm({ ...form, bingo: e.target.value })}
                     min={0}
                 />
 
+                <div className="notice-danger">
+                    <p>※ 이미지 파일 이름이 반드시 <strong>이름</strong>이어야 합니다.</p>
+                    <p>예) 홍길동 → 홍길동.jpg</p>
+                    <p>※ 확장자는 <strong>jpg</strong> / <strong>JPG</strong> / <strong>png</strong> 형식만 허용됩니다.</p>
+                </div>
+
                 <div className="upload-actions">
+                    <div className="custom-file-upload">
+                        <label htmlFor="buddyplus-image-upload">📎 이미지 선택</label>
+                        <input
+                            id="buddyplus-image-upload"
+                            type="file"
+                            accept=".jpg,.JPG,.png"
+                            onChange={(e) => setSelectedFile(e.target.files[0])}
+                        />
+                        <span>{selectedFile?.name}</span>
+                    </div>
+
                     <button className="action-btn" onClick={handleSubmit}>
                         {editId ? '수정' : '완료'}
                     </button>
@@ -132,7 +240,7 @@ function BuddyPlusManager() {
                 </div>
             </div>
 
-            <h3>📋 목록 (BINGO 높은 순)</h3>
+            <h3>📋 목록 (POINT 높은 순)</h3>
             {loading ? (
                 <div className="bp-empty">불러오는 중…</div>
             ) : (
@@ -144,17 +252,25 @@ function BuddyPlusManager() {
                                     #{idx + 1}
                                 </strong>
                                 <p className="bp-item-names">
-                                    <span className="bp-ko">{row.koName}</span>
+                                    <span className="bp-ko large">{row.koName}</span>
                                     <span className="bp-en">{row.enName}</span>
                                 </p>
                                 <p className="bp-item-score">
-                                    BINGO: <strong>{row.bingo}</strong>
+                                    POINT: <strong>{row.bingo}</strong>
                                 </p>
                             </div>
 
-                            <div className="bp-actions">
-                                <button className="edit-btn" onClick={() => handleEdit(row)}>수정</button>
-                                <button className="delete-btn" onClick={() => handleDelete(row.id)}>삭제</button>
+                            <div className="bp-item-side">
+                                <TeamImage
+                                    name={row.koName}
+                                    alt={row.koName}
+                                    className="thumbnail"
+                                />
+                                <div className="bp-actions">
+                                    <button className="edit-btn" onClick={() => handleEdit(row)}>수정</button>
+                                    <button className="delete-btn" onClick={() => handleDelete(row.id, row.koName)}>삭제</button>
+                                    <button className="image-btn" onClick={() => handleImageEdit(row)}>사진 교체</button>
+                                </div>
                             </div>
                         </li>
                     ))}
