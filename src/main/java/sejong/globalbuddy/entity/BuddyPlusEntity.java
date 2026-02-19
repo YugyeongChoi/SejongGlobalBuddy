@@ -16,9 +16,6 @@ public class BuddyPlusEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private int team;
-
     @Column(name = "ko_name", nullable = false, length = 255)
     private String koName;
 

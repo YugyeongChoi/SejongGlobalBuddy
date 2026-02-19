@@ -1,68 +1,16 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './BuddyPlus.css';
 
-const DEFAULT_IMG = '/images/team.png';
-const R2_BASE_URL = 'https://pub-ee85493dc18e4a65aa97ee5157757291.r2.dev';
-
-function TeamImage({ team, alt, className, emphasize }) {
-    const [cacheBuster] = useState(Date.now());
-    const candidates = useMemo(
-        () => ['.jpg', '.JPG', '.png'].map(
-            ext => `${R2_BASE_URL}/${encodeURIComponent(team)}${ext}?t=${cacheBuster}`
-        ),
-        [team, cacheBuster]
-    );
-
-    const [idx, setIdx] = useState(0);
-    const [loaded, setLoaded] = useState(false);
-
-    const preventCtx = (e) => e.preventDefault();
-    const preventDrag = (e) => e.preventDefault();
-
-    useEffect(() => {
-        setIdx(0);
-        setLoaded(false);
-    }, [team]);
-
-    const handleError = (e) => {
-        if (idx < candidates.length - 1) {
-            setIdx(idx + 1);
-        } else {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = DEFAULT_IMG;
-        }
-    };
-
-    return (
-        <div
-            className={`pc-media no-save ${emphasize ? 'large' : ''}`}
-            onContextMenu={preventCtx}
-        >
-            <img
-                src={candidates[idx]}
-                alt={alt}
-                loading="lazy"
-                onLoad={() => setLoaded(true)}
-                onError={handleError}
-                onContextMenu={preventCtx}
-                onDragStart={preventDrag}
-                draggable={false}
-                className={`fade-image ${loaded ? 'loaded' : ''}`}
-            />
-        </div>
-    );
-}
-
-
-function Card({ index, team, koName, enName, bingo, emphasize = false }) {
+function Card({ index, koName, enName, bingo, emphasize = false }) {
     const rank = index + 1;
+
     return (
         <article className={`podium-card ${emphasize ? 'is-first' : ''} ${rank===2 ? 'rank-2' : ''} ${rank===3 ? 'rank-3' : ''}`}>
             <header className="pc-head">
                 <span className="pc-rank">{rank}</span>
                 <div className="pc-title">
-                    <h3 className="pc-name">Team {team}</h3>
+                    <h3 className="pc-name">TOP {rank}</h3>
                     <p className="pc-members-ko">{koName}</p>
                     <p className="pc-members-en">{enName}</p>
                 </div>
@@ -71,13 +19,6 @@ function Card({ index, team, koName, enName, bingo, emphasize = false }) {
                     <span>POINTS!</span>
                 </div>
             </header>
-
-            <TeamImage
-                team={team}
-                alt={`팀 ${team} 사진`}
-                className="pc-image"
-                emphasize={emphasize}
-            />
         </article>
     );
 }
@@ -109,7 +50,6 @@ const BuddyPlus = () => {
                 const normalized = list
                     .map((it) => ({
                         id: it.id,
-                        team: it.team,
                         koName: it.koName ?? it.ko_name ?? '',
                         enName: it.enName ?? it.en_name ?? '',
                         bingo: Number(it.bingo ?? 0),
@@ -135,7 +75,6 @@ const BuddyPlus = () => {
             ? [0]
             : [1, 0, 2].filter(i => i < top3.length);
 
-
     return (
         <div className="top3-wrap">
             {loading && <div className="bp-empty">불러오는 중…</div>}
@@ -147,9 +86,8 @@ const BuddyPlus = () => {
                         const item = top3[idx];
                         return (
                             <Card
-                                key={item.id ?? `${item.team}-${idx}`}
+                                key={item.id ?? `rank-${idx}`}
                                 index={idx}
-                                team={item.team}
                                 koName={item.koName}
                                 enName={item.enName}
                                 bingo={item.bingo}
