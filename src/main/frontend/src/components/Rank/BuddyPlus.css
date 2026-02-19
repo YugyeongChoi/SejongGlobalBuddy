@@ -129,7 +129,19 @@
     padding-bottom: 8px;
 }
 
-.pc-members-ko,
+.pc-members-ko.large {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    white-space: normal;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    display: block;
+}
+
 .pc-members-en {
     margin: 4px 0 0;
     color: var(--muted);
