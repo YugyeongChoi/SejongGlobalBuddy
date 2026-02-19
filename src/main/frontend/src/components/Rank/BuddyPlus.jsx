@@ -7,7 +7,6 @@ const DEFAULT_IMG = '/images/team.png';
 
 function Card({ index, koName, enName, bingo, emphasize = false }) {
     const rank = index + 1;
-
     const safeName = encodeURIComponent(koName);
     const imageSrc = `${R2_BASE_URL}/${safeName}.jpg`;
 
@@ -24,7 +23,7 @@ function Card({ index, koName, enName, bingo, emphasize = false }) {
                     <span>POINTS!</span>
                 </div>
             </header>
-            <div className="pc-image-wrap">
+            <div className="pc-media">
                 <img
                     src={imageSrc}
                     alt={koName}

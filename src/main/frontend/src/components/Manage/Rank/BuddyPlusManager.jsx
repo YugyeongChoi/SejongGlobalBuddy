@@ -74,8 +74,8 @@ function BuddyPlusManager() {
     };
 
     const validate = () => {
-        if (!form.koName.trim()) return '한국어 이름을 입력하세요.';
-        if (!form.enName.trim()) return '영어 이름을 입력하세요.';
+        if (!form.koName.trim()) return '부원 이름을 입력하세요.';
+        if (!form.enName.trim()) return '외국인 버디 이름을 입력하세요.';
         if (form.bingo === '' || isNaN(form.bingo)) return '점수를 숫자로 입력하세요.';
         return null;
     };
