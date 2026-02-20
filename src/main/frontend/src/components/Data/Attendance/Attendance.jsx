@@ -38,7 +38,7 @@ const Attendance = () => {
                 <div className="attendance-box">
                     <p><span className="highlight red">공식 행사 or 공식 회의</span> 결석, 조퇴 시 사유서와 증빙 서류 제출</p>
                     <ul>
-                        <li>사유서: 공식 행사 or (공식 회의) <strong>공지일 D-DAY</strong></li>
+                        <li>사유서: 공식 행사 or (공식 회의) <strong>당일 D-DAY</strong></li>
                         <li>증빙서류: 공식 행사 or (공식 회의) <strong>당일 D+1</strong></li>
                         <li><strong>증빙서류는 발급 날짜 필수 포함</strong></li>
                     </ul>
