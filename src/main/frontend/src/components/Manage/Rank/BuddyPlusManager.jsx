@@ -186,7 +186,7 @@ function BuddyPlusManager() {
 
     return (
         <div className="bp-manager">
-            <h2>BuddyPlus 관리</h2>
+            <h2>BuddyCross 관리</h2>
 
             <h3>{editId ? '✏️ 수정' : '➕ 새 입력'}</h3>
             <div className="bp-form">
