@@ -132,7 +132,6 @@
 .pc-members-ko.large {
     font-size: 22px;
     font-weight: 900;
-    line-height: 1.2;
     white-space: normal;
     display: block;
 }
@@ -141,7 +140,7 @@
     margin: 4px 0 0;
     color: var(--muted);
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.2;
     height: 1.4em;
     overflow: hidden;
     display: -webkit-box;
