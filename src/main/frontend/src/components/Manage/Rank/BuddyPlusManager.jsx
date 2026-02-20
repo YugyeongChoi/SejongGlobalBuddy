@@ -75,7 +75,7 @@ function BuddyPlusManager() {
 
     const validate = () => {
         if (!form.koName.trim()) return '한국인 부원 이름을 입력하세요.';
-        if (!form.enName.trim()) return '외국인 버디 이름을 입력하세요.';
+        if (!form.enName.trim()) return '활동 내용을 입력하세요.';
         if (form.bingo === '' || isNaN(form.bingo)) return '점수를 숫자로 입력하세요.';
         return null;
     };
@@ -198,7 +198,7 @@ function BuddyPlusManager() {
                 />
                 <input
                     type="text"
-                    placeholder="외국인 버디 이름 (쉼표로 구분)"
+                    placeholder="활동 내용 (쉼표로 구분)"
                     value={form.enName}
                     onChange={(e) => setForm({ ...form, enName: e.target.value })}
                 />
