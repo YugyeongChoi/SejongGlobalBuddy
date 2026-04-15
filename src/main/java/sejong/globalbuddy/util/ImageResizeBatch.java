@@ -1,27 +1,69 @@
 package sejong.globalbuddy.util;
 
 import net.coobird.thumbnailator.Thumbnails;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 
-public class ImageResizeBatch { //이미지 크기 리사이징
+@Component
+public class ImageResizeBatch implements CommandLineRunner {
 
-    public static void main(String[] args) throws Exception {
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
-        File folder = new File("/home/ec2-user/images");
+    @Override
+    public void run(String... args) throws Exception {
 
-        for (File file : folder.listFiles()) {
+        File folder = new File(uploadDir);
+
+        if (!folder.exists() || !folder.isDirectory()) {
+            System.out.println("업로드 폴더 없음: " + uploadDir);
+            return;
+        }
+
+        File[] files = folder.listFiles();
+        if (files == null || files.length == 0) {
+            System.out.println("이미지 없음");
+            return;
+        }
+
+        System.out.println("이미지 리사이즈 시작");
+
+        int count = 0;
+
+        for (File file : files) {
 
             if (!file.isFile()) continue;
 
-            System.out.println("processing: " + file.getName());
+            String name = file.getName();
 
-            Thumbnails.of(file)
-                    .size(1200, 1200)
-                    .outputQuality(0.8)
-                    .toFile(file);
+            if (!(name.endsWith(".jpg") ||
+                    name.endsWith(".jpeg") ||
+                    name.endsWith(".png") ||
+                    name.endsWith(".webp") ||
+                    name.endsWith(".JPG") ||
+                    name.endsWith(".JPEG"))) {
+                continue;
+            }
+
+            System.out.println("processing: " + name);
+
+            try {
+                Thumbnails.of(file)
+                        .size(1200, 1200)
+                        .outputQuality(0.8)
+                        .toFile(file);
+
+                count++;
+
+            } catch (Exception e) {
+                System.out.println("실패: " + name);
+                e.printStackTrace();
+            }
         }
 
-        System.out.println("DONE");
+        System.out.println("완료, 처리된 이미지: " + count + "개");
     }
 }
