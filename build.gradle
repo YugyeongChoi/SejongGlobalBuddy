@@ -32,7 +32,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.4'
-    implementation 'net.coobird:thumbnailator:0.4.20'
 }
 tasks.named('bootJar') {
     mainClass = 'sejong.globalbuddy.GlobalbuddyApplication'
