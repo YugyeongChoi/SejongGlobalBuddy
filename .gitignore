@@ -47,3 +47,5 @@ src/.env
 
 pgbouncer.ini
 userlist.txt
+app-nohup.log
+backend.pid
